@@ -36,9 +36,9 @@ const ContactUsMain = () => {
 
         if (!formData.phone.trim()) {
             newErrors.phone = 'Telephone is required.';
-        } else if (!/^\+?[0-9\s\-()]{7,15}$/.test(formData.phone.trim())) {
-            newErrors.phone = 'Enter a valid phone number.';
-        }
+        } else if (formData.phone.trim().length < 7) {
+    errors.phone = "Phone number must be at least 7 digits";
+}
 
         if (!formData.email.trim()) {
             newErrors.email = 'Email address is required.';

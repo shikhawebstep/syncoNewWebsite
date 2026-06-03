@@ -12,8 +12,6 @@ const CheckoutStep = ({ classDetails }) => {
   const [country, setCountry] = useState("United States");
   const [zip, setZip] = useState("");
   const [errors, setErrors] = useState({});
-  const [passwordLink, setPasswordLink] = useState(null);
-  console.log('checkoutStep - passwordLink:', passwordLink);
 
   const options = useMemo(() => countryList().getData(), []);
 
@@ -126,7 +124,7 @@ const CheckoutStep = ({ classDetails }) => {
   // ✅ Starter pack: joiningFee + deliveryFee + proRataAmount
   // ✅ Regular: joiningFee + proRataAmount
   const initialPayment = isStarterPack
-    ? joiningFeeAfterDiscount + deliveryFee
+    ? joiningFeeAfterDiscount +deliveryFee 
     : joiningFeeAfterDiscount + proRataAmount;
 
   const firstPaymentDate = "1st of next month";
@@ -304,9 +302,7 @@ const CheckoutStep = ({ classDetails }) => {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Booking successful:", result);
-        setPasswordLink(result.setPasswordLink || response.setPasswordLink || null);
-        
+        setStep(step + 1);
       } else {
         let errorMsg = result.message || "Unknown error";
         if (result.error && typeof result.error === "object") {
@@ -524,8 +520,9 @@ const CheckoutStep = ({ classDetails }) => {
             <button
               disabled={!isFormValid || loading}
               onClick={handleCompleteBooking}
-              className={`mt-6 px-6 py-2 rounded-[6px] bg-blue-900 text-white font-semibold ${!isFormValid || loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"
-                }`}
+              className={`mt-6 px-6 py-2 rounded-[6px] bg-blue-900 text-white font-semibold ${
+                !isFormValid || loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"
+              }`}
               type="button"
             >
               {loading ? "Processing..." : "Complete Booking"}
@@ -533,56 +530,13 @@ const CheckoutStep = ({ classDetails }) => {
           </div>
         </div>
       </div>
-      {passwordLink && (
-        <div className="fixed inset-0 bg-[#00000066] flex justify-center items-center z-50">
-          <div className="bg-[#FDFDFF] rounded-2xl p-10 w-full max-w-md text-center shadow-xl">
-
-            {/* Success icon */}
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-[#E6F4EA] flex items-center justify-center">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-bold text-[#042C89] poppins mb-2">
-              Booking Confirmed!
-            </h2>
-            <p className="text-[#34353B] poppins text-[15px] mb-1">
-              Your membership has been successfully created.
-            </p>
-
-            <div className="my-5 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
-              <p className="text-[#004B9E] font-semibold poppins text-[14px] mb-1">
-                🔐 Set up your Parent Dashboard
-              </p>
-              <p className="text-[#2D3748] poppins text-[13px] leading-relaxed">
-                A parent account has been created for you. Set up your password now to access your <strong>Parent Dashboard</strong> — where you can track sessions, manage bookings, and stay up to date.
-              </p>
-            </div>
-
-            <button
-              onClick={() => window.open(passwordLink, "_blank")}
-              className="w-full bg-[#042C89] text-white poppins font-semibold text-[15px] py-3 rounded-xl hover:bg-blue-800 transition mb-3"
-            >
-              Set Up My Password →
-            </button>
-
-            <button
-              onClick={() => {
-                setPasswordLink(null);
-                setStep(step + 1);
-              }}
-              className="w-full text-[#717073] poppins text-[13px] underline hover:text-gray-800"
-            >
-              Skip for now
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default CheckoutStep;
+
+
+
+
+

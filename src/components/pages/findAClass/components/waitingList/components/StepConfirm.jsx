@@ -14,8 +14,6 @@ export default function StepConfirm({
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [passwordLink, setPasswordLink] = useState(null);
-
   const { toasts, addToast, removeToast } = useToast();
   const navigate = useNavigate();
 
@@ -25,7 +23,6 @@ export default function StepConfirm({
     setIsSubmitting(false);
     if (result.success) {
       setShowSuccessModal(true);
-      setPasswordLink(result.passwordLink || null); 
     } else {
       let errorMsg = result.message || "Something went wrong. Please try again.";
       if (result.error && typeof result.error === 'object') {
@@ -210,23 +207,7 @@ export default function StepConfirm({
             <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
               A member of our team will contact you when a space becomes available.
             </p>
-    {passwordLink && (
-        <div className="my-4 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
-          <p className="text-[#004B9E] font-semibold text-[14px] mb-1">
-            🔐 Set up your Parent Dashboard
-          </p>
-          <p className="text-[#2D3748] text-[13px] leading-relaxed">
-            A parent account has been created for you. Set up your password to access your{" "}
-            <strong>Parent Dashboard</strong> — track sessions, manage bookings, and stay updated.
-          </p>
-          <button
-            onClick={() => window.open(passwordLink, "_blank")}
-            className="w-full mt-3 bg-[#042C89] text-white font-semibold text-[14px] py-2.5 rounded-xl hover:bg-blue-800 transition"
-          >
-            Set Up My Password →
-          </button>
-        </div>
-      )}
+
             {/* Actions */}
             <div className="grid grid-cols-2 justify-center gap-4">
               <button

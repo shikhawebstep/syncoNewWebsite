@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast, Toast } from "../../../Common/Toast";
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   age: "",
   partyDate: "",
   availableDays: "",
-  package: "Gold",
+  package: "",
   notes: "",
 };
 
@@ -27,11 +27,11 @@ const validate = (formData) => {
     errors.email = "Enter a valid email address";
   }
 
-  if (!formData.phone.trim()) {
+if (!formData.phone.trim()) {
     errors.phone = "Phone number is required";
-  } else if (!/^\+?[\d\s\-().]{7,15}$/.test(formData.phone.trim())) {
-    errors.phone = "Enter a valid phone number (7–15 digits)";
-  }
+} else if (formData.phone.trim().length < 7) {
+    errors.phone = "Phone number must be at least 7 digits";
+}
 
   if (!formData.postcode.trim()) errors.postcode = "Postcode is required";
   if (!formData.childName.trim()) errors.childName = "Child's name is required";
@@ -73,6 +73,23 @@ const EnquiryForm = () => {
     }
   };
 
+
+  const [packages, setPackages] = useState([]);
+  const [packagesLoading, setPackagesLoading] = useState(true);
+
+  // 2. Fetch packages on mount
+  useEffect(() => {
+    fetch("https://api.grabbite.com/api/open/birthday-party/packages")
+      .then(r => r.json())
+      .then(data => {
+        const list = Array.isArray(data) ? data : (data.data || []);
+        setPackages(list);
+        if (list.length > 0) {
+          setFormData(prev => ({ ...prev, package: list[0].id })); // ← set first as default
+        }
+        setPackagesLoading(false);
+      });
+  }, []);
   const handleBlur = (e) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
@@ -99,8 +116,8 @@ const EnquiryForm = () => {
       childName: formData.childName.trim(),
       age: Number(formData.age),
       partyDate: formData.partyDate,
-      packageInterest: formData.package,
-      phoneNumber: formData.phone.trim(),
+      packageId: formData.package,
+      phoneNumber: formData.phone,
       email: formData.email.trim(),
       postCode: formData.postcode.trim(),
       availableDays: formData.availableDays,
@@ -357,17 +374,17 @@ const EnquiryForm = () => {
           Which package are you interested in?
         </label>
         <div className="flex gap-6">
-          {["Gold", "Silver"].map((pkg) => (
-            <label key={pkg} className="flex items-center gap-2">
+          {packages.map(pkg => (
+            <label key={pkg?.id} className="flex items-center gap-2">
               <input
                 type="radio"
                 name="package"
-                value={pkg}
-                checked={formData.package === pkg}
-                onChange={handleChange}
+                value={pkg.id}
+                checked={formData.package === pkg.id || formData.package === String(pkg.id)}
+                onChange={() => setFormData(prev => ({ ...prev, package: pkg.id }))} // ← set as id directly, not e.target.value (which is always string)
                 className="accent-green-500"
               />
-              {pkg}
+              {pkg?.packageName}
             </label>
           ))}
         </div>

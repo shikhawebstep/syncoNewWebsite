@@ -14,8 +14,6 @@ export default function StepConfirm({
 }) {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [passwordLink, setPasswordLink] = useState(null);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
   const navigate = useNavigate();
@@ -26,7 +24,6 @@ export default function StepConfirm({
     setIsSubmitting(false);
     if (result.success) {
       setShowSuccessModal(true);
-       setPasswordLink(result.passwordLink || null); 
     } else {
       let errorMsg = result.message || "Something went wrong. Please try again.";
       if (result.error && typeof result.error === 'object') {
@@ -186,65 +183,53 @@ export default function StepConfirm({
         </div>
       )}
 
-    {showSuccessModal && (
-  <div className="fixed p-6 inset-0 z-50 flex items-center justify-center bg-black/40">
-    <div className="bg-white w-[500px] rounded-3xl p-6 text-center relative">
-      
-      <img src="/assets/win.png" alt="success" className="w-[200px] mx-auto mb-6" />
+      {showSuccessModal && (
+        <div className="fixed p-6 inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white w-[500px] rounded-3xl p-6 text-center relative">
+            {/* Trophy Image */}
+            <img
+              src="/assets/win.png"
+              alt="success"
+              className="w-[200px] mx-auto mb-6"
+            />
 
-      <h2 className="md:text-[32px] text-[24px] font-bold text-[#16C784] mb-2">
-        Congratulations {parents.length > 0 ? parents[0]?.parentFirstName + " " + parents[0]?.parentLastName : ""}!
-      </h2>
+            {/* Heading */}
+            <h2 className="md:text-[32px] text-[24px] font-bold -tracking-[0px] text-[#16C784] mb-2">
+              Congratulations {parents.length > 0 ? parents[0]?.parentFirstName + " " + parents[0]?.parentLastName : ""}!
+            </h2>
 
-      <p className="text-[#042C89] font-semibold text-[16px] mt-4 mb-1">
-        Your Free Trial Booking has been successful
-      </p>
+            {/* Subtext */}
+            <p className="text-[#042C89] font-semibold text-[16px] mt-4 mb-1">
+              Your Free Trial Booking has been successful
+            </p>
 
-      <p className="text-[#5F5F6D] text-[14px] mb-4">
-        We'll send you an email confirming your free trial session.
-      </p>
+            <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
+              We'll send you an email confirming your free trial session.
+            </p>
 
-      {/* 👇 Password setup section — sirf tab dikhao jab link ho */}
-      {passwordLink && (
-        <div className="my-4 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
-          <p className="text-[#004B9E] font-semibold text-[14px] mb-1">
-            🔐 Set up your Parent Dashboard
-          </p>
-          <p className="text-[#2D3748] text-[13px] leading-relaxed">
-            A parent account has been created for you. Set up your password to access your{" "}
-            <strong>Parent Dashboard</strong> — track sessions, manage bookings, and stay updated.
-          </p>
-          <button
-            onClick={() => window.open(passwordLink, "_blank")}
-            className="w-full mt-3 bg-[#042C89] text-white font-semibold text-[14px] py-2.5 rounded-xl hover:bg-blue-800 transition"
-          >
-            Set Up My Password →
-          </button>
+            {/* Actions */}
+            <div className="grid grid-cols-2 justify-center gap-4">
+              <button
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  onCancel();
+                  navigate('/find-a-class');
+                }}
+                className="md:px-8 px-6 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold"
+              >
+                Go Home
+              </button>
+
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="md:px-8 px-6 py-2 rounded-lg bg-[#042C89] text-white font-semibold"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         </div>
       )}
-
-      <div className="grid grid-cols-2 gap-4 mt-4">
-        <button
-          onClick={() => {
-            setShowSuccessModal(false);
-            onCancel();
-            navigate('/find-a-class');
-          }}
-          className="px-8 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold"
-        >
-          Go Home
-        </button>
-        <button
-          onClick={() => setShowSuccessModal(false)}
-          className="px-8 py-2 rounded-lg bg-[#042C89] text-white font-semibold"
-        >
-          Close
-        </button>
-      </div>
-
-    </div>
-  </div>
-)}
     </div>
   );
 }

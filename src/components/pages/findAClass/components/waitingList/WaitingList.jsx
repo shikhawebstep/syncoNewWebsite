@@ -179,8 +179,7 @@ const formatDateSafe = (dateInput) => {
       if (!response.ok) {
         return { success: false, message: result.message || "Submission failed", error: result.error };
       }
-      return { success: true, passwordLink: result.setPasswordLink || null };
-
+      return { success: true };
     } catch (error) {
       console.error("Waiting list error:", error);
       return { success: false, message: error.message };

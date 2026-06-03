@@ -13,7 +13,6 @@ export default function BookFreeTrial() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const classId = searchParams.get("classId");
-  const [passwordLink, setPasswordLink] = useState(null);
 
   useEffect(() => {
     if (classId) {
@@ -147,9 +146,7 @@ export default function BookFreeTrial() {
       if (!response.ok) {
         return { success: false, message: result.message || "Submission failed", error: result.error };
       }
-      // setPasswordLink(result.setPasswordLink || response.setPasswordLink || null);
-
- return { success: true, passwordLink: result.setPasswordLink || null };
+      return { success: true };
     } catch (error) {
       console.error("Booking error:", error);
       return { success: false, message: error.message };
@@ -241,67 +238,19 @@ export default function BookFreeTrial() {
           )}
 
           {/* STEP 4 */}
-         {step === 4 && (
-  <StepConfirm
-    venue={venue}
-    students={students}
-    parents={parents}
-    sessionInfo={sessionInfo}
-    onBack={() => setStep(3)}
-    onCancel={() => setStep(0)}
-    onConfirm={handleBookNow}
-  />
-)}
+          {step === 4 && (
+            <StepConfirm
+              venue={venue}
+              students={students}
+              parents={parents}
+              sessionInfo={sessionInfo}
+              onBack={() => setStep(3)}
+              onCancel={() => setStep(0)}
+              onConfirm={handleBookNow}
+            />
+          )}
         </div>
       </div>
-      {passwordLink && (
-        <div className="fixed inset-0 bg-[#00000066] flex justify-center items-center z-50">
-          <div className="bg-[#FDFDFF] rounded-2xl p-10 w-full max-w-md text-center shadow-xl">
-
-            {/* Success icon */}
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full bg-[#E6F4EA] flex items-center justify-center">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-bold text-[#042C89] poppins mb-2">
-              Free trial booked!
-            </h2>
-            <p className="text-[#34353B] poppins text-[15px] mb-1">
-              Your free trial has been booked!
-            </p>
-
-            <div className="my-5 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
-              <p className="text-[#004B9E] font-semibold poppins text-[14px] mb-1">
-                🔐 Set up your Parent Dashboard
-              </p>
-              <p className="text-[#2D3748] poppins text-[13px] leading-relaxed">
-                A parent account has been created for you. Set up your password now to access your <strong>Parent Dashboard</strong> — where you can track sessions, manage bookings, and stay up to date.
-              </p>
-            </div>
-
-            <button
-              onClick={() => window.open(passwordLink, "_blank")}
-              className="w-full bg-[#042C89] text-white poppins font-semibold text-[15px] py-3 rounded-xl hover:bg-blue-800 transition mb-3"
-            >
-              Set Up My Password →
-            </button>
-
-            <button
-              onClick={() => {
-                setPasswordLink(null);
-                
-              }}
-              className="w-full text-[#717073] poppins text-[13px] underline hover:text-gray-800"
-            >
-              Skip for now
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast, Toast } from "./Toast";
 
 const validate = (formData) => {
@@ -15,10 +15,9 @@ const validate = (formData) => {
 
   if (!formData.phone.trim()) {
     errors.phone = "Telephone number is required.";
-  } else if (!/^\d{10,15}$/.test(formData.phone.replace(/\s+/g, ""))) {
-    errors.phone = "Enter a valid phone number (10–15 digits).";
+  } else if (formData.phone.trim().length < 7) {
+    errors.phone = "Phone number must be at least 7 digits";
   }
-
   if (!formData.postcode.trim()) {
     errors.postcode = "Postcode is required.";
   } else if (
@@ -40,7 +39,7 @@ const validate = (formData) => {
     errors.age = "Age must be between 1 and 18.";
   }
 
-  if (!formData.package) errors.package = "Please select a package.";
+  if (!formData.packageId) errors.packageId = "Please select a package.";
 
   if (!formData.days) errors.days = "Please select at least one day.";
 
@@ -54,7 +53,7 @@ const initialState = {
   postcode: "",
   childName: "",
   age: "",
-  package: "",
+  packageId: "",
   days: "",
   notes: "",
 };
@@ -68,7 +67,20 @@ const EnquiryForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
+  const [packages, setPackages] = useState([]);
+  const [packagesLoading, setPackagesLoading] = useState(true);
 
+  // 2. Fetch packages on mount
+  useEffect(() => {
+    fetch("https://api.grabbite.com/api/open/one-to-one/packages", {
+    })
+      .then(r => r.json())
+      .then(data => {
+        const list = Array.isArray(data) ? data : (data.data || []);
+        setPackages(list);
+        setPackagesLoading(false);
+      });
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -76,6 +88,9 @@ const EnquiryForm = () => {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,11 +107,10 @@ const EnquiryForm = () => {
       parentName: formData.parentName.trim(),
       childName: formData.childName.trim(),
       email: formData.email.trim(),
-      phoneNumber: Number(formData.phone.replace(/\s+/g, "")),
+      phoneNumber: formData.phone,
       age: Number(formData.age),
       postCode: formData.postcode.trim(),
-      packageInterest:
-        formData.package.charAt(0).toUpperCase() + formData.package.slice(1),
+      packageId: formData.packageId,
       availability: formData.days,
       notes: formData.notes.trim(),
     };
@@ -126,7 +140,7 @@ const EnquiryForm = () => {
 
       setFormData(initialState);
       setErrors({});
-      addToast(
+      addToast(result.message ||
         "Your enquiry has been submitted successfully! We'll be in touch soon.",
         "success"
       );
@@ -271,15 +285,17 @@ const EnquiryForm = () => {
             Which package are you interested in? <R />
           </label>
           <select
-            name="package"
-            value={formData.package}
+            name="packageId"
+            value={formData.packageId}
             onChange={handleChange}
             disabled={isSubmitting}
-            className={inputClass("package")}
+            className={inputClass("packageId")}
           >
             <option value="">Choose package</option>
-            <option value="silver">Silver</option>
-            <option value="gold">Gold</option>
+            {packages.map(pkg => (
+              <option key={pkg.id} value={pkg.id}>{pkg.packageName}</option>
+            ))}
+
           </select>
           <ErrorMsg name="package" />
         </div>
