@@ -8,10 +8,13 @@ import EducationDiff from "/assets/EducationDiff.png";
 
 const WhatMakeDiffrent = () => {
   return (
+    <>
+        <img src="/assets/vector.png" alt="" className="block md:hidden" />
+
     <section
       className="bg-white"
     >
-      <div className="bg-cover bg-white pt-[180px] bg-white pb-[90px] relative"
+      <div className="bg-cover samba-diff pt-5 bg-white md:pt-[180px] bg-white pb-[90px] relative"
         style={{ backgroundImage: `url(${bgImage})` }}>
         <div className="container mx-auto">
           {/* Heading */}
@@ -86,6 +89,7 @@ const WhatMakeDiffrent = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

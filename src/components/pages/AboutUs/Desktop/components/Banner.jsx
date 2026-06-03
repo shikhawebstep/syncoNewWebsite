@@ -6,8 +6,8 @@ const Banner = () => {
     return (
         <section
             className={`
-              relative flex items-end bg-cover bg-bottom bg-[#FFDE14]
-              pt-[150px] pb-[150px] md:min-h-[800px] min-h-[900px]
+              relative aboutusbanner flex items-end bg-cover bg-bottom bg-[#FFDE14]
+              pt-[150px] pb-[150px] 2xl:min-h-[700px] lg:h-[600px] h-[800px] 
               bg-[url('/assets/AboutusMainBannerMobile.png')]
               md:bg-[url('/assets/AboutusMainBanner2.png')]
             `}

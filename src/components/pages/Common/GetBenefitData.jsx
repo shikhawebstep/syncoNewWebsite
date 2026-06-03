@@ -6,9 +6,14 @@ const benefitsContent = {
     heading: "",
     logoImage: '',
     isCenter: true,
+    isNotLine: true,
     highlightText: "benefits",
     subHeading: "of our One to One",
     subHeading2: " Football Training Classes",
+    headingMobile: "",
+    highlightTextMobile: "Benefits",
+    subHeadingMobile: " of our ",
+    subHeading2Mobile: "One to One Football Training Classes",
     benefits: [
       {
         img: "/assets/service1.png",
@@ -41,6 +46,12 @@ const benefitsContent = {
     heading: "The",
     logoImage: '',
     isCenter: true,
+    isNotLine: true,
+
+    headingMobile: "The",
+    highlightTextMobile: "Benefits",
+    subHeadingMobile: "of our football",
+    subHeading2Mobile: "camps",
 
     highlightText: "benefits",
     subHeading2: "of our football camps",
@@ -186,7 +197,10 @@ const benefitsContent = {
     heading: "The",
     logoImage: '',
     isCenter: true,
-
+    headingMobile: "The",
+    highlightTextMobile: "Benefits",
+    subHeadingMobile: "of our weekly ",
+    subHeading2Mobile: "football classes for kids ",
     highlightText: "benefits",
     subHeading: "of our weekly",
     subHeading2: "football classes for kids",

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
+const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color, align }) => {
     return (
         <>
             <div className="lg:block gap-4 lg:max-w-[1100px] mt-5 m-auto lg:space-x-10">
@@ -17,7 +17,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                             }
                             className={`
                 uppercase recline poppins
-                px-4 py-4 text-[18px] md:text-[20px]
+                md:px-4 px-2 py-4 text-[17px] md:text-[20px]
                 rounded-xl transition-colors duration-300
                 w-full md:w-fit
                 text-center md:text-left
@@ -37,7 +37,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
 
                 {/* Answer + Image */}
                 <div className="lg:w-full acc">
-                    <div className="md:flex   justify-center items-center">
+                    <div className={`md:flex   justify-center ${align ? 'md:mt-15' : items - center}`}>
                         <div className='md:w-[50%] md:hidden block my-10 '>
                             <div className='w-full md:max-w-8/12  m-auto'>
                                 <img
@@ -95,6 +95,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                             )}
                             <div className="mt-8 flex md:justify-end justify-center">
                                 <button
+                                    onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
                                     style={{ backgroundColor: color || "#042C89" }}
                                     className="text-white px-8 py-3 rounded-3xl poppins font-bold"
                                 >

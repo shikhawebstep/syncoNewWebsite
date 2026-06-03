@@ -113,15 +113,16 @@ const FrequentlyAskedQuestions = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="relative py-[100px]  bg-[#F9FAFB]"
+        <section className="relative md:py-[100px] py-10  bg-[#F9FAFB]"
          style={{ backgroundImage: `url(${TexturedBackground})` }}>
             <div className="container mx-auto max-w-[1100px]">
                 {/* Heading */}
-                <h2 className="text-center text-[#0DD180] text-[52px] md:text-[56px] font-normal recline mb-6">
-                    Frequently Asked Questions
+                <h2 className="text-center text-[#0DD180] text-[50px] md:text-[56px] font-normal recline pb-6">
+                    Frequently <br className="block md:hidden" />
+                    Asked Questions
                 </h2>
 
-                <p className="text-[#5F5F6D] text-[20px] poppins text-center mb-14">
+                <p className="text-[#5F5F6D] md:text-[20px] poppins text-center mb-14">
                     Below are answers to a variety of frequently asked questions that we
                     have received from our customers.
                 </p>

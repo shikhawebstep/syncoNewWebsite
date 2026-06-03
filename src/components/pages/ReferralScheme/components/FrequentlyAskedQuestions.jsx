@@ -113,11 +113,11 @@ const FrequentlyAskedQuestions = () => {
             style={{ backgroundImage: `url(${TexturedBackground})` }}>
             <div className="container mx-auto max-w-[1100px]">
                 {/* Heading */}
-                <h2 className="text-center text-[#042C89] text-[52px] md:text-[56px] font-normal recline mb-6">
+                <h2 className="text-center text-[#042C89] text-[48px] font-normal recline mb-6">
                     Frequently Asked Questions
                 </h2>
 
-                <p className="text-[#5F5F6D] text-[20px] poppins text-center mb-14">
+                <p className="text-[#5F5F6D] tracking-[1%] text-[18px] poppins text-center mb-14">
                     Here are the answers to some of our frequently asked questions.
                 </p>
 
@@ -158,7 +158,7 @@ const FrequentlyAskedQuestions = () => {
                                     className={`overflow-hidden transition-all duration-300 ${isOpen ? " opacity-100" : "max-h-0 opacity-0"
                                         }`}
                                 >
-                                    <p className="text-[#5F5F6D] text-[16px] poppins leading-relaxed">
+                                    <p className="text-[#5F5F6D] text-[16px] poppins leading-[35px]">
                                         {faq.answer}
                                     </p>
                                 </div>

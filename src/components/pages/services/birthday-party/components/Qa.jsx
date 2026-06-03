@@ -43,7 +43,7 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="bg-white  faq py-20 md:px-4 px-8 lg:px-20">
+        <section className="bg-white  faq faq-main md:py-20 py-10 md:px-4 px-8 lg:px-20">
             <div className="md:text-center mb-10 lg:max-w-[780px] m-auto ">
                 <h3 className="text-3xl lg:text-4xl  font-bold text-blue-900 recline">
                     Football Birthday Parties<span className="text-[#00A6E3] recline"> FAQs</span>
@@ -53,7 +53,7 @@ const Qa = () => {
                 <p className=" md:hidden block text-[#5F5F6D] mt-2">We know you’ve probably got lots of questions to ask about your child’s football birthday party.To make thing easy, we’ve gone ahead and answered the common questions.</p>
             </div>
 
-            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Enquire Today"} color={"#00A6E3"} />
+            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Enquire Today"} color={"#00A6E3"} btnColor={'#00A6E3'} />
         </section>
     );
 };

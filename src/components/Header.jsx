@@ -31,12 +31,11 @@ const Header = () => {
 
                                     {/* Dropdown: Services */}
                                     <li className="group relative ">
-                                        <NavLink
-                                            to="/services"
-                                            className={isActive('/services') ? 'text-yellow-300 font-bold active-tab' : 'text-[#FDFDFF]'}
+                                        <span
+                                            className={path.startsWith('/services') ? 'text-yellow-300 font-bold active-tab cursor-pointer' : 'text-[#FDFDFF] cursor-pointer'}
                                         >
                                             Services
-                                        </NavLink>
+                                        </span>
                                         <ul
                                             className="absolute left-0 z-999999999 hidden group-hover:block bg-[#164fa6] bg-[url('/assets/header-bg.webp')] bg-cover bg-center rounded-lg shadow-lg  w-48 max-w-48"
                                         >
@@ -82,7 +81,9 @@ const Header = () => {
                     {/* Right Menus */}
                     <div className='right-menus min-h-[120px] flex flex-col justify-between'>
                         <div className='topbar flex gap-2 justify-end'>
-                            <button className='bg-white text-[#042C89] rounded-3xl p-2 px-4 recline'>Book a FREE Trial</button>
+                            <NavLink to="/find-a-class">
+                                <button className='bg-white text-[#042C89] rounded-3xl p-2 px-4 recline'>Book a FREE Trial</button>
+                            </NavLink>
                             <button className='bg-[#FFDE14] text-[#042C89] rounded-3xl p-2 px-4 recline'>Login</button>
                         </div>
                         <div className='bottombar'>

@@ -4,7 +4,7 @@ import TexturedBackground from "/assets/TexturedBackground.png";
 
 const Enquiry = () => {
   return (
-    <section className='py-[80px] relative bg-[#F6F7FB] overflow-hidden'
+    <section id="enquiry-section" className='py-[80px] relative bg-[#F6F7FB] overflow-hidden'
      style={{ backgroundImage: `url(${TexturedBackground})` }}>
       <div className="container">
         <div className="md:flex justify-between max-w-[1200px] m-auto gap-10">
@@ -12,8 +12,8 @@ const Enquiry = () => {
             <h4 className="text-[18px] recline blue-text">
               Apply Today
             </h4>
-            <p className="text-[20px] text-[#5F5F6D] mt-5 ">
-Fill in your details below and you can expect to hear from our team within 48 hours. Don’t forget to add a cover note and upload your CV at the bottom!            </p>         </div>
+            <p className="md:text-[20px] text-[#5F5F6D] mt-5 ">
+Fill in your details below and you can expect to hear from our team within 48 hours. Don’t forget to add a cover note and <br className="hidden md:block" /> upload your CV at the bottom!            </p>         </div>
           <div className='md:w-[690px] relative z-50'>
             <ApplicationForm /></div>
         </div>

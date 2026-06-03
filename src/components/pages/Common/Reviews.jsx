@@ -15,7 +15,7 @@ const testimonials = [
     img: "/assets/Review-img1.png",
     color: "bg-[#FFDE14]",
     starColor: "text-[#0DD180]",
-    arrowColor: "text-[#00A6E3]",
+    arrowColor: "text-[#FFDE14]",
     textColor: "text-[#042C89]",
   },
   {
@@ -24,7 +24,7 @@ const testimonials = [
     rating: 5,
     img: "/assets/Review-img2.png",
     color: "bg-[#00A6E3]",
-    arrowColor: "text-[#0DD180]",
+    arrowColor: "text-[#00A6E3]",
     starColor: "text-[#FFDE14]",
     textColor: "text-[#fff]",
   },
@@ -107,7 +107,7 @@ export default function Reviews() {
   md:max-w-full`}
                 >
                   <p
-                    className={`italic text-[15px] font-bold  ${item.textColor}  leading-relaxed`}
+                    className={` text-[15px] font-bold  ${item.textColor}  leading-relaxed`}
                   >
                     “{item.text}”
                   </p>
@@ -125,13 +125,13 @@ export default function Reviews() {
                   </div>
                   {/* Bubble arrow */}
                   <div
-                    className={`${item.arrowColor} absolute bottom-[-14px] left-1/2 -translate-x-1/2 w-0 h-0 
+                    className={`${item.arrowColor} absolute bottom-[-14px] left-1/2 rounded-md -translate-x-1/2 w-0 h-0 
                   border-l-[15px] border-r-[15px] border-t-[15px] border-l-transparent border-r-transparent`}
                     style={{ borderTopColor: item.color.replace("bg-", "") }}
                   />
                 </div>
                 {/* User Image */}
-                <div className="mt-4 w-16 h-16 rounded-full overflow-hidden md:w-20 md:h-20">
+                <div className="mt-7 w-16 h-16 rounded-full overflow-hidden md:w-20 md:h-20">
                   <img
                     src={item.img}
                     alt={item.author}

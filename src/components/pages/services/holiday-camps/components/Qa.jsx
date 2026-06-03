@@ -51,8 +51,8 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="bg-white  faq py-20 md:px-4 px-8 lg:px-20">
-            <div className="text-center mb-10 lg:max-w-[800px] m-auto p-2">
+        <section className="bg-white  faq md:py-20 py-10 md:px-4 px-6 lg:px-20">
+            <div className="md:text-center mb-10 lg:max-w-[800px] m-auto md:p-2">
                 <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
                     Soccer Holiday Camps  <span className="text-[#00A6E3] recline "> FAQS</span>
                 </h3>
@@ -62,7 +62,7 @@ const Qa = () => {
 
             </div>
 
-            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Find A Camp"} color={"#00A6E3"} />
+            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Find A Camp"} color={"#00A6E3"} btnColor={"#00A6E3"} />
         </section>
     );
 };

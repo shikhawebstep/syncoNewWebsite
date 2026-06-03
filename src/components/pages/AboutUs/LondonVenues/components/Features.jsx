@@ -14,6 +14,7 @@ const Features = () => {
       imageAlt: "Kids playing football training",
       imagePosition: "right",
       buttonText: "Find your venue",
+      buttonText2: "Online Shop",
     }
   ];
   return (
@@ -28,7 +29,7 @@ const Features = () => {
                 return (
                   <div
                     key={idx}
-                    className={`flex mt-0 flex-col md:flex-row items-center gap-14 ${isImageRight ? "md:flex-row-reverse" : "md:flex-row"
+                    className={`flex mt-0 flex-col md:flex-row items-center md:gap-14 ${isImageRight ? "md:flex-row-reverse" : "md:flex-row"
                       }`}
                   >
                     {/* Text Content */}
@@ -42,21 +43,29 @@ const Features = () => {
 
 
                     </div>
-                    <div className="md:w-7/12 text-gray-700">
+                    <div className="md:w-7/12 max-w-[608px] text-gray-700">
 
-                      <h1 className='md:text-[48px] text-[28px] leading-[1.2] text-left recline blue-text pb-8'> {section.title1} <span className='text-[#0DD180] permanent-marker   ' > </span>   {section.title3}
+                      <h1 className='md:text-[48px] text-[28px] leading-[1.2] text-left recline blue-text pb-8 md:block hidden'> {section.title1} <span className='text-[#0DD180] permanent-marker   ' > </span>   {section.title3}
                       </h1>
-                      <p className="mb-3  leading-relaxed text-[#00A6E3] poppins font-semibold">  {section.title2}</p>
+                      <h1 className='md:text-[48px] text-[28px] leading-[1.2] text-left recline blue-text pb-8 md:hidden block'> {section.title2} <span className='text-[#0DD180] permanent-marker   ' > </span>   {section.title3}
+                      </h1>
+                      <p className="mb-3 md:block hidden  leading-relaxed text-[#00A6E3] poppins font-semibold">  {section.title2}</p>
                       {section.description.split("\n\n").map((para, i) => (
-                        <p key={i} className="mb-4 leading-relaxed text-[#797A88] poppins">
+                        <p key={i} className="mb-4 leading-[28px] text-[#4B4B56] text-[14px] poppins">
                           {para}
                         </p>
                       ))}
                       <p className='mb-4 leading-relaxed font-semibold text-[#00A6E3] poppins'>{section.highlightDescription}</p>
                       {section.buttonText && (
-                        <button className="mt-5 rounded-full bg-[#FFDE14] px-5 py-2.5 text-[18px] font-semibold text-[#042C89] recline">
+                       <>
+                        <button className="mt-5 hidden md:block rounded-full bg-[#FFDE14] px-5 py-2.5 text-[18px] font-semibold text-[#042C89] recline">
                           {section.buttonText}
-                        </button>)}
+                        </button>
+                         <button className="mt-5 block md:hidden rounded-full bg-[#FFDE14] px-5 py-2.5 text-[18px] font-semibold text-[#042C89] recline">
+                          {section.buttonText2}
+                        </button>
+                       </>
+                      )}
                     </div>
 
                     {/* Image with decorative yellow splashes */}

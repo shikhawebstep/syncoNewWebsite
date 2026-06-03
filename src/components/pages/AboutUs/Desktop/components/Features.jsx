@@ -29,12 +29,12 @@ const Features = () => {
                 return (
                   <div
                     key={idx}
-                    className={`flex mt-0 flex-col md:flex-row items-center gap-14 ${isImageRight ? "md:flex-row-reverse" : "md:flex-row"
+                    className={`flex mt-0 flex-col md:flex-row  gap-14 ${isImageRight ? "md:flex-row-reverse" : "md:flex-row"
                       }`}
                   >
                     {/* Text Content */}
 
-                    <div className="md:w-5/12 p-15 relative md:block hidden">
+                    <div className="md:w-5/12 p-15 pt-0 relative md:block hidden">
                       <img
                         src={section.image}
                         alt={section.imageAlt}
@@ -47,7 +47,8 @@ const Features = () => {
                       <h2 className="text-[36px] recline font-bold text-[#0DD180] mb-4">
 
                       </h2>
-                      <h1 className='md:text-[52px] text-[38px] w-full text-left recline blue-text'> <span className='text-[#0DD180] permanent-marker   ' >  {section.title1}</span>  {section.title2}
+                      <h1 className='md:text-[52px] text-[38px] w-full text-left recline blue-text'>
+                     Football schools in London teaching flair, fun, and <br /> unforgettable skills.
                       </h1>
                       {section.description.split("\n\n").map((para, i) => (
                         <p key={i} className="my-4 leading-relaxed text-[#797A88] poppins">

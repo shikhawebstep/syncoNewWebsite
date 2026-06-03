@@ -7,7 +7,7 @@ export default function Stepper({ currentStep = 1 }) {
   ];
 
   return (
-    <div className="w-full m-auto flex bg-[#FAFAFB] md:p-5 p-3 rounded-2xl items-center justify-center mb-[25px]">
+    <div className="w-full m-auto flex bg-[#FAFAFB] md:p-5 p-3 rounded-2xl items-center md:justify-center mb-[25px] justify-between md:gap-0 gap-1.5">
       {steps.map((step, index) => {
         const isActive = step.id === currentStep;
         const isCompleted = step.id < currentStep;
@@ -17,7 +17,7 @@ export default function Stepper({ currentStep = 1 }) {
             {/* Step Circle + Label */}
             <div className="flex items-center gap-3">
               <div
-                className={`w-[25px] h-[25px] flex items-center justify-center rounded-full capitalize border text-sm font-semibold
+                className={`md:w-[25px] md:h-[25px]  w-[20px] h-[20px] flex items-center justify-center rounded-full capitalize border md:text-sm text-[10px] font-semibold
                   ${
                     isCompleted || isActive
                       ? "border-green-500 text-green-500"
@@ -50,7 +50,7 @@ export default function Stepper({ currentStep = 1 }) {
 
             {/* Connector */}
             {index < steps.length - 1 && (
-              <div className="md:mx-8 mx-3 md:w-[80px] w-[50px] h-[2px] bg-[#9E9FAA]" />
+              <div className="md:mx-8 mx-1 md:w-[80px] w-[20px] h-[2px] bg-[#9E9FAA]" />
             )}
           </div>
         );

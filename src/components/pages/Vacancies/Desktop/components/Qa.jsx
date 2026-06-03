@@ -29,18 +29,20 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className=" grey-bg faq py-20 px-4 lg:px-20">
-            <div className="text-center mb-10">
-                <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
+        <section className=" grey-bg faq md:py-20 py-10 px-4 lg:px-20">
+            <div className="text-center mb-10 px-3 md:px-0">
+                <h2 className="text-[40px] lg:text-[55px] font-bold text-blue-900 recline">
                     Why should you <span className="text-[#0DD180]  font-medium permanent-marker">Learn</span> From us  ?
-                </h3>
+                </h2>
                 <p className="text-[#5F5F6D] mt-2 font-medium">
-                    With our industry experience, we are confident we can help you become an outstanding coach <br /> who will thrive in the football world
+                    With our industry experience, we are confident we can help you become an outstanding coach <br className="hidden md:block" /> who will thrive in the football world
                 </p>
 
             </div>
 
-            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Apply Today"} />
+            <div className="px-3 md:px-0">
+                <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Apply Today"} />
+            </div>
         </section>
     );
 };

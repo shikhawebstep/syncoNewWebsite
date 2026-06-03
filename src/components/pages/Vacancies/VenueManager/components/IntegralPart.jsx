@@ -74,7 +74,7 @@ const BenefitCard = ({ title, desc, icon: Icon, color }) => (
         {/* Content */}
         <div>
             <p
-                className="text-[20px] recline font-semibold text-[#001F6E] leading-tight mb-1"
+                className= "text-[16px] md:text-[20px] recline font-semibold text-[#001F6E] leading-tight mb-1"
             >
                 {title}
             </p>
@@ -101,23 +101,26 @@ const IntegralPart = () => {
                 <div className="max-w-6xl mx-auto">
 
                     {/* Heading */}
-                    <h2 className="text-[48px] md:text-[38px] font-semibold recline text-[#001F6E] mb-4">
-                        Become an integral part of the <br />
+                    <h2 className="text-[38px] md:text-[38px] font-semibold recline text-[#001F6E] b-4">
+                        Become an <br className="block md:hidden" /> integral part of  <br className="block md:hidden" /> the <br className="md:block hidden" />
                         Samba Soccer Schools team!
                     </h2>
+                    <div className="max-w-[787px] mt-3">
 
-                    <p className="text-[#797A88] max-w-2xl poppins mb-4 text-[20px] ">
-                        We do things a little differently at Samba Soccer Schools and would
-                        like to offer you the opportunity to be a crucial part of that.
-                    </p>
+                        <p className="text-[#797A88] poppins mb-4 text-[16px] md:text-[20px] ">
+                            We do things a little differently at Samba Soccer Schools and would
+                            like to offer you the opportunity to be a crucial part of that.
+                        </p>
 
-                    <p className="text-[#797A88] max-w-2xl poppins mb-4  text-[20px] ">
-                        Our ethos is all about doing things the Brazilian way – injecting fun, flair, and freedom into everything we do.
-                    </p>
+                        <p className="text-[#797A88] poppins mb-4  text-[16px] md:text-[20px] ">
+                            Our ethos is all about doing things the Brazilian way – injecting fun, flair, and freedom into everything we do.
+                        </p>
 
-                    <p className="text-[#797A88] max-w-2xl poppins mb-25 text-[20px] ">
-                        As one of our Regional Managers, you would benefit in a variety of ways…
-                    </p>
+                        <p className="text-[#797A88] poppins md:mb-25 mb-7 text-[16px] md:text-[20px] ">
+                            As one of our Regional Managers, you would benefit in a variety of ways…
+                        </p>
+
+                    </div>
 
 
                     {/* Cards Grid */}

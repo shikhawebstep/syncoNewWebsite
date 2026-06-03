@@ -13,23 +13,23 @@ const managersData = [
         name: "Emmanuel Marshal",
         role: "Venue Manager",
         image: "/assets/EmmanuelMarshal.png",
-         banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         description: [
-          "Nicknamed ‘Manny’, Emmanuel Marshal started his coaching journey at the age of 17.",
-          "He is known for his vibrant energy and fun-like style of football coaching.",
-          "When he’s not coaching, you’ll probably find him in the gym."
+          "Nicknamed ‘Manny’, Emmanuel Marshal started his coaching journey at the age of 17. He played for Fulham FC Academy as a youth player and was later recruited by their coaching department.",
+          "Emmanuel went on to work with Samba Soccer Schools at the age of 18 and has since developed into a Head Coach. He is known for his vibrant energy and fun-like style of football coaching. He’s also a bit of a ‘baller’ but shh don't tell him that as it’ll get to his head.",
+          "When he’s not coaching, you’ll probably find him in the gym or praying for Fulham FC to get back in the Premier League.",
         ]
       },
       {
         id: 2,
         name: "Haile Solomon",
         role: "Venue Manager",
-        banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         image: "/assets/HaileSolomon.png",
         description: [
-          "Started coaching at a young age with Fulham FC Academy.",
-          "Developed into a Head Coach at Samba Soccer Schools.",
-          "Big believer in high-energy, fun training sessions."
+          "Nicknamed ‘Manny’, Emmanuel Marshal started his coaching journey at the age of 17. He played for Fulham FC Academy as a youth player and was later recruited by their coaching department.",
+          "Emmanuel went on to work with Samba Soccer Schools at the age of 18 and has since developed into a Head Coach. He is known for his vibrant energy and fun-like style of football coaching. He’s also a bit of a ‘baller’ but shh don't tell him that as it’ll get to his head.",
+          "When he’s not coaching, you’ll probably find him in the gym or praying for Fulham FC to get back in the Premier League.",
         ]
       }
     ]
@@ -47,33 +47,33 @@ const managersData = [
         image: "/assets/EthanBondVaughan.png",
         banner: "/assets/EthanBond.png",
         description: [
-          "Experienced youth coach with a strong technical background.",
-          "Known for structured but exciting coaching methods.",
-          "Always focused on player development."
+          "Ethan realised his passion for football coaching after completing a coaching course hosted by Samba Soccer Schools in 2017. After gaining his FA qualifications, he worked tremendously hard to climb the ladder going from support coach, to Head Coach and now appointed as Head of Recruitment at SSS.",
+          "He is popular for breaking down exercises and communicating with players in a clear way. One parent had this to say: ‘Ethan has the teacher-engaging-ability all teachers should have, but not all do have!’",
+          "Bravo Ethan, Bravo!"
         ]
       },
-       {
+      {
         id: 1,
         name: "Emmanuel Marshal",
         role: "Venue Manager",
         image: "/assets/EmmanuelMarshal.png",
-         banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         description: [
-          "Nicknamed ‘Manny’, Emmanuel Marshal started his coaching journey at the age of 17.",
-          "He is known for his vibrant energy and fun-like style of football coaching.",
-          "When he’s not coaching, you’ll probably find him in the gym."
+          "Ethan realised his passion for football coaching after completing a coaching course hosted by Samba Soccer Schools in 2017. After gaining his FA qualifications, he worked tremendously hard to climb the ladder going from support coach, to Head Coach and now appointed as Head of Recruitment at SSS.",
+          "He is popular for breaking down exercises and communicating with players in a clear way. One parent had this to say: ‘Ethan has the teacher-engaging-ability all teachers should have, but not all do have!’",
+          "Bravo Ethan, Bravo!"
         ]
       },
       {
         id: 2,
         name: "Haile Solomon",
         role: "Venue Manager",
-        banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         image: "/assets/HaileSolomon.png",
         description: [
-          "Started coaching at a young age with Fulham FC Academy.",
-          "Developed into a Head Coach at Samba Soccer Schools.",
-          "Big believer in high-energy, fun training sessions."
+          "Ethan realised his passion for football coaching after completing a coaching course hosted by Samba Soccer Schools in 2017. After gaining his FA qualifications, he worked tremendously hard to climb the ladder going from support coach, to Head Coach and now appointed as Head of Recruitment at SSS.",
+          "He is popular for breaking down exercises and communicating with players in a clear way. One parent had this to say: ‘Ethan has the teacher-engaging-ability all teachers should have, but not all do have!’",
+          "Bravo Ethan, Bravo!"
         ]
       }
     ]
@@ -84,44 +84,52 @@ const managersData = [
     color: "#00AEEF",
     position: "normal",
     managers: [
-     {
+      {
         id: 1,
         name: "Emmanuel Marshal",
         role: "Venue Manager",
         image: "/assets/EmmanuelMarshal.png",
-         banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         description: [
-          "Nicknamed ‘Manny’, Emmanuel Marshal started his coaching journey at the age of 17.",
-          "He is known for his vibrant energy and fun-like style of football coaching.",
-          "When he’s not coaching, you’ll probably find him in the gym."
+          "Coach Haile is one of the coolest guys you will meet in football coaching. Big claim right? But he has years of evidence to back this up!",
+
+          "Haile has been a Head Coach for Samba Soccer Schools for 5 years. He knows how to bring the fun to every class putting smiles on all his students the moment they arrive to his classes.",
+
+          "Outside of coaching, you’ll find Haile enjoying a 5-aside game with his mates or watching his beloved Borussia Dortmund FC.",
+
+          "Oh yeah, we also forgot to mention that Haile represents his home country, Eritrea for their national football tournaments! Now that's pretty cool!"
         ]
       },
-       {
+      {
         id: 6,
         name: "Helaku El-bay",
         role: "Venue Manager",
         image: "/assets/HelakuEl-bay.png",
-         banner: "/assets/Helaku.png", 
-          description: [
+        banner: "/assets/Helaku.png",
+        description: [
           "Coach Haile is one of the coolest guys you will meet in football coaching. Big claim right? But he has years of evidence to back this up!",
 
-"Haile has been a Head Coach for Samba Soccer Schools for 5 years. He knows how to bring the fun to every class putting smiles on all his students the moment they arrive to his classes.",
+          "Haile has been a Head Coach for Samba Soccer Schools for 5 years. He knows how to bring the fun to every class putting smiles on all his students the moment they arrive to his classes.",
 
-"Outside of coaching, you’ll find Haile enjoying a 5-aside game with his mates or watching his beloved Borussia Dortmund FC.",
+          "Outside of coaching, you’ll find Haile enjoying a 5-aside game with his mates or watching his beloved Borussia Dortmund FC.",
 
-"Oh yeah, we also forgot to mention that Haile represents his home country, Eritrea for their national football tournaments! Now that's pretty cool!"
+          "Oh yeah, we also forgot to mention that Haile represents his home country, Eritrea for their national football tournaments! Now that's pretty cool!"
         ]
       },
-          {
+      {
         id: 2,
         name: "Haile Solomon",
         role: "Venue Manager",
-        banner: "/assets/Emmanuel.png", 
+        banner: "/assets/Emmanuel.png",
         image: "/assets/HaileSolomon.png",
         description: [
-          "Started coaching at a young age with Fulham FC Academy.",
-          "Developed into a Head Coach at Samba Soccer Schools.",
-          "Big believer in high-energy, fun training sessions."
+          "Coach Haile is one of the coolest guys you will meet in football coaching. Big claim right? But he has years of evidence to back this up!",
+
+          "Haile has been a Head Coach for Samba Soccer Schools for 5 years. He knows how to bring the fun to every class putting smiles on all his students the moment they arrive to his classes.",
+
+          "Outside of coaching, you’ll find Haile enjoying a 5-aside game with his mates or watching his beloved Borussia Dortmund FC.",
+
+          "Oh yeah, we also forgot to mention that Haile represents his home country, Eritrea for their national football tournaments! Now that's pretty cool!"
         ]
       }
     ]
@@ -130,7 +138,7 @@ const managersData = [
 
 /* ===================== SECTION ===================== */
 const VenueManagerSection = ({ group }) => {
-  const { groupName, position,color, managers } = group;
+  const { groupName, position, color, managers } = group;
 
   if (!managers?.length) return null;
 
@@ -173,8 +181,8 @@ const VenueManagerSection = ({ group }) => {
   const activeColor = activeIndex % 2 === 0 ? "#00BA7C" : "#00AEEF";
 
   return (
-    <section className="relative bg-[#F6F6F6] py-20 m-0 venueManagersSec">
-      <div className="container mx-auto relative z-10">
+    <section className={`relative px-4 md:px-0 py-10  md:py-20 ${groupName !== "Head Coaches" ? 'ggggggs' : ""}  m-0   z-1`}>
+      <div className="max-w-[1164px] mx-auto relative z-10">
 
         {/* TITLE */}
         <div
@@ -184,7 +192,7 @@ const VenueManagerSection = ({ group }) => {
         >
           {/* HEADING */}
           <h2
-            className={`md:text-[48px] text-[40px] recline font-bold  text-center md:text-left`}
+            className={`md:text-[48px] text-[38px] recline font-bold  text-center md:text-left`}
             style={{ color }}
           >
             {groupName}
@@ -196,14 +204,14 @@ const VenueManagerSection = ({ group }) => {
             {/* LEFT */}
             <button
               onClick={() => scrollByCard(-1)}
-              className="absolute md:left-[-55px] left-[-15px] top-1/2 -translate-y-1/2 z-30"
+              className="absolute md:left-[27px] left-[5px] top-1/2 -translate-y-1/2 z-30"
             >
-              <img src="/assets/leftIcon.png" className="h-5" alt="Left" />
+              <img src="/assets/leftIcon.png" className="h-3 md:h-5" alt="Left" />
             </button>
 
             <div
               ref={sliderRef}
-              className="flex max-w-[900px] gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2"
+              className="flex md:max-w-[660px] w-[80%] m-auto gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2"
             >
               {infiniteManagers.map((item, index) => {
                 const isActive = active.id === item.id;
@@ -213,8 +221,8 @@ const VenueManagerSection = ({ group }) => {
                   <button
                     key={`${item.id}-${index}`}
                     onClick={() => setActive(item)}
-                    className={`snap-start flex-shrink-0 w-[160px] rounded-2xl overflow-hidden bg-white transition-all duration-300
-              ${isActive ? "border-4 shadow-lg" : "border-4 border-white"}
+                    className={`snap-start flex-shrink-0 md:w-[115px] w-[80px] rounded-2xl items-stretch p-0 overflow-hidden bg-white transition-all duration-300
+              ${isActive ? "border-2 shadow-lg" : "border-white"}
             `}
                     style={
                       isActive
@@ -228,10 +236,10 @@ const VenueManagerSection = ({ group }) => {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-[200px] p-2 object-cover"
+                      className="w-full md:h-[100px] h-[70px] object-contain"
                     />
                     <p
-                      className="text-white text-center font-bold py-3 text-[12px]"
+                      className="text-white h-[100%] text-center font-bold py-3 md:px-4 text-[10px] md:text-[12px]"
                       style={{ backgroundColor: baseColor }}
                     >
                       {item.name.toUpperCase()}
@@ -244,9 +252,9 @@ const VenueManagerSection = ({ group }) => {
             {/* RIGHT */}
             <button
               onClick={() => scrollByCard(1)}
-              className="absolute md:right-[-55px] right-[-15px] top-1/2 -translate-y-1/2 z-30"
+              className="absolute md:right-[27px] right-[5px] top-1/2 -translate-y-1/2 z27"
             >
-              <img src="/assets/rightIcon.png" className="h-5" alt="Right" />
+              <img src="/assets/rightIcon.png" className="h-3 md:h-5" alt="Right" />
             </button>
           </div>
         </div>
@@ -254,7 +262,7 @@ const VenueManagerSection = ({ group }) => {
 
         {/* DETAIL CARD */}
         <div
-          className="bg-white rounded-[32px] p-10 flex flex-col lg:flex-row gap-10 items-center shadow-lg"
+          className="bg-white rounded-[32px] md:p-10 p-5 flex flex-col lg:flex-row gap-10 items-center shadow-lg"
           style={{ borderLeft: `6px solid ${activeColor}` }}
         >
           <div className="w-full lg:w-4/12">
@@ -266,14 +274,14 @@ const VenueManagerSection = ({ group }) => {
           </div>
 
           <div className="w-full lg:w-8/12">
-            <h3 className="text-[24px] font-bold text-[#042C89] mb-6">
+            <h2 className="md:text-[24px] text-[20px] poppins font-bold text-[#042C89] pb-6">
               {active.name}
-            </h3>
+            </h2>
 
             {active.description.map((para, index) => (
               <p
                 key={index}
-                className="text-[#5F5F6D] mb-4 text-[16px] leading-relaxed"
+                className="text-[#5F5F6D] mb-4 md:text-[16px] text-[14px] leading-relaxed"
               >
                 {para}
               </p>

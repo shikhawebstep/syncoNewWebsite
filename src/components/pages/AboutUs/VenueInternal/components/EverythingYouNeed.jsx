@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import EverythingYouNeedBg from "/assets/EverythingYouNeedBg.png";
 import BookTrialGreenBg from "/assets/BookTrialGreenBg.png";
 
@@ -181,9 +182,11 @@ const EverythingYouNeed = () => {
                                     we’ll show you all the fuss.
                                 </p>
 
-                                <button className="mt-6 inline-flex items-center justify-center bg-[#FFDE14] recline font-bold hover:bg-yellow-500 transition text-[#042C89]  px-6 py-3 rounded-full">
-                                    Book a FREE Trial
-                                </button>
+                                <Link to="/find-a-class">
+                                    <button className="mt-6 inline-flex items-center justify-center bg-[#FFDE14] recline font-bold hover:bg-yellow-500 transition text-[#042C89]  px-6 py-3 rounded-full">
+                                        Book a FREE Trial
+                                    </button>
+                                </Link>
                             </div>
                             <div className="">
                                 <img src="/assets/img-kids-picture-2.png" className="absolute right-[20px] bottom-[0px]" alt="" />

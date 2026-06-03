@@ -4,7 +4,7 @@ import bannerImg from "/assets/RegionalManagerBg.png";
 const Banner = () => {
     return (
         <section
-            className="relative  regionalManagerSection whitetop flex md:bg-cover bg-no-repeat items-start bg-[#fff]  bg-top md:pt-[100px] pt-[200px] pb-[200px] min-h-[1600px]"
+            className="relative  regionalManagerSection whitetop flex md:bg-cover bg-no-repeat items-start bg-[#fff]  md:bg-top bg-bottom md:pt-[100px] pt-[100px] pb-[100px] min-h-[1200px] "
            
         >
             <div className="container mx-auto">

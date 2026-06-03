@@ -99,15 +99,15 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="grey-bg faq py-20 px-4 lg:px-20">
+        <section className="grey-bg faq pt-15 md:pb-20 pb-10 px-4 lg:px-20">
             <div className="text-center mb-10">
-                <div className="m-auto max-w-[150px] mb-5">
+                <div className="m-auto max-w-[130px] mb-5">
                     <img src="/assets/locate.png" alt="" />
 
                 </div>
-                <h4 className="text-3xl lg:text-4xl recline font-bold text-blue-900 recline">
-                    Our franchise support involves <br /> the following:
-                </h4>
+                <h2 className="text-4xl lg:text-4xl recline font-bold text-blue-900 recline">
+                    Our franchise support involves <br className="hidden md:block" /> the following:
+                </h2>
             </div>
 
             <div className="lg:flex gap-4 lg:max-w-[1200px] mt-5 m-auto lg:space-x-10">
@@ -132,7 +132,7 @@ const Qa = () => {
                 <div className="lg:w-2/3 acc md:pr-15">
                     <div>
                         {faqData[activeIndex].title && (
-                            <h5 className="recline font-bold text-[#00A6E3] pb-4 recline">
+                            <h5 className="recline font-bold md:text-start text-center text-[#00A6E3] pb-4 recline">
                                 {faqData[activeIndex].title}
                             </h5>
                         )}
@@ -147,7 +147,9 @@ const Qa = () => {
                     </div>
 
                     <div className="mt-8">
-                        <button className="text-white px-6 bg-[#0DD180] py-3 rounded-3xl poppins font-bold">
+                        <button 
+                            onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
+                            className="text-white px-6 bg-[#0DD180] py-3 rounded-3xl poppins font-bold">
                             Apply Today
                         </button>
                     </div>

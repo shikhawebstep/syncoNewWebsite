@@ -3,15 +3,15 @@ import ApplyForm from '../../../Common/ApplyForm'
 
 const Enquiry = () => {
   return (
-    <section className='py-[80px] relative overflow-hidden'>
+    <section id="enquiry-section" className='py-[80px] relative overflow-hidden'>
       <div className="container">
         <div className="md:flex justify-between max-w-[1200px] m-auto gap-10">
-          <div className='md:w-[430px] '>
+          <div className='md:w-[490px] '>
             <h4 className="text-[18px] recline blue-text">
               Apply Today
 
             </h4>
-            <p className="text-[20px] text-[#5F5F6D] mt-5 ">
+            <p className="md:text-[22px] text-[18px] mb-15 md:mb-0 text-[#5F5F6D] mt-5 ">
               Like what you hear? Your first step starts right here. Fill in your details below and you can expect to hear from our team within 48 hours. Don’t forget to add a cover note and upload your CV at the bottom!            </p>
           </div>
           <div className='md:w-[690px] relative z-50'>

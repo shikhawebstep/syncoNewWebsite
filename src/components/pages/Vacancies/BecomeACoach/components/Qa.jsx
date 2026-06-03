@@ -31,16 +31,16 @@ const Qa = () => {
 
     return (
         <section className=" grey-bg faq py-20 px-4 lg:px-20">
-            <div className="text-center mb-10">
-                <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
+            <div className="text-center mb-10 px-4 md:px-0">
+                <h3 style={{textAlign:'center'}} className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
                     The process
                 </h3>
-                <p className="text-[#5F5F6D] mt-2 font-medium">
+                <p className="text-[#5F5F6D] mt-2 font-medium md:pb-5">
                     Working for Samba Soccer Schools involves passing through a two-stage recruitment process.                 </p>
 
             </div>
 
-            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Apply Today"} />
+            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Apply Today"} align={'top'} />
         </section>
     );
 };

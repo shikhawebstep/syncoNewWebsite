@@ -2,7 +2,7 @@ import FranchiseForm from '../../../Common/FranchiseForm'
 
 const Enquiry = () => {
     return (
-        <section className='py-[80px] relative overflow-hidden'>
+        <section id="enquiry-section" className='py-[80px] relative overflow-hidden'>
             <div className="container">
                 <div className="md:flex justify-between max-w-[1200px] m-auto gap-10">
                     <div className='md:w-[430px] text-center md:text-left'>
@@ -11,7 +11,8 @@ const Enquiry = () => {
                             <span className='recline block blue-text' >Enquire Today</span>
                         </h3>
                         <p className="text22 text-[#797A88] mt-5 ">
-                            Your Samba Soccer Schools franchise journey begins here. Simply fill out the form below, and we’ll be in touch within 48 hours to answer any questions and get you started on your franchise journey.
+                            Your Samba Soccer Schools franchise journey begins here. Simply fill out the form below,
+                             and we’ll be in touch within 48 hours to answer any questions and get you started on <br className='hidden md:block'/> your franchise journey.
                         </p>
                     </div>
                     <div className='md:w-[690px] md:mt-0 mt-10 bg-white shadowBox rounded-2xl relative z-50'>
@@ -24,7 +25,7 @@ const Enquiry = () => {
                 <img src="/assets/blueDots1.png" alt="" />
             </div>
 
-            <div className="absolute md:-right-0 right-[-150px] md:-top-5 top-[-150px] max-w-[400px]">
+            <div className="absolute md:-right-0 right-[-120px] md:-top-5 top-[-150px] md:max-w-[400px] max-w-[315px]">
                 <img src="/assets/blueDots1.png" alt="" />
             </div>
         </section>

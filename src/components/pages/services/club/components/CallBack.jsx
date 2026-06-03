@@ -2,7 +2,7 @@ import React from "react";
 
 const CallBack = () => {
   return (
-    <section className="relative bg-white py-[80px]">
+    <section className="relative blubpage bg-white py-[80px]">
       <div className="container mx-auto px-4">
         <div
           className="
@@ -21,13 +21,14 @@ const CallBack = () => {
             to develop skills and boost confidence in a short time.
           </h6>
 
-          <p className="font-regular text-[#5F5F6D]">
+          <p className="font-regular text-[#5F5F6D] py-5 md:text-[16px] text-[15px]">
             Fill out the form at the bottom of the page and a member of our team
-            will discuss how we can help your child.
+            will discuss <br className="hidden md:block"/> how we can help your child.
           </p>
 
           <button
             type="button"
+            onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
             className="
               mt-4 w-full rounded-4xl 
               bg-[#0DD180] p-3 text-[18px]
@@ -44,7 +45,7 @@ const CallBack = () => {
         <img src="/assets/blueVector.png" alt="Blue decorative vector" />
       </div>
 
-      <div className="absolute md:top-0 top-[70%] md:left-[10%] left-[-10%] md:w-4/12">
+      <div className="absolute md:top-0 md:top-[70%] top-[50%] md:left-[10%] left-[-10%] md:w-4/12">
         <img src="/assets/greenVector1.png" alt="Green decorative vector 1" />
       </div>
 

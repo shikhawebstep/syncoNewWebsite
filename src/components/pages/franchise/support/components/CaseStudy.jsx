@@ -6,17 +6,18 @@ const CaseStudy = () => {
             <div className="max-w-[1200px] mx-auto px-4">
 
                 {/* Heading */}
-                <div className="text-center mb-14">
-                    <h4 className="text-[64px] leading-[1.1] font-bold  recline">
+                <div className="text-center md:mb-14 mb-4">
+                    <h2 className="md:text-[64px] leading-[1.1] text-[42px] recline">
                         <span className=" text-[#0DD180] permanent-marker">
                             Case Study
-                        </span>
+                        </span> <br className="md:hidden block" />
                         <span className="text-[#00A6E3]"> SSS Essex</span>
-                    </h4>
+                    </h2>
                 </div>
 
                 {/* Row 1 */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center mb-20">
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center md:mb-20 mb-10">
                     {/* Text */}
                     <div>
                         <p className="text-[#5F5F6D] text-[14px] mb-6 leading-[24px]">
@@ -45,7 +46,8 @@ const CaseStudy = () => {
                 </div>
 
                 {/* Row 2 */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-20 gap-10 md:mb-0 mb-10 items-center">
                     {/* Image */}
                     <div className="relative order-2 lg:order-1">
                         <img
@@ -72,11 +74,12 @@ const CaseStudy = () => {
                         </p>
                     </div>
                 </div>
-       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center mb-20">
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
                     {/* Text */}
                     <div>
                         <p className="text-[#5F5F6D] text-[14px] mb-6 leading-[24px]">
-                            I decided to do this for the right reasons because I wanted to do better for my family and to help the kids in my local community whose parents do not have time to take them to play football. I wanted to assist those families and make a change for them in the same way I have done for my son. I am very proud to be involved in this and I can honestly say I wouldn’t change this for the world. 
+                            I decided to do this for the right reasons because I wanted to do better for my family and to help the kids in my local community whose parents do not have time to take them to play football. I wanted to assist those families and make a change for them in the same way I have done for my son. I am very proud to be involved in this and I can honestly say I wouldn’t change this for the world.
                         </p>
 
                         <p className="text-[#5F5F6D] text-[14px] mb-6 leading-[24px]">
@@ -84,7 +87,7 @@ const CaseStudy = () => {
 
 
                         <p className="text-[#5F5F6D] text-[14px] mb-5 leading-[24px]">
-                           Fill in the form below to signal your interest, and we’ll have someone in touch within 48 hours to talk you through the process and answer any questions you might have. 
+                            Fill in the form below to signal your interest, and we’ll have someone in touch within 48 hours to talk you through the process and answer any questions you might have.
                         </p>
 
 

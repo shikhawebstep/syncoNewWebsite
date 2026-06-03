@@ -55,13 +55,13 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="bg-white  faq py-20 md:px-4 px-8 lg:px-20">
+        <section className="bg-white  faq md:py-20 md:px-4 px-8 lg:px-20 py-15 pb-20">
             <div className="text-center mb-10">
-                <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
-                    Let’s answer your <span className="text-[#0DD180] recline">questions</span>
+                <h3 style={{textAlign:'center'}} className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
+                    Let’s answer  <br className="block md:hidden"/>  your <span className="text-[#0DD180] recline">questions</span>
                 </h3>
-                <p className="text-[#5F5F6D] mt-2">
-                    We know you’ve probably got lots of questions to ask about our 1-to-1 coaching classes.To <br /> bmake things easy, we’ve gone ahead and answered the commonly asked:
+                <p className="text-[#5F5F6D] md:text-[16px] text-[15px] mt-2">
+                    We know you’ve probably got lots of questions to ask about our 1-to-1 coaching classes.To <br className="md:block hidden"/> bmake things easy, we’ve gone ahead and answered the commonly asked:
                 </p>
 
             </div>

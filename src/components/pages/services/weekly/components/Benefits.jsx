@@ -5,7 +5,7 @@ import { GetBenefitsData } from "../../../Common/GetBenefitData";
 
 const Benefits = () => {
   const { pathname } = useLocation();
-  const { bannerImg, heading,logoImage, isCenter, highlightText, subHeading,subHeading2, benefits ,headingMobile, highlightTextMobile, subHeadingMobile, subHeading2Mobile } =
+  const { bannerImg, heading,logoImage, isCenter,isNotLine, highlightText, subHeading,subHeading2, benefits ,headingMobile, highlightTextMobile, subHeadingMobile, subHeading2Mobile, } =
     GetBenefitsData(pathname);
 
   return (
@@ -22,6 +22,7 @@ const Benefits = () => {
       subHeadingMobile={subHeadingMobile}
       subHeading2Mobile={subHeading2Mobile}
       isCenter={isCenter}
+      isNotLine={isNotLine}
     />
   );
 };

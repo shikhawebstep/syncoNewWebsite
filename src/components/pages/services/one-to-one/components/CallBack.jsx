@@ -2,7 +2,7 @@ import React from 'react'
 
 const CallBack = () => {
     return (
-        <section className='bg-white py-[120px] relative'>
+        <section className='bg-white md:py-[120px] py-10 px-5 md:px-0 relative'>
             <div className="container mx-auto">
                 <div className="bg-white max-w-[770px] m-auto text-center overflow-hidden relative z-50 p-8 rounded-4xl
  shadowBox border-t-10  border-[#fede23]">

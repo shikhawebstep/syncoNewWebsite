@@ -57,13 +57,14 @@ const GoodFit = () => {
                 </h2>
 
                 {/* Description */}
-                <p className="mx-auto mt-6 max-w-5xl text-lg text-white/90 leading-relaxed">
+                <p className="mx-auto hidden md:block mt-6 max-w-[950px] text-[18px] text-lg text-white/90 leading-relaxed">
                     We’d love to hear from you if you like the sound of what we do and
                     think you might be a good fit to join the exciting and ever-expanding
                     Samba Soccer Schools franchise. We’re always looking for passionate
                     and motivated people to partner with, so if you tick the following
                     boxes, get in contact today.
                 </p>
+                <p className="block md:hidden text-[22px]">If you have each of the following, we would love to work with you</p>
 
                 {/* Cards */}
                 <div className="mt-20  md:grid hidden max-w-[1190px] m-auto gap-4 sm:grid-cols-2 lg:grid-cols-6">
@@ -71,7 +72,7 @@ const GoodFit = () => {
                         return (
                             <div
                                 key={index}
-                                className={`relative rounded-3xl ${item.bg}  px-4 pb-10 pt-14 `}
+                                className={`relative rounded-3xl ${item.bg}  px-4 pb-6 pt-14 `}
                             >
                                 {/* Icon */}
                                 <div
@@ -81,7 +82,7 @@ const GoodFit = () => {
                                 </div>
 
                                 {/* Text */}
-                                <p className="text-sm font-medium leading-relaxed whitespace-pre-line">
+                                <p className="text-[16px] font-medium leading-relaxed whitespace-pre-line">
                                     {item.title}
                                 </p>
                             </div>
@@ -104,7 +105,7 @@ const GoodFit = () => {
                         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                         breakpoints={{
                             0: {
-                                slidesPerView: 1.3,     // MOBILE
+                                slidesPerView: 1.5,     // MOBILE
                                 centeredSlides: true,
                             },
                             768: {
@@ -137,7 +138,7 @@ const GoodFit = () => {
                         <button className="custom-prev mobilebtnngreen leftMobileBtnn text-[#0DD180] text-2xl absolute top-[32%] left-[-4%]"><MdKeyboardArrowLeft className="text-5xl" /></button>
                         <button className="custom-next mobilebtnngreen rightMobileBtnn text-[#0DD180] text-2xl absolute top-[32%] right-[-4%]"><MdKeyboardArrowRight className="text-5xl" /></button>
                     </div>
-                    <div className="flex justify-center mt-8 md:hidden gap-2">
+                    <div className="flex justify-center mt-8 md:hidden gap-2 absolute left-0 right-0 bottom-10">
                         {fitItems.map((_, index) => (
                             <span
                                 key={index}

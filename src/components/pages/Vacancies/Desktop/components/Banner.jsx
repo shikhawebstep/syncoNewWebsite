@@ -11,7 +11,7 @@ const Banner = () => {
 
     return (
         <section
-            className="relative py-[100px] min-h-[900px] flex items-center justify-center cursor-pointer"
+            className="relative videoSection py-[100px] md:min-h-[900px] min-h-[615px] flex items-center justify-center cursor-pointer"
             style={{
                 backgroundImage: showVideo ? "none" : `url(${bannerImg})`,
                 backgroundSize: "cover",
@@ -41,7 +41,7 @@ const Banner = () => {
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                         </div>
-                        <div className="mt-0 text-white text-[70px] font-black leading-none tracking-[3px] select-none">
+                        <div className="md:mt-0 mt-6 text-white text-[70px] font-black leading-none tracking-[3px] select-none">
                             VIDEO
                         </div>
 

@@ -64,7 +64,7 @@ const Services = () => {
 
     return (
         <>
-            <section className="services py-10 md:py-12 lg:py-16">
+            <section className="services py-10">
                 <div className="container">
                     <div className="text-center  sm:px-0">
                         <h3 className='text-white recline text-[28px] sm:text-[34px] md:text-[38px] lg:text-[44px]'>
@@ -77,7 +77,7 @@ const Services = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 service-card sm:grid-cols-2 gap-4 md:gap-5 lg:gap-6 mt-8 md:mt-10 lg:mt-12 lg:max-w-[1250px] m-auto sm:px-0">
+                    <div className="grid grid-cols-1 service-card sm:grid-cols-2 gap-4 mt-8 md:mt-10 lg:mt-12 lg:max-w-[1250px] m-auto sm:px-0">
                         {cardsData.map((card) => {
                             const isActive = activeCard === card.id
 

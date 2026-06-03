@@ -25,7 +25,7 @@ const FranchiseIncome = () => {
     };
 
     return (
-        <section className="w-full grey-bg py-20 px-4">
+        <section className="w-full income grey-bg py-20 px-4">
             <div className="max-w-5xl mx-auto text-center">
                 <div className="max-w-[610px]  m-auto">
                     <h4 className="extra-small md:text-4xl font-bold mb-6">
@@ -46,7 +46,7 @@ const FranchiseIncome = () => {
                     {incomeData.cards.map((item, index) => (
                         <div
                             key={index}
-                            className={`px-8 py-6 text-center text-[#3E3E47] small font-medium md:text-base ${index % 2 === 0 ? "bg-[#E1E2E6]" : "bg-[#FDFDFF]"
+                            className={`md:px-8 px-4 py-6 text-center text-[#3E3E47] text-[14px] font-medium ${index % 2 === 0 ? "bg-[#E1E2E6]" : "bg-[#FDFDFF]"
                                 }`}
                         >
                             {item.text}

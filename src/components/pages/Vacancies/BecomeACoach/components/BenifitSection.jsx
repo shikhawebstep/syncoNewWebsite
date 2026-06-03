@@ -17,7 +17,7 @@ const BeforeYouApply = () => {
         <div className="text-center max-w-[1130px] mx-auto mb-14">
           <h2 className="text-white recline text-[48px] font-semibold leading-tight">
 
-            <span className="text-[#FFDE14] permanent-marker font-medium">BENEFITS </span> of working with Samba <br /> Soccer Schools
+            <span className="text-[#FFDE14] permanent-marker font-medium">BENEFITS </span> of working with Samba <br className="hidden md:block"/> Soccer Schools
           </h2>
 
 
@@ -30,7 +30,7 @@ const BeforeYouApply = () => {
             <div className="h-[190px] flex items-center justify-center mb-4">
               <img src={skillImg} alt="Develop a New Skill" className="max-h-full" />
             </div>
-            <p className="text-[#FFDE14] text-[35px] recline font-bold mb-3">
+            <p className="text-[#FFDE14] md:text-[35px] text-[25px] recline font-bold mb-3">
               Competitive Rates
             </p>
             <p className="text-white text-[14px] leading-relaxed">
@@ -43,7 +43,7 @@ const BeforeYouApply = () => {
             <div className="h-[190px] flex items-center justify-center mb-4">
               <img src={earnImg} alt="Earn through what you love" className="max-h-full" />
             </div>
-            <p className="text-[#0DD180] text-[35px] recline font-bold mb-3">
+            <p className="text-[#0DD180] md:text-[35px] text-[25px] recline font-bold mb-3">
               Training & Support
             </p>
             <p className="text-white text-[14px] leading-relaxed">
@@ -55,7 +55,7 @@ const BeforeYouApply = () => {
             <div className="h-[190px] flex items-center justify-center mb-4">
               <img src={networkImg} alt="Expand your Network" className="max-h-full" />
             </div>
-            <p className="text-[#FFDE14] text-[35px] recline font-bold mb-3">
+            <p className="text-[#FFDE14] md:text-[35px] text-[25px] recline font-bold mb-3">
               Pre-made Session Plans            </p>
             <p className="text-white text-[14px] leading-relaxed">
               We want all our coaches to focus on the coaching, so we provide everybody with our detailed and comprehensive syllabus - meaning every lesson is planned and fully taken care of before you even step onto the pitch. This saves you a huge amount of planning time and ensures a degree of uniformity, meaning every child passing through the Samba Soccer Schools learns the same skills, and nobody gets left behind.             </p>
@@ -66,7 +66,7 @@ const BeforeYouApply = () => {
             <div className="h-[190px] flex items-center justify-center mb-4">
               <img src={growthImg} alt="Personal Growth" className="max-h-full" />
             </div>
-            <p className="text-[#0DD180] text-[35px] recline font-bold mb-3">
+            <p className="text-[#0DD180] md:text-[35px] text-[25px] recline font-bold mb-3">
               Fun            </p>
             <p className="text-white text-[14px] leading-relaxed">
               Football coaching should be all about fun, but too often, it becomes stale too quickly. We teach children to play football with a genuine love of the game, with passion and excitement - and as a coach, it’s impossible not to get caught up in all the fun. If you love football and are looking for a job to have a great time while doing it, look no further.            </p>

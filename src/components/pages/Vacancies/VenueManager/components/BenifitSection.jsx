@@ -79,10 +79,10 @@ const BeforeYouApply = () => {
       className="bg-cover whatDoesRoleInclude bg-top pt-[180px] pb-[90px] relative"
 
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-15" >
-          <h2 className="text-[#FFDE14] recline text-[52px]">What does the role include?</h2>
-          <p className="font-light text-[#FDFDFF]">Here is an overview of the six areas our Regional Manager <br /> would oversee and what each would entail:</p>
+      <div className="max-w-7xl mx-auto ">
+        <div className="text-center mb-15 " >
+          <h2 className="text-[#FFDE14] recline md:text-[52px] text-[48px]">What does the role include?</h2>
+          <p className="font-light px-3 md:px-0 text-[#FDFDFF]">Here is an overview of the six areas our Regional Manager <br className="hidden md:block" /> would oversee and what each would entail:</p>
         </div>
         {/* TOP ROW */}
         <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-6 items-stretch">
@@ -91,7 +91,7 @@ const BeforeYouApply = () => {
           <img
             src={leftImg}
             alt="Training"
-            className="rounded-2xl w-full h-full object-cover"
+            className="rounded-2xl px-3 md:px-0 w-full h-full object-cover"
           />
 
           {/* Cards */}
@@ -124,7 +124,7 @@ const BeforeYouApply = () => {
        <div className="md:hidden block">  <img
             src={rightImg}
             alt="Safety"
-            className="rounded-2xl w-full h-full   object-cover"
+            className="rounded-2xl px-3 md:px-0 w-full h-full   object-cover"
           /></div>
          <div
             className="

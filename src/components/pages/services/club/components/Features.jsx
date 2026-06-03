@@ -23,9 +23,9 @@ const Features = () => {
   ];
   return (
     <>
-      <section className=" py-10 pt-15 ">
+      <section className=" py-10 md:pt-15 pt-0 ">
         <div className="container">
-          <h1 className='md:text-[84px] text-[48px] text-center recline blue-text'> <span className='text-[#0DD180] permanent-marker block' >Features</span> of our club
+          <h1 className='lg:text-[84px] sm-[48px] text-[38px] text-center recline blue-text'> <span className='text-[#0DD180] permanent-marker block' >Features</span> of our club
           </h1>
           <div>
             <div className='max-w-[1200px] m-auto'>
@@ -34,7 +34,7 @@ const Features = () => {
                 return (
                   <div
                   key={idx}
-  className={`flex mt-10 flex-col-reverse md:flex-row items-center md:gap-14 ${
+  className={`flex mt-10 flex-col-reverse md:flex-row  md:gap-14 ${
     isImageRight ? "md:flex-row-reverse" : ""
   }`}
                   >
@@ -49,12 +49,12 @@ const Features = () => {
 
 
                     </div>
-                    <div className="md:w-1/2 text-gray-700">
-                      <h2 className="text-[36px] recline font-bold text-[#0DD180] mb-4">
+                    <div className={`md:w-1/2 ${isImageRight ? 'mt-5':""} text-gray-700`}>
+                      <h2 className="md:text-[36px] text-[32px]  recline font-bold text-[#0DD180] pb-4">
                         {section.title}
                       </h2>
                       {section.description.split("\n\n").map((para, i) => (
-                        <p key={i} className="mb-4 leading-relaxed text-[#797A88] poppins">
+                        <p key={i} className="mb-4 md:text-[16px] text-[15px] leading-relaxed text-[#797A88] poppins">
                           {para}
                         </p>
                       ))}

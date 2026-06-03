@@ -24,6 +24,9 @@ import WaitingList from './components/pages/findAClass/components/waitingList/Wa
 import BookMemberShip from './components/pages/findAClass/components/bookMembership/BookMemberShip';
 import CoachDesktop from './components/pages/Vacancies/Desktop/router/Desktop.jsx';
 import { BookingProvider } from './components/pages/findAClass/components/bookMembership/context/BookingContext';
+import FindACamp from './components/pages/findACamp/router/FindACamp';
+import WaitingCampList from './components/pages/findACamp/components/waitingList/WaitingList';
+import BookCampMembership from './components/pages/findACamp/components/bookACamp/BookACamp';
 import BecomeACoachDesktop from './components/pages/Vacancies/BecomeACoach/router/Desktop.jsx';
 import VenueManager from './components/pages/Vacancies/VenueManager/router/Desktop.jsx';
 import AboutDesktop from './components/pages/AboutUs/Desktop/router/Desktop.jsx';
@@ -39,11 +42,14 @@ import LoyaltyScheme from './components/pages/LoyaltyScheme/router/Support.jsx';
 import MainBlogPage from './components/pages/Blogs/MainBlogPage/router/Support.jsx';
 import DetailBlogPage from './components/pages/Blogs/DetailBlog/router/Support.jsx';
 import ContactUs from './components/pages/ContactUs/router/Support.jsx';
+import ScrollToTop from './components/pages/Common/ScrollToTop';
+
 const App = () => {
   const location = useLocation();
 
   return (
     <>
+      <ScrollToTop />
       <BookingProvider>
         <Header />
          <MobileHeader /> 
@@ -63,6 +69,9 @@ const App = () => {
           <Route path="/find-a-class/book-free-trial" element={<BookFreeTrial />} />
           <Route path="/find-a-class/waiting-list" element={<WaitingList />} />
           <Route path="/find-a-class/book-membership" element={<BookMemberShip />} />
+          <Route path="/find-a-camp" element={<FindACamp />} />
+          <Route path="/find-a-camp/waiting-list" element={<WaitingCampList />} />
+          <Route path="/find-a-camp/book-camp" element={<BookCampMembership />} />
           <Route path="/coaching" element={<CoachDesktop />} />
           <Route path="/coaching/coach" element={<BecomeACoachDesktop />} />
           <Route path="/coaching/manager" element={<VenueManager />} />

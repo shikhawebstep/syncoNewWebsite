@@ -8,14 +8,14 @@ import growthImg from "/assets/img-personal-growth.png";
 const BenifitSection = () => {
   return (
     <section
-      className=" bg-[#1c3c87]"
+      className="bg-texture"
     >
-      <div className="bg-cover  md:py-[120px] py-[80px] bg-[#1c3c87] relative"
+      <div className="bg-cover  md:py-[120px] py-[80px] relative"
        >
         <div className="container mx-auto"><div className="md:flex gap-20">
           {/* Heading */}
           <div className="md:text-left text-center md:w-[50%] mx-auto md:mb-14 pr-5">
-            <h2 className="text-white text-[62px] font-semibold recline leading-tight">
+            <h2 className="text-white md:text-[62px] text-[55px] font-semibold recline leading-tight">
               <span className="text-[#FFDE14] permanent-marker font-medium">Before</span> <br />YOU APPLY
 
             </h2>

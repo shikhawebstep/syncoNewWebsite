@@ -37,13 +37,13 @@ const EnquireToday = () => {
     const [selectedCountry, setSelectedCountry] = useState(countries[0]); // UK default
     const [phone, setPhone] = useState("");
     return (
-        <section className="py-[50px] ">
+        <section className="py-[50px] pt-[80px] ">
             <div className="container">
 
                 <div className='max-w-[900px] m-auto text-[#042C89] text-center'>
-                    <p className='text-[20px] leading-[30px] text-[#042C89] font-semibold px-[8%]'>Introduce your friends to Samba Soccer Schools and they’ll get one free month of classes! You’ll also get a free month as a thank you for sharing.
+                    <p className='text-[20px] leading-[30px] text-[#042C89] font-medium px-[8%]'>Introduce your friends to Samba Soccer Schools and they’ll get one free month of classes! You’ll also get a free month as a thank you for sharing.
                     </p>
-                    <p className='text-[20px] leading-[30px] text-[#042C89] font-semibold px-[8%] py-8'>
+                    <p className='text-[20px] leading-[30px] text-[#042C89] font-medium px-[8%] py-8'>
                         The more friends you refer, the more months you get! Simply use the buttons below to share this form with them. Or copy and paste this link to share:
                     </p>
                     <div className='mt-10'>
@@ -78,29 +78,29 @@ const EnquireToday = () => {
                         </div>
                     </div>
                     <div className='mt-10'>
-                        <p className='text-[20px] text-[#042C89] mb-2 font-semibold'>Share</p>
+                        <p className='text-[20px] text-[#042C89] mb-4 font-semibold'>Share</p>
                         <div className='flex gap-2 justify-center'>
                             <div>
-                                <img src="/assets/mobileIcon.png" className='ml-4 flex items-center justify-center w-18 h-18  p-4 rounded-full bg-[#0DD180]' alt="" />
+                                <img src="/assets/mobileIcon.png" className='ml-4 flex items-center justify-center w-[70px] h-[70px]  p-4 rounded-full bg-[#0DD180]' alt="" />
                             </div>
                             <div>
-                                <img src="/assets/MailIcon.png" className='ml-4 flex items-center justify-center w-18 h-18  p-4 rounded-full bg-[#0DD180]' alt="" />
+                                <img src="/assets/MailIcon.png" className='ml-4 flex items-center justify-center w-[70px] h-[70px]  p-4 rounded-full bg-[#0DD180]' alt="" />
                             </div>
                             <div>
-                                <img src="/assets/FacebookIcon.png" className='ml-4 flex items-center justify-center w-18 h-18  p-4 rounded-full bg-[#0DD180]' alt="" />
+                                <img src="/assets/FacebookIcon.png" className='ml-4 flex items-center justify-center w-[70px] h-[70px]  p-4 rounded-full bg-[#0DD180]' alt="" />
                             </div>
                             <div>
-                                <img src="/assets/InstaIcon.png" className='ml-4 flex items-center justify-center w-18 h-18  p-4 rounded-full bg-[#0DD180]' alt="" />
+                                <img src="/assets/InstaIcon.png" className='ml-4 flex items-center justify-center w-[70px] h-[70px]  p-4 rounded-full bg-[#0DD180]' alt="" />
                             </div>
 
                             <div>
-                                <img src="/assets/LinkedinIcon.png" className='ml-4 flex items-center justify-center w-18 h-18  p-4 rounded-full bg-[#0DD180]' alt="" />
+                                <img src="/assets/LinkedinIcon.png" className='ml-4 flex items-center justify-center w-[70px] h-[70px]  p-4 rounded-full bg-[#0DD180]' alt="" />
                             </div>
                         </div>
                     </div>
-                    <div className='mt-20'>
-                        <p className='text-[20px] text-[#042C89] mb-2 font-semibold'>Or send us the referee details</p>
-                        <p className='text-[18px] text-[#87838D] mb-2 font-semibold px-[5%]'>Prefer to send us their details? Use the form below and we’ll directly contact your friend on your behalf, and if they sign up, we’ll let you know. </p>
+                    <div className='mt-10'>
+                        <p className='text-[20px] text-[#042C89] mb-1 font-semibold'>Or send us the referee details</p>
+                        <p className='text-[18px] text-[#87838D] mb-2 font-medium px-[5%]'>Prefer to send us their details? Use the form below and we’ll directly contact your friend on your behalf, and if they sign up, we’ll let you know. </p>
                         <div className="max-w-[1000px] mx-auto">
                             <div className="grid text-left mt-10 grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
 
@@ -210,32 +210,32 @@ const EnquireToday = () => {
                     </button>
 
 
-                    <div className='howItWork mt-50'>
+                    <div className='howItWork pt-25 pb-20'>
                         <h4 className="text-3xl lg:text-4xl recline font-bold text-blue-900 recline">
                             How it works…
                         </h4>
-                        <p className='text-[18px] text-[#87838D] mb-2 font-semibold px-[5%]'>Start earning rewards in three simple steps…</p>
+                        <p className='text-[16px] text-[#87838D] mb-2 font-medium px-[5%]'>Start earning rewards in three simple steps…</p>
                         <div className="grid text-left mt-10 grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6">
                             <div className='text-center'>
                                 <div className='min-h-50'>
-                                <img src="/assets/ShareImg.png" className='mx-auto  ' alt="" />
+                                    <img src="/assets/ShareImg.png" className='mx-auto  ' alt="" />
                                 </div>
                                 <p className='text-[20px] text-[#00A6E3] mb-2  recline font-semibold'>Share</p>
-                                <p className='text-[14px] text-[#87838D] mb-2  font-medium px-[10%]'>To give your friend a reward, share this link and tell your friends to enter your name in the fields above.</p>
+                                <p className='text-[14px] text-[#4B4B56] mb-2   px-[8%]'>To give your friend a reward, share this link and tell your friends to enter your name in the fields above.</p>
                             </div>
-                               <div className='text-center'>
+                            <div className='text-center'>
                                 <div className='min-h-50'>
-                                <img src="/assets/RelaxImg.png" className='mx-auto ' alt="" />
+                                    <img src="/assets/RelaxImg.png" className='mx-auto ' alt="" />
                                 </div>
                                 <p className='text-[20px] text-[#00A6E3] mb-2  recline font-semibold'>Relax</p>
-                                <p className='text-[14px] text-[#87838D] mb-2  font-medium px-[10%]'>Sit back, relax and wait for your friends to book a membership plan.</p>
+                                <p className='text-[14px] text-[#4B4B56] mb-2   px-[8%]'>Sit back, relax and wait for <br className="hidden md:block" /> your friends to book a <br className="hidden md:block" /> membership plan.</p>
                             </div>
-                               <div className='text-center'>
-                                 <div className='min-h-50'>
-                                <img src="/assets/RewardImg.png" className='mx-auto  ' alt="" />
+                            <div className='text-center'>
+                                <div className='min-h-50'>
+                                    <img src="/assets/RewardImg.png" className='mx-auto  ' alt="" />
                                 </div>
                                 <p className='text-[20px] text-[#00A6E3] mb-2  recline font-semibold'>Reward</p>
-                                <p className='text-[14px] text-[#87838D] mb-2  font-medium px-[10%]'>When they make their booking, you’ll both receive one month for free. Hooray!</p>
+                                <p className='text-[14px] text-[#4B4B56] mb-2   px-[6%]'>When they make their booking, you’ll both receive one month for free. Hooray!</p>
                             </div>
                         </div>
                     </div>

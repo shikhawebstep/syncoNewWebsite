@@ -9,7 +9,8 @@ const InitialInvestment = () => {
             <div className="container">
                 <div className="grid md:grid-cols-2 max-w-[1230px] m-auto text-white gap-6 items-center">
                     <div>
-                        <h4 className='recline howmuchText md:text-left text-center green-text leading-[50px]'><span className='text-[#FFDE14] permanent-marker'>How much </span>  is the initial investment and what does it cover?</h4>
+                        <h4 className='recline howmuchText md:text-left text-center green-text leading-[50px]'>
+                            <span className='text-[#FFDE14] permanent-marker yellowBar relative'>How much </span>  is the initial investment and what does  <br className="hidden md:block" /> it cover?</h4>
                         <p className='text-[14px] my-3'>
                             Offering new franchises the best possible chance of success is essential. Our franchise package covers the use of our name and brand, while also granting access to the Samba Soccer Schools family, where we work together to develop and expand as one. We only succeed if everybody succeeds - we’re not selling name rights only to disappear, never to be heard from again.
                         </p>

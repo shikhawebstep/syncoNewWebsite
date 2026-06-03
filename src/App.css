@@ -132,6 +132,12 @@ body {
   margin: 0 auto;
 }
 
+@media(min-width:1400px) and (max-width:2000px) {
+  .container {
+    max-width: 1340px;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -144,7 +150,6 @@ h6 {
 
 img {
   max-width: 100%;
-  display: block;
 }
 
 .small15 {
@@ -198,7 +203,8 @@ h3 span {
   font-family: permanent marker;
 }
 
-p {
+p,
+div {
   font-family: "Poppins", sans-serif;
 
 }
@@ -294,8 +300,7 @@ header.desktopHeader {
 header.mobileHeader {
   background-size: cover;
   background-position: right;
-  padding: 30px;
-  position: absolute;
+  padding: 15px;
 }
 
 header.mobileHeader {
@@ -445,22 +450,25 @@ input.placeholder::placeholder {
   background-position: center;
 }
 
-@media(min-width:992px){
+@media(min-width:992px) {
   footer ul li {
-  font-size: 16px;
-  padding-bottom: 10px;
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
 }
-}
-@media(max-width:992px){
+
+@media(max-width:992px) {
   .banner h1 span {
-  letter-spacing: 20px;
-  line-height: normal;
+    letter-spacing: 20px;
+    line-height: normal;
+  }
 }
-}
+
 .banner h1 span {
   letter-spacing: 10px;
   line-height: normal;
 }
+
 .banner h1 {
   line-height: 54px;
 }
@@ -521,6 +529,7 @@ input.placeholder::placeholder {
 .blog-section h6 {
   font-family: "Poppins", sans-serif;
   font-size: 18px;
+  line-height: 28px;
 }
 
 .blog-section h4 {
@@ -566,26 +575,28 @@ header nav ul li::before {
   background-position: center;
   display: none;
 }
+
 .mobileheader.active::before {
-    content: '';
-    height: 4px;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background-image: url(/assets/Vector_1.png);
-    background-size: cover;
-    background-position: center;
+  content: '';
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: url(/assets/Vector_1.png);
+  background-size: cover;
+  background-position: center;
 }
+
 header nav ul li::after {
-    content: '';
-    height: 3px;
-    width: 4px;
-    position: absolute;
-    right: -20px;
-    top: 7px;
-    background: #ffde14;
-    border-radius: 10px;
+  content: '';
+  height: 3px;
+  width: 4px;
+  position: absolute;
+  right: -20px;
+  top: 7px;
+  background: #ffde14;
+  border-radius: 10px;
 }
 
 header nav ul li:last-child:after {
@@ -638,7 +649,6 @@ header nav ul li:hover {
 
   .campBanner {
     padding: 130px 0;
-    min-height: 840px;
   }
 
   .weekly-whyus {
@@ -647,7 +657,7 @@ header nav ul li:hover {
   }
 
   .campBook {
-    margin-top: -170px;
+    margin-top: -200px;
     padding-top: 220px;
   }
 }
@@ -716,11 +726,20 @@ button.activeTabCamp2 {
 }
 
 .mainShadow {
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 0px 3px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 4px 0px;
 }
 
 .react-tel-input {
   width: 10% !important;
+}
+
+.react-tel-input .selected-flag {
+  outline: none;
+  position: relative;
+  width: 38px;
+  height: 100%;
+  padding: 0 0 0 15px !important;
+  border-radius: 3px 0 0 3px;
 }
 
 .custom-radio {
@@ -772,43 +791,23 @@ button.activeTabCamp2 {
   /* REQUIRED */
 }
 
-.MeetTheTeamCoaches::before {
-  content: "";
-  position: absolute;
-  width: 330px;
-  height: 600px;
-  background-image: url('/assets/coahCoach.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  display: block;
-  top: -100px;
-  bottom: 0;
-}
 
-.MeetTheTeamCoaches::after {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 600px;
-  background-image: url('/assets/davidCoach.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  display: block;
-  top: -100px;
-  right: 0;
-  bottom: 0;
-}
 
-.venueManagersSec::before {
+
+.venueManagersSec::before,
+.gggggg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('/assets/GreyTexureBg.png') no-repeat center;
+  background: url('/assets/transparent-bg.png') no-repeat center;
   background-size: cover;
-  top: -218px;
+
   background-position: top;
+}
+
+.ggggggs {
+  background: url('/assets/transparent-bg.png') no-repeat center;
+
 }
 
 .trainingKitSec::before {
@@ -969,12 +968,18 @@ section.different-sec h3 span::before {
 .whitetop{
   position: relative;
 } */
+.img-box-main img {
+  max-width: 580px;
+  left: -91px;
+}
+
 section.services h3 span::before {
   background: url(/assets/serviceLine.png);
   content: '';
   width: 100%;
   height: 30px;
   background-position: center;
+  background-size: contain;
   position: absolute;
   background-repeat: no-repeat;
   bottom: -15px;
@@ -987,24 +992,38 @@ section.unforgattable h3 span::before {
   height: 30px;
   background-position: center;
   position: absolute;
+  background-size: contain;
   background-repeat: no-repeat;
   bottom: -15px;
 }
 
 section.blog-section h3 span::before {
-    background-size: contain !important;
-    background: url(/assets/yellowLine.png);
-    content: '';
-    width: 100%;
-    height: 116px;
-    background-position: center;
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: -42px;
-    z-index: -1;
+  background-size: contain !important;
+  background: url(/assets/yellowLine.png);
+  content: '';
+  width: 100%;
+  height: 116px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -42px;
+  z-index: -1;
 }
 
-.nearest .right-side-content h3 span::before {
+.yellowBar::before {
+  background-size: contain !important;
+  background: url(/assets/yellowLine.png);
+  content: '';
+  width: 57%;
+  height: 87px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -42px;
+}
+
+.nearest .right-side-content h3 span::before,
+.blueLine::before {
   background: url(/assets/blueLine.png);
   content: '';
   width: 100%;
@@ -1012,8 +1031,10 @@ section.blog-section h3 span::before {
   background-position: center;
   position: absolute;
   background-repeat: no-repeat;
+  background-size: contain;
   bottom: -15px;
 }
+
 
 section.benefits-banner h3 span.blueLineBelow::before {
   background: url(/assets/blueLine.png);
@@ -1030,8 +1051,11 @@ section.benefits-banner h3 span.blueLineBelow::before {
   background-image: url('/assets/weeklyclassbanner.png');
 }
 
-.campBook {
+.campBook,
+.bg-texture {
   background-image: url(/assets/bg-primary-texture.png);
+  background-size: cover;
+  background-position: center;
 }
 
 .whyShoulIChoose {
@@ -1073,7 +1097,7 @@ section.benefits-banner h3 span.blueLineBelow::before {
 .FranchiseInvestmentBanner {
   background-image: url(/assets/investmentBanner.png);
 }
- 
+
 .idealCandidate {
   background-image: url("/assets/candidate.png");
 }
@@ -1086,27 +1110,66 @@ section.benefits-banner h3 span.blueLineBelow::before {
   background-image: url("/assets/BecomeACoachBanner.png");
 }
 
+.filter-yellow {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(78%) saturate(749%) hue-rotate(2deg) brightness(103%) contrast(101%);
+}
+
 @media (max-width: 768px) {
   .trainingKitSec::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('/assets/WhiteTexureBg.png') no-repeat center;
-  background-size:contain;
-  top: -200px;
-  background-position: top;
-}
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('/assets/WhiteTexureBg.png') no-repeat center;
+    background-size: contain;
+    top: -200px;
+    background-position: top;
+  }
+
+  .JoinMail h4 {
+    font-size: 30px !important;
+  }
+
+  .booked h4 {
+    font-size: 38px !important;
+  }
+
+  .appForm h4 {
+    font-size: 38px;
+  }
+
+  .Transformation h4 {
+    font-size: 39px;
+  }
+
+  .story-banner {
+    background-image: url('/assets/VectorMain.png') !important;
+    background-position: bottom !important;
+  }
+
+  .samba-diff {
+    background-image: url('/assets/VectorMain2.png') !important;
+    background-position: bottom !important;
+  }
+
+  .london-kids {
+    overflow: hidden;
+  }
 
   .banner {
     background-image: url("/assets/mobileHeroBanner.png");
-    padding: 300px 0 150px 0;
+    padding: 135px 0 150px 0;
     /* optional mobile spacing */
   }
- .MeetTheTeamCoaches::before,
+
+  .yellowOnMobile::before {
+    background-image: url(/assets/yellowLine.png) !important;
+  }
+
+  .MeetTheTeamCoaches::before,
   .MeetTheTeamCoaches::after {
     display: none;
   }
- 
+
   .nearest-class h2 {
     padding: 0 20px;
   }
@@ -1126,19 +1189,20 @@ section.benefits-banner h3 span.blueLineBelow::before {
   }
 
   .servicesBenifit {
-    top: -50px;
     padding: 100px 10px;
     background-position: top;
     background-image: url(/assets/Vector301211.png);
     background-size: cover;
     position: relative;
   }
-  .service-card p{
+
+  .service-card p {
     line-height: 20px;
   }
-  .blog-section h6{
-    font-size: 14px;
-    line-height: 20px;
+
+  .blog-section h6 {
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .whatDoesRoleInclude {
@@ -1151,9 +1215,8 @@ section.benefits-banner h3 span.blueLineBelow::before {
 
   .campBook {
     background-image: url(/assets/Vector301211.png);
-    top: -50px;
-    padding: 100px 10px;
-    background-position: top;
+    margin-top: -138px;
+    padding: 170px 10px 50px;
     background-size: cover;
     position: relative;
   }
@@ -1282,17 +1345,20 @@ section.benefits-banner h3 span.blueLineBelow::before {
   }
 
   .coacingSessions h3 {
-    font-size: 46px !important;
+    font-size: 42px !important;
     line-height: 1.2;
   }
 
   .benefits-banner {
-    top: -50px;
-    padding: 100px 10px;
+    margin-top: -50px;
     background-position: top;
     background-image: url(/assets/Vector301211.png);
     background-size: cover;
     position: relative;
+  }
+
+  .swiper-slide.swiper-slide-active.active p {
+    font-size: 16px;
   }
 
   .glorytext {
@@ -1301,7 +1367,7 @@ section.benefits-banner h3 span.blueLineBelow::before {
 
   .services.services1 {
     background-image: url(/assets/Vector301211.png);
-    padding: 100px 20px;
+    padding: 50px 20px;
   }
 
   .whyShoulIChoose {
@@ -1382,26 +1448,33 @@ section.benefits-banner h3 span.blueLineBelow::before {
 
   .howmuchText {
     color: #fff;
+    font-size: 38px;
+  }
+
+  .income h4 {
+    font-size: 30px;
   }
 
   .pxImp24 {
     font-size: 24px !important;
   }
-  
-.innerVenueBanner::after,.innerVenueBanner::before  {
+
+  .innerVenueBanner::after,
+  .innerVenueBanner::before {
     display: none;
-}
+  }
 
 
-.footballClassinvenue{
+  .footballClassinvenue {
     background-image: url('/assets/footballClassBannerMobile.png');
-  background-size: cover;
-  background-position: top;
+    background-size: cover;
+    background-position: top;
 
-}
-.JoinMail {
-  background-image: url('/assets/EverythingYouNeedBgMobile.png');
-}
+  }
+
+  .JoinMail {
+    background-image: url('/assets/EverythingYouNeedBgMobile.png');
+  }
 }
 
 .overflowvisible {
@@ -1416,8 +1489,110 @@ section.benefits-banner h3 span.blueLineBelow::before {
   z-index: 9999999 !important;
 
 }
+
 header.mobileHeader {
-    background-color: #042C89;
-    background-image: none;
-    z-index: 999999;
+  background-color: #042C89;
+  background-image: none;
+  z-index: 999999;
+}
+
+.referFriend {
+  background-image: url('/assets/ReferAFriendBg.png');
+}
+
+@media(max-width:700px) {
+  .mainpage h4 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .referFriend {
+    background-image: url('/assets/referMobileBanner.png') !important;
+  }
+
+
+  iframe {
+    height: 300px;
+  }
+
+  .videoSection {
+    background-image: url(/assets/videoMobileBanner.png) !important;
+  }
+
+  .vectormain {
+    background-image: url(/assets/VectorMain.png) !important;
+
+  }
+
+  .campBox {
+    margin-bottom: -101px;
+    z-index: 999;
+    max-width: 85%;
+  }
+
+  .thankyou p {
+    font-size: 12px;
+  }
+
+  .thankyou span {
+    font-size: 11px;
+  }
+
+  .thankyouBanner {
+    background-image: url('/assets/thankyou-banner.png') !important;
+    height: 550px;
+    text-align: end !important;
+  }
+
+  .faq.faq-main h3 {
+    font-size: 53px;
+    text-align: left;
+  }
+
+  .thankyouBanner h4 {
+    font-size: 36px;
+  }
+
+  .faq h3 {
+    font-size: 40px;
+    text-align: left;
+  }
+
+  .whyShoulIChoose h4.small {
+    font-size: 37px;
+  }
+
+  .benifith4 {
+    font-size: 46px;
+  }
+
+  .blubpage h6 {
+    font-size: 19px;
+    line-height: 28px;
+  }
+}
+
+.break {
+  line-break: anywhere;
+}
+
+.place::placeholder {
+  color: #5F5F6D;
+}
+
+@media (min-width:1900px) {
+  .image-absolute {
+    max-width: 600px;
+  }
+
+  .videoSection {
+    min-height: 1200px;
+  }
+
+  .clubBackground,
+  .holidayCampbanner,
+  .aboutusbanner {
+    min-height: 900px;
+  }
+
 }

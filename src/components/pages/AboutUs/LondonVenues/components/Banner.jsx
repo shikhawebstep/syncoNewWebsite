@@ -5,7 +5,7 @@ import bannerImgMobile from "/assets/LondonVenueBanner2Mobile.png";
 const Banner = () => {
     return (
         <section
-            className="relative  flex bg-cover md:items-end items-center bg-[#0DD180]  bg-top md:pt-[200px] pt-[400px] md:pb-[400px] pb-[300px] lg:min-h-[1000px]  bg-[url('/assets/LondonVenueBanner2Mobile.png')]
+            className="relative flex bg-cover md:items-end items-center bg-[#0DD180]  bg-top md:pt-[200px] pt-[200px] md:pb-[400px] pb-[300px] lg:min-h-[1000px]  bg-[url('/assets/LondonVenueBanner2Mobile.png')]
               md:bg-[url('/assets/LondonVenueBanner2.png')]"
 
         >

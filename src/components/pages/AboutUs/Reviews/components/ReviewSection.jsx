@@ -286,7 +286,7 @@ const ReviewSection = () => {
     // 2 cards per column
     const groupedTestimonials = chunkArray(testimonials, 2);
     return (
-        <section className="relative md:py-[100px] py-[200px]  bg-[#F9FAFB]"
+        <section className="relative md:py-[100px] py-[50px] px-5 md:px-0  bg-[#F9FAFB]"
             style={{ backgroundImage: `url(${TexturedBackground})` }}>
             <div className="container mx-auto max-w-[1100px]">
                 {/* Heading */}
@@ -294,7 +294,7 @@ const ReviewSection = () => {
 
 
                 <div className="text-center mb-10">
-                    <div className="review-img mb-4 flex justify-center items-center gap-3">
+                    <div className=" mb-4 flex justify-center items-center gap-3">
                         {/* <img className='w-[120px]' src="/assets/google-reviews.png" alt="" />
                         <img className='w-[120px]' src="/assets/trustpoint.png" alt="" /> */}
                        <h6 className="text-[#042C89] poppins ">GOOGLE REVIEWS</h6>
@@ -303,7 +303,7 @@ const ReviewSection = () => {
                         Unforgettable <span className='light-blue-text '>moments</span> <br className="md:block hidden" /> since 2009
                     </h3>
                 </div>
-                <div className="w-full bg-white rounded-4xl  max-w-6xl mx-auto py-15 relative">
+                <div className="w-full md:bg-white rounded-4xl  max-w-6xl mx-auto md:py-15 py-5 relative">
                     <div className="lg:max-w-[1085px] mx-auto">
                         <Swiper
                             modules={[Navigation]}

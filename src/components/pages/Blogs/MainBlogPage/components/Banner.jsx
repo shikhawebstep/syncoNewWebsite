@@ -4,7 +4,7 @@ import bannerImg from "/assets/BlogpostBanner.png";
 const Banner = () => {
   return (
     <section
-      className="relative     bg-bottom md:py-[100px] py-[200px] lg:min-h-[700px]"
+      className="relative     bg-bottom md:py-[100px] py-[70px] pb-0 lg:min-h-[700px]"
 
     >
       <div className="container mx-auto">
@@ -42,41 +42,41 @@ const Banner = () => {
         </div>
         <div className="grid text-left mt-8 grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-5">
 
-  {[1,2,3].map((_, i) => (
-    <div key={i} className="bg-white md:shadow-sm flex flex-col h-full">
-      
-      <div className="min-h-50">
-        <img src={`/assets/Blog${i+1}.png`} className="mx-auto w-full" alt="" />
-      </div>
+          {[1, 2, 3].map((_, i) => (
+            <div key={i} className="bg-white mainShadow flex flex-col h-full">
 
-      {/* CONTENT */}
-      <div className="md:px-8 py-5 flex flex-col justify-between flex-grow">
-        
-        {/* TEXT */}
-        <div>
-          <p className="text-[20px] text-[#042C89] mb-2 font-semibold">
-            {i === 0 && "Football Skills to Practice in the Playground"}
-            {i === 1 && "5 Ways The SSS Skills Tutorial App Can Improve Your Child’s Football Skills"}
-            {i === 2 && "5 Important Attributes the Best Strikers Need"}
-          </p>
+              <div className="min-h-50">
+                <img src={`/assets/Blog${i + 1}.png`} className="mx-auto w-full" alt="" />
+              </div>
 
-          <p className="text-[16px] text-[#87838D] mb-2 font-medium">
-            {i === 0 && "Every kid loves pulling off fancy tricks and skills and there’s no better place to try these out than on the playgroun..."}
-            {i === 1 && "The Samba Soccer Skills Tutorial App is our home for weekly skills and tutorials. The SSS app..."}
-            {i === 2 && "Everyone loves scoring goals and there’s no position that is focussed more on scoring goals than a striker. However, t..."}
-          </p>
+              {/* CONTENT */}
+              <div className="md:px-8 px-4 py-5 flex flex-col justify-between flex-grow">
+
+                {/* TEXT */}
+                <div>
+                  <p className="text-[20px] text-[#042C89] mb-2 font-semibold">
+                    {i === 0 && "Football Skills to Practice in the Playground"}
+                    {i === 1 && "5 Ways The SSS Skills Tutorial App Can Improve Your Child’s Football Skills"}
+                    {i === 2 && "5 Important Attributes the Best Strikers Need"}
+                  </p>
+
+                  <p className="text-[16px] text-[#87838D] mb-2 font-medium">
+                    {i === 0 && "Every kid loves pulling off fancy tricks and skills and there’s no better place to try these out than on the playgroun..."}
+                    {i === 1 && "The Samba Soccer Skills Tutorial App is our home for weekly skills and tutorials. The SSS app..."}
+                    {i === 2 && "Everyone loves scoring goals and there’s no position that is focussed more on scoring goals than a striker. However, t..."}
+                  </p>
+                </div>
+
+                {/* BUTTON */}
+                <button className="bg-[#042C89] text-white text-[14px] mt-5 rounded-full poppins py-2 px-5 self-start">
+                  Read More
+                </button>
+
+              </div>
+            </div>
+          ))}
+
         </div>
-
-        {/* BUTTON */}
-        <button className="bg-[#042C89] text-white text-[14px] mt-5 rounded-full poppins py-2 px-5 self-start">
-          Read More
-        </button>
-
-      </div>
-    </div>
-  ))}
-
-</div>
 
 
       </div>

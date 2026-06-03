@@ -5,7 +5,7 @@ const EnquireToday = () => {
         <section className="py-[50px] ">
             <div className="container">
 
-                <div className='max-w-[915px] m-auto text-[##34353B] text-center'>
+                <div className='max-w-[915px] m-auto text-[##34353B] md:text-center'>
                     <p className='small15 leading-[30px] text-[#34353B]'>Successful franchising with Samba Soccer Schools depends on the franchisee’s commitment, hard work, and enthusiasm, but having our unparalleled support behind you can make all the difference.
                     </p>
                     <p className='small15 leading-[30px] text-[#34353B] py-8'>
@@ -13,7 +13,9 @@ const EnquireToday = () => {
                     </p>
                     <p className='small15 leading-[30px] text-[#34353B]'>
                         Our success is your success. Joining the rapidly expanding Samba Soccer Schools family means you gain access to a proven system with more than a decade’s worth of experience behind it. However, launching a business is always a rocky road, and we’ll remain committed to guiding you through it all until you feel ready and confident enough to go it alone.  </p>
-                    <button className="mt-6 rounded-full bg-[#0DD180] px-5 py-2.5 text-[16px] font-medium text-white poppins">
+                    <button 
+                        onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="mt-6 rounded-full bg-[#0DD180] px-5 py-2.5 text-[16px] font-medium text-white poppins">
                         Apply Today
                     </button>
                 </div>

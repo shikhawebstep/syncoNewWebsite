@@ -3,13 +3,13 @@ import React from "react";
 const Banner = () => {
   return (
     <section
-      className="relative FranchiseInvestmentBanner flex bg-cover items-center  bg-bottom md:py-[100px] md:min-h-[700px] min-h-[1000px]"
+      className="relative FranchiseInvestmentBanner md:flex bg-cover items-center  bg-bottom md:py-[100px] py-[110px] md:min-h-[900px] min-h-[750px]"
       
     >
       <div className="container mx-auto">
-        <div className="pb-20 flex md:mt-0 mt-[-200px] justify-start max-w-[1020px] mx-auto">
+        <div className="pb-20 flex md:mt-0  justify-start max-w-[1020px] mx-auto">
           <h1 className="recline leading-tight text-white  text-[45px] lg:text-[72px]">
-            <span className="md:text-[95px]  text-[62px]  leading-none font-normal permanent-marker text-[#FFDE14]"> Investment</span><br /> Information
+            <span className="md:text-[95px]  text-[52px]  leading-none font-normal permanent-marker text-[#FFDE14]"> Investment</span><br /> Information
           </h1>
 
 

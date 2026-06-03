@@ -12,7 +12,7 @@ const TopFooter = () => {
   return (
     <section className='top-footer py-5'>
       <div className="container">
-          <div className=" md:py-6 md:px-6 flex flex-col md:flex-row items-center gap-10 justify-between">
+          <div className=" md:py-6 md:px-6 flex flex-col md:flex-row items-center md:gap-10 gap-5 justify-between">
         <div>
           <h4 className="text-[36px] recline text-white font-bold">Let’s be friends</h4>
           <p className="text-[18px] font-semibold text-white">

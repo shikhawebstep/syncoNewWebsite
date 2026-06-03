@@ -43,9 +43,9 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className="bg-white  faq py-20 md:px-4 px-8 lg:px-20">
-            <div className="text-center mb-10">
-                <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
+        <section className="bg-white bg-img grey-bg  faq md:py-20 md:px-4 px-8 lg:px-20 py-15 pb-20">
+            <div className="text-center mb-15">
+                <h3 style={{textAlign:'center'}} className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
                     Why choose us?
                 </h3>
                 <p className="text-[#5F5F6D] mt-2">

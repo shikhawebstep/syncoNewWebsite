@@ -1,12 +1,19 @@
-import React from 'react'
+import React from 'react';
 import bannerImg from "/assets/whyus.png";
+import { useSearchForm } from "../../../../../hooks/useSearchForm";
+import { CustomPostcodeInput, CustomVenueInput } from "../../../Common/SearchInputs";
+import { Toast } from "../../../Common/Toast";
+
 const Whyus = () => {
+    const searchFormProps = useSearchForm();
+    const { handleSearch, toasts, removeToast } = searchFormProps;
     return (
         <>
             <section
                 className=" bg-cover bg-center bg-[#0dd180] lg:p-[60px] relative "
                 style={{ backgroundImage: `url(${bannerImg})` }}
             >
+                <Toast toasts={toasts} removeToast={removeToast} />
                 <div className="container mx-auto">
                     <div className="md:flex items-center justify-between gap-10 rounded-2xl bg-[#FDFDFF] p-10 max-w-[1190px] mx-auto">
                         <div className="text-left text-white  recline md:w-[67%]">
@@ -17,60 +24,24 @@ const Whyus = () => {
 
 
                         </div>
-                        <div class="lg:w-[33%] shadowBox bg-white p-8 rounded-3xl">
+                        <div className="lg:w-[33%] shadowBox bg-white md:p-8 rounded-3xl p-4">
 
 
 
-                            <form class="space-y-4">
-                                <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-4 ">
-                                    <input
-  type="text"
-  placeholder="Enter your post code"
-  class="w-full appearance-none rounded-lg border-2 px-4 py-3 pr-12 bg-white
-  text-[#5F5F6D] border-[#E5E7EB]
-  placeholder:text-[#5F5F6D]
-  focus:outline-none focus:border-[#0DD180]"
-/>
-
-                                    <div className="relative w-full">
-                                        <select
-                                            name="venue"
-                                            defaultValue=""
-                                            className={`w-full appearance-none rounded-lg border-2 px-4 py-3 pr-12 bg-white
-        text-[#5F5F6D] border-[#E5E7EB]
-        focus:outline-none focus:border-[#0DD180]`}
-                                        >
-                                            <option value="" disabled className="text-[#9CA3AF]">
-                                                Or select a Venue
-                                            </option>
-                                            <option value="venue1">Venue 1</option>
-                                            <option value="venue2">Venue 2</option>
-                                            <option value="venue3">Venue 3</option>
-                                        </select>
-
-                                        {/* Custom arrow */}
-                                        <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                                            <svg
-                                                className="w-5 h-5 text-[#1c3c87]"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M19 9l-7 7-7-7"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-
-
+                            <form className="space-y-4" onSubmit={handleSearch}>
+                                <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-4">
+                                    <CustomPostcodeInput
+                                        {...searchFormProps}
+                                        inputClassName="w-full appearance-none rounded-lg border-2 px-4 py-3 bg-white text-[#5F5F6D] border-[#E5E7EB] placeholder:text-[#5F5F6D] focus:outline-none focus:border-[#0DD180]"
+                                    />
+                                    <CustomVenueInput
+                                        {...searchFormProps}
+                                        inputClassName="w-full appearance-none rounded-lg border-2 px-4 py-3 pr-12 bg-white text-[#5F5F6D] border-[#E5E7EB] focus:outline-none focus:border-[#0DD180]"
+                                    />
                                 </div>
 
                                 <button type="submit"
-                                    class="w-full bg-[#0DD180] hover:bg-green-600 poppins font-bold text-white py-2 rounded-full transition">
+                                    className="w-full bg-[#0DD180] hover:bg-green-600 poppins font-bold text-white py-2 rounded-full transition">
                                     Search
                                 </button>
                             </form>
@@ -82,4 +53,4 @@ const Whyus = () => {
     )
 }
 
-export default Whyus
+export default Whyus;

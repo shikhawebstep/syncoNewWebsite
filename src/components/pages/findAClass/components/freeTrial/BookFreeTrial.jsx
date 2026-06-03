@@ -1,30 +1,36 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import { scrollToTopSmooth } from "../../../../../utils/scroll";
 import StepSelectTrialDate from "./components/StepSelectTrialDate";
 import StepChildrenCount from "./components/StepChildrenCount";
 import StepStudents from "./components/StepStudents";
 import StepParents from "./components/StepParents";
 import StepConfirm from "./components/StepConfirm";
 import Stepper from "./components/Stepper";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 export default function BookFreeTrial() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const classId = searchParams.get("classId");
+  const [passwordLink, setPasswordLink] = useState(null);
+
+  useEffect(() => {
+    if (classId) {
+      fetch(`https://api.grabbite.com/api/open/find-class/${classId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Fetched class details on Free Trial:", data);
+        })
+        .catch((err) => console.error("Error fetching class details:", err));
+    }
+  }, [classId]);
 
   // current step
-  const [step, setStep] = useState(() => {
-    if (typeof window !== "undefined") {
-      const savedStep = localStorage.getItem("bookFreeTrialStep");
-      return savedStep !== null ? Number(savedStep) : 0;
-    }
-    return 0;
-  });
+  const [step, setStep] = useState(0);
 
-  // Save step to localStorage whenever it changes
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("bookFreeTrialStep", step);
-    }
+    scrollToTopSmooth(800); // 800ms slow smooth scroll
   }, [step]);
   // shared data
   const [trialDate, setTrialDate] = useState(null);
@@ -40,9 +46,117 @@ export default function BookFreeTrial() {
     }
   ]);
   const [parents, setParents] = useState([]);
+  const [emergency, setEmergency] = useState({
+    emergencyFirstName: "",
+    emergencyLastName: "",
+    emergencyPhoneNumber: "",
+    emergencyRelation: ""
+  });
+  const [classDetails, setClassDetails] = useState(null);
+  const [venueClasses, setVenueClasses] = useState([]);
 
-  // example dynamic venue and session info (you might want to get these from API or props)
-  const venue = "The King Fahad Academy, East Acton Lane, London W3 7HD";
+  useEffect(() => {
+    if (classId) {
+      fetch(`https://api.grabbite.com/api/open/find-class/${classId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Fetched class details:", data);
+          setClassDetails(data?.data);
+        })
+        .catch((err) => console.error("Error fetching class details:", err));
+    }
+  }, [classId]);
+
+  useEffect(() => {
+    if (classDetails?.venue?.id) {
+      fetch("https://api.grabbite.com/api/open/find-class")
+        .then((res) => res.json())
+        .then((data) => {
+          const venue = data?.data?.find(v => v.venueId === classDetails.venue.id);
+          if (venue && venue.classes) {
+            const flatClasses = Object.entries(venue.classes).flatMap(([day, classList]) =>
+              classList.map(c => ({ ...c, day }))
+            );
+            setVenueClasses(flatClasses);
+          }
+        })
+        .catch((err) => console.error("Error fetching venue classes:", err));
+    }
+  }, [classDetails]);
+  const formatDateSafe = (dateInput) => {
+    console.log('dateInput', dateInput);
+    if (!dateInput) return null;
+
+    let date;
+
+    // Handle DD/MM/YYYY format
+    if (typeof dateInput === "string" && /^\d{2}\/\d{2}\/\d{4}$/.test(dateInput)) {
+      const [day, month, year] = dateInput.split("/");
+      date = new Date(`${year}-${month}-${day}`);
+    } else {
+      date = new Date(dateInput);
+    }
+
+    if (isNaN(date.getTime())) return null;
+
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
+  const handleBookNow = async () => {
+    const rawData = {
+      venueId: classDetails?.venueId || 51,
+      trialDate: formatDateSafe(trialDate),
+      totalStudents: childrenCount,
+      students: students.map(s => ({
+        studentFirstName: s.firstName,
+        studentLastName: s.lastName,
+        dateOfBirth: formatDateSafe(s.dob),
+        age: parseInt(s.age) || 0,
+        gender: s.gender,
+        medicalInformation: s.medical || "None",
+        classScheduleId: s.classScheduleId || classDetails?.id || 80
+      })),
+      parents: parents.map(p => ({
+        parentFirstName: p.parentFirstName,
+        parentLastName: p.parentLastName,
+        parentEmail: p.parentEmail,
+        parentPhoneNumber: p.phoneNumber,
+        dialCode: p.dialCode || "",
+        relationToChild: p.relationChild || "Mother",
+        howDidYouHear: p.howDidHear || "Search",
+        interestReason: p.interestReason || "",
+        interestReasonOther: p.interestReasonOther || "",
+      })),
+
+    };
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(rawData),
+      redirect: "follow"
+    };
+
+    try {
+      const response = await fetch("https://api.grabbite.com/api/open/book-free-trial/create", requestOptions);
+      const result = await response.json();
+      console.log("Booking result:", result);
+
+      if (!response.ok) {
+        return { success: false, message: result.message || "Submission failed", error: result.error };
+      }
+      // setPasswordLink(result.setPasswordLink || response.setPasswordLink || null);
+
+ return { success: true, passwordLink: result.setPasswordLink || null };
+    } catch (error) {
+      console.error("Booking error:", error);
+      return { success: false, message: error.message };
+    }
+  };
+
+  const venue = classDetails?.venue?.name + ", " + classDetails?.venue?.address + ", " + classDetails?.venue?.postal_code || classDetails?.venue?.postalCode || "The King Fahad Academy, East Acton Lane, London W3 7HD";
 
   const formattedTrialDate = trialDate
     ? trialDate instanceof Date
@@ -50,23 +164,27 @@ export default function BookFreeTrial() {
       : String(trialDate)
     : "";
 
+  const timeString = classDetails?.startTime && classDetails?.endTime
+    ? `${classDetails.startTime} - ${classDetails.endTime}`
+    : "9:30 am – 10:30 am";
+
   const sessionInfo = {
-    area: "Acton",
-    day: "Saturday",
-    type: "Outdoor",
+    area: classDetails?.venue?.area || "Acton",
+    day: classDetails?.day || "Saturday",
+    type: classDetails?.venue?.facility || "Outdoor",
     date: formattedTrialDate || "N/A", // use formatted trialDate or fallback
-    time: "9:30 am – 10:30 am",
-    ageGroup: "4–7 Years",
+    time: timeString,
+    ageGroup: classDetails?.className || "4–7 Years",
   };
 
   // Stepper shows only 2 steps visually
   const stepperStep = step <= 2 ? 1 : 2;
 
   return (
-    <div className="poppins px-4 bg-[#F6F6F7] py-12">
+    <div className="poppins px-4 bg-[#F6F6F7] md:py-12 py-6">
       {/* Header */}
       <div className="flex items-center gap-3 md:max-w-[900px] mb-5 m-auto">
-        <img src="/assets/Arrow.png" onClick={()=> navigate('/find-a-class')} className="w-5 cursor-pointer" alt="" />
+        <img src="/assets/Arrow.png" onClick={() => navigate('/find-a-class')} className="w-5 cursor-pointer" alt="" />
         <p className="text-[#00A6E3] font-semibold text-lg">Book a Free Trial</p>
       </div>
 
@@ -74,60 +192,116 @@ export default function BookFreeTrial() {
       <div className="w-full max-w-[1040px] m-auto bg-[#FDFDFF] rounded-[20px]  md:p-10 p-5">
         <Stepper currentStep={stepperStep} />
 
-        {/* STEP 0 */}
-        {step === 0 && (
-          <StepSelectTrialDate
-            selectedDate={trialDate}
-            onNext={(date) => {
-              setTrialDate(date);
-              setStep(1);
-            }}
-          />
-        )}
+        <div key={step} className="animate-fade-slide-in">
+          {/* STEP 0 */}
+          {step === 0 && (
+            <StepSelectTrialDate
+              selectedDate={trialDate}
+              onNext={(date) => {
+                setTrialDate(date);
+                setStep(1);
+              }}
+              classDetails={classDetails}
+            />
+          )}
 
-        {/* STEP 1 */}
-        {step === 1 && (
-          <StepChildrenCount
-            value={childrenCount}
-            setValue={setChildrenCount}
-            onBack={() => setStep(0)}
-            onNext={() => setStep(2)}
-          />
-        )}
+          {/* STEP 1 */}
+          {step === 1 && (
+            <StepChildrenCount
+              value={childrenCount}
+              setValue={setChildrenCount}
+              onBack={() => setStep(0)}
+              onNext={() => setStep(2)}
+            />
+          )}
 
-        {/* STEP 2 */}
-        {step === 2 && (
-          <StepStudents
-            count={childrenCount}
-            students={students}
-            setStudents={setStudents}
-            onNext={() => setStep(3)}
-            onBack={() => setStep(1)}
-          />
-        )}
+          {/* STEP 2 */}
+          {step === 2 && (
+            <StepStudents
+              count={childrenCount}
+              students={students}
+              setStudents={setStudents}
+              onNext={() => setStep(3)}
+              onBack={() => setStep(1)}
+              classDetails={classDetails}
+              venueClasses={venueClasses}
+            />
+          )}
 
-        {/* STEP 3 */}
-        {step === 3 && (
-          <StepParents
-            parents={parents}
-            setParents={setParents}
-            onNext={() => setStep(4)}
-            onBack={() => setStep(2)}
-          />
-        )}
+          {/* STEP 3 */}
+          {step === 3 && (
+            <StepParents
+              parents={parents}
+              setParents={setParents}
+              emergency={emergency}
+              setEmergency={setEmergency}
+              onNext={() => setStep(4)}
+              onBack={() => setStep(2)}
+            />
+          )}
 
-        {/* STEP 4 */}
-        {step === 4 && (
-          <StepConfirm
-            venue={venue}
-            students={students}
-            parents={parents}
-            sessionInfo={sessionInfo}
-            onBack={() => setStep(3)}
-            onCancel={() => setStep(0)}
-          />
-        )}
+          {/* STEP 4 */}
+         {step === 4 && (
+  <StepConfirm
+    venue={venue}
+    students={students}
+    parents={parents}
+    sessionInfo={sessionInfo}
+    onBack={() => setStep(3)}
+    onCancel={() => setStep(0)}
+    onConfirm={handleBookNow}
+  />
+)}
+        </div>
       </div>
+      {passwordLink && (
+        <div className="fixed inset-0 bg-[#00000066] flex justify-center items-center z-50">
+          <div className="bg-[#FDFDFF] rounded-2xl p-10 w-full max-w-md text-center shadow-xl">
+
+            {/* Success icon */}
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-[#E6F4EA] flex items-center justify-center">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold text-[#042C89] poppins mb-2">
+              Free trial booked!
+            </h2>
+            <p className="text-[#34353B] poppins text-[15px] mb-1">
+              Your free trial has been booked!
+            </p>
+
+            <div className="my-5 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
+              <p className="text-[#004B9E] font-semibold poppins text-[14px] mb-1">
+                🔐 Set up your Parent Dashboard
+              </p>
+              <p className="text-[#2D3748] poppins text-[13px] leading-relaxed">
+                A parent account has been created for you. Set up your password now to access your <strong>Parent Dashboard</strong> — where you can track sessions, manage bookings, and stay up to date.
+              </p>
+            </div>
+
+            <button
+              onClick={() => window.open(passwordLink, "_blank")}
+              className="w-full bg-[#042C89] text-white poppins font-semibold text-[15px] py-3 rounded-xl hover:bg-blue-800 transition mb-3"
+            >
+              Set Up My Password →
+            </button>
+
+            <button
+              onClick={() => {
+                setPasswordLink(null);
+                
+              }}
+              className="w-full text-[#717073] poppins text-[13px] underline hover:text-gray-800"
+            >
+              Skip for now
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

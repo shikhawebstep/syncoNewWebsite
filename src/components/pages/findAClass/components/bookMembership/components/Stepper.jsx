@@ -24,7 +24,7 @@ export default function Stepper() {
   ];
 
   return (
-    <div className="w-full m-auto flex bg-[#FAFAFB] md:p-5 p-3 rounded-2xl items-center justify-center mb-[25px]">
+    <div className="w-full m-auto flex bg-[#FAFAFB] md:p-5 p-3 rounded-2xl items-center md:justify-center mb-[25px] justify-between md:gap-0 gap-1.5">
       {steps.map((step, index) => {
         const isActive = step.id === currentStep;
         const isCompleted = step.id < currentStep;
@@ -34,7 +34,7 @@ export default function Stepper() {
             {/* Step Circle + Label */}
             <div className="flex items-center gap-3">
               <div
-                className={`w-[25px] h-[25px] flex items-center justify-center rounded-full capitalize border text-sm font-semibold cursor-default ${isCompleted || isActive
+                className={`md:w-[25px] md:h-[25px]  w-[20px] h-[20px] flex items-center justify-center rounded-full capitalize border md:text-sm text-[10px] font-semibold cursor-default ${isCompleted || isActive
                     ? "border-green-500 text-green-500"
                     : "border-gray-300 text-[#797A88]"
                   }`}
@@ -52,20 +52,12 @@ export default function Stepper() {
                 {step.label}
               </span>
 
-              {/* Mobile label */}
-              <span
-                className={`md:hidden block text-[12px] ${isActive || isCompleted
-                    ? "text-[#34353B] font-semibold"
-                    : "text-[#797A88] font-normal"
-                  }`}
-              >
-                {step.mobileLabel}
-              </span>
+          
             </div>
 
             {/* Connector */}
             {index < steps.length - 1 && (
-              <div className="md:mx-8 mx-3 md:w-[60px] w-[50px] h-[2px] bg-[#9E9FAA]" />
+              <div className="md:mx-8 mx-3 md:w-[60px] w-[40px] h-[2px] bg-[#9E9FAA]" />
             )}
           </div>
         );

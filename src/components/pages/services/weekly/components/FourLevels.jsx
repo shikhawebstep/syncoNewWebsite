@@ -62,12 +62,12 @@ const FourLevels = () => {
   const activeItem = faqData[activeIndex];
 
   return (
-    <section className="bg-white  services services1  faq py-20 px-10 lg:px-20">
+    <section className="bg-white  services services1  faq md:py-20 py-10 px-10 lg:px-20">
       <div className="text-center mb-10 text-white">
-        <h3 className="yellow-text recline">Four Levels</h3>
+        <h3 className="yellow-text   recline" style={{textAlign:'center'}}>Four Levels</h3>
         {activeIndex == 0 ? (
           <>
-            <p className="md:block hidden ">
+            <p className="md:block hidden pt-5 ">
               Our weekly football classes in London are all divided into four
               levels to ensure that  <br className="md:block hidden" /> every child plays within a group that shares
               similar abilities.
@@ -78,13 +78,13 @@ const FourLevels = () => {
               Intermediate (6-7 years) <br className="md:block hidden" />, Advanced (8-9 years), and Proficient
               (10-12 years).
             </p>
-             <p className="pt-6 md:hidden block px-10">
+             <p className="pt-6 md:hidden block md:px-10">
              Although we group players based on ability and not age, we have found that our ability groups loosely fit certain age groups.
 
             </p>
           </>
         ) : (
-          <p>
+          <p className="pt-5">
             Our weekly football classes in London are all divided into four
             levels to ensure  <br className="md:block hidden" /> that every child plays within a group that shares
             similar abilities.
@@ -111,7 +111,7 @@ const FourLevels = () => {
         </div>
 
         {/* Content */}
-        <div className="lg:flex lg:items-start lg:space-x-8 mt-15">
+        <div className="flex lg:flex-row flex-col lg:items-center lg:space-x-8 mt-15">
       
 
           <div className="lg:w-7/12">
@@ -130,7 +130,7 @@ const FourLevels = () => {
             )}
             <ul className="list-disc pl-5 space-y-1 text-white text-[#5F5F6D] leading-[28px]">
               {activeItem.listing.map((point, idx) => (
-                <li key={idx} className="text-[15px] poppins flex gap-2 items-center "><img className="h-10 w-10" src="/assets/greenCheck.png" alt="" />{point}</li>
+                <li key={idx} className="text-[15px] poppins flex gap-2 items-center "><img className="w-4.5" src="/assets/greenCheck.png" alt="" />{point}</li>
               ))}
             </ul>
           </div>
@@ -138,8 +138,9 @@ const FourLevels = () => {
             <img
               src={activeItem.image}
               alt={activeItem.question}
-              className="w-full mb-8 h-auto rounded-lg object-cover"
+              className="w-full md:mb-8 mt-8 md:mt-0 h-auto rounded-lg object-cover"
             />
+          
           </div>
         </div>
       </div>

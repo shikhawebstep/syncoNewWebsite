@@ -8,7 +8,8 @@ const Features = () => {
     {
       title1: "Do you have the",
       title2: "skills ",
-      title3: "to oversee, manage, and maintain our coaching quality?",
+      titlebreak: "to ",
+      title3: "oversee, manage, and maintain our coaching quality?",
       description:
         "Samba Soccer Schools are searching for an experienced football coach to manage our coaching staff and supervise the quality of our football classes. \n\n The role of a ‘Regional Manager’ requires exceptional management and leadership skills as you take on significant responsibility.\n\n Please read the details below carefully before submitting your application and only apply if you meet the eligibility criteria.",
       image: "/assets/img-coaching-skills.png", // Replace with your actual image path or URL
@@ -19,7 +20,7 @@ const Features = () => {
   ];
   return (
     <>
-      <section className="  py-10 pt-15 ">
+      <section className="md:pt-10 md:pb-0 py-10">
         <div className="container">
 
           <div>
@@ -43,7 +44,8 @@ const Features = () => {
                     </div>
                     <div className="md:w-7/12 text-gray-700">
 
-                      <h1 className='md:text-[48px] text-[38px] leading-[1.2] text-left recline blue-text pb-8'> {section.title1} <span className='text-[#0DD180] permanent-marker' > {section.title2}</span>   {section.title3}
+                      <h1 className='md:text-[48px] text-[38px] leading-[1.2] text-left recline blue-text pb-8'> {section.title1}
+                         <span className='text-[#0DD180] permanent-marker' > {section.title2}</span> <br className='md:block hidden'/>  {section.titlebreak}  {section.title3}
                       </h1>
                       {section.description.split("\n\n").map((para, i) => (
                         <p key={i} className="mb-4 leading-relaxed text-[#797A88] poppins">
@@ -52,7 +54,9 @@ const Features = () => {
                       ))}
                       <p className='mb-4 leading-relaxed font-semibold text-[#00A6E3] poppins'>{section.highlightDescription}</p>
                       {section.buttonText && (
-                        <button className="mt-5 rounded-full bg-[#00A6E3] px-5 py-2.5 text-[16px] font-medium text-white poppins">
+                        <button 
+                          onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
+                          className="mt-5 rounded-full bg-[#00A6E3] px-5 py-2.5 text-[16px] font-medium text-white poppins">
                           {section.buttonText}
                         </button>)}
                     </div>

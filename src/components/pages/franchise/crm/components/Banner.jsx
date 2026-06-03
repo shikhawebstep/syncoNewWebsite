@@ -4,7 +4,7 @@ import bannerImg from "/assets/crmBanner.png";
 const Banner = () => {
     return (
         <section
-            className="relative crmSection  flex bg-cover items-end  bg-top md:pt-[100px] pt-[300px] pb-[30px] min-h-[800px]"
+            className="relative crmSection  flex bg-cover items-end  bg-top md:pt-[100px] pt-[180px] pb-[30px] min-h-[800px]"
 
         >
             <div className="container mx-auto">

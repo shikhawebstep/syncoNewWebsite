@@ -2,7 +2,7 @@ import FranchiseForm from '../../../Common/FranchiseForm'
 
 const Enquiry = () => {
     return (
-        <section className='py-[80px] relative overflow-hidden'>
+        <section id="enquiry-section" className='py-[80px] relative overflow-hidden'>
             <div className="container">
                 <div className="md:flex justify-between max-w-[1200px] m-auto gap-10">
                     <div className='md:w-[430px] '>

@@ -20,7 +20,7 @@ const Gallary = () => {
             <h3 className="blue-text text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px]">
               Image Gallery
             </h3>
-            <p className="text-[#797A88] font-medium text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] py-2 md:py-3">
+            <p className="text-[#797A88] font-medium text-[14px] md:text-[14px] lg:text-[15px] py-2 md:py-3">
               Our classes are all about fun, flicks & tricks - some of which we
               manage to catch on camera! Check out{" "}
               <br className="md:block hidden" /> the latest images from our
@@ -29,11 +29,11 @@ const Gallary = () => {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 my-6 md:my-8 lg:my-10">
+          <div className="grid grid-cols-2 md:grid-cols-3  gap-6 md:gap-5 lg:gap-[60px] my-6 md:my-8 lg:my-10">
             {galleryImages.map((img, index) => (
               <div
                 key={index}
-                className="w-full aspect-square overflow-hidden rounded-lg "
+                className="w-full aspect-square overflow-hidden "
               >
                 <img
                   src={img}

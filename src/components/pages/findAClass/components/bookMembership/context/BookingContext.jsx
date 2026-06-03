@@ -5,19 +5,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const BookingContext = createContext();
 
 export function BookingProvider({ children }) {
-    const [step, setStep] = useState(() => {
-        if (typeof window !== "undefined") {
-            const savedStep = localStorage.getItem("bookingSteps");
-            return savedStep !== null ? Number(savedStep) : 0;
-        }
-        return 0;
-    });
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            localStorage.setItem("bookingSteps", step);
-        }
-    }, [step]);
+    const [step, setStep] = useState(0);
 
     // Shared states
     const [trialDate, setTrialDate] = useState(null);
@@ -34,10 +22,15 @@ export function BookingProvider({ children }) {
     ]);
 
     const [showPlans, setShowPlans] = useState(false);
-    const [selectedPlan, setSelectedPlan] = useState("");
+    const [selectedPlan, setSelectedPlan] = useState(null);
     const [showBreakdown, setShowBreakdown] = useState(false);
     const [parents, setParents] = useState([]);
-    const [emergency, setEmergency] = useState({});
+    const [emergency, setEmergency] = useState([]);
+    const [paymentDetails, setPaymentDetails] = useState({
+        accountHolder: "",
+        sortCode: "",
+        accountNumber: "",
+    });
 
     // You can also put derived data here if you want
     const venue = "The King Fahad Academy, East Acton Lane, London W3 7HD";
@@ -57,6 +50,37 @@ export function BookingProvider({ children }) {
         ageGroup: "4–7 Years",
     };
 
+    const [discount, setDiscount] = useState({ code: "", amount: 0 });
+    const resetBooking = () => {
+        setStep(0);
+        setTrialDate(null);
+        setChildrenCount(1);
+
+        setStudents([
+            {
+                firstName: "",
+                lastName: "",
+                dob: "",
+                age: 0,
+                gender: "",
+                medical: "",
+            },
+        ]);
+
+        setShowPlans(false);
+        setSelectedPlan(null);
+        setShowBreakdown(false);
+        setParents([]);
+        setEmergency([]);
+
+        setPaymentDetails({
+            accountHolder: "",
+            sortCode: "",
+            accountNumber: "",
+        });
+
+        setDiscount({ code: "", amount: 0 });
+    };
     return (
         <BookingContext.Provider
             value={{
@@ -73,16 +97,22 @@ export function BookingProvider({ children }) {
                 selectedPlan,
                 setSelectedPlan,
                 showBreakdown,
+                resetBooking,
                 setShowBreakdown,
                 parents,
                 setParents,
                 venue,
                 sessionInfo,
                 emergency,
-                setEmergency
+                setEmergency,
+                paymentDetails,
+                setPaymentDetails,
+                discount,
+                setDiscount
             }}
         >
             {children}
         </BookingContext.Provider>
     );
 }
+

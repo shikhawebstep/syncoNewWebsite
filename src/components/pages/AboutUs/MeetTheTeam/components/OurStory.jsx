@@ -1,15 +1,19 @@
 import React from "react";
-import bgImage from "/assets/founderBg.png"; // background
+import bgImage from "/assets/OurStory.png"; // background
 
 const OurStorySection = () => {
   return (
-    <section className="bg-cover  pt-[180px] bg-[#f9f9f9] mt-[-6px] pb-[90px] relative" 
+    <>
+  <img src="/assets/Vector2.png" alt='' className="block relative gggggg md:hidden"/>
+
+    
+    <section className="bg-cover gggggg vectormain bg-top  md:pt-[180px]  pb-[90px]  relative" 
      style={{ backgroundImage: `url(${bgImage})` }} >
         
       <div className="mx-auto max-w-5xl">
         {/* Heading */}
         <img src="/assets/Founder.png" className="mx-auto mb-5" alt="" />
-        <h2 className="text-center text-[#0DD180] text-[48px] md:text-[56px] font-bold recline mb-12">
+        <h2 className="text-center text-[#0DD180] text-[38px] md:text-[56px] font-bold recline mb-12">
           A Word from our Founder...
         </h2>
 
@@ -21,7 +25,7 @@ const OurStorySection = () => {
             <p className="font-light text-[#FDFDFF] leading-8">
               Hey everybody,            </p>
 
-            <p className="font-light text-[#FDFDFF] leading-8 ">
+            <p className="font-light text-[#FDFDFF] relative-8 ">
               I’m Nilio Bagga. Together with the help of my friends and family, I started Samba Soccer Schools back in 2009. Today, I serve as the company’s Managing Director, whilst a close-knit team of qualified coaches takes care of the football side of things - though I still like jumping in for a game now and again when I can!
             </p>
 
@@ -59,6 +63,8 @@ const OurStorySection = () => {
 
 
     </section>
+    
+    </>
   );
 };
 

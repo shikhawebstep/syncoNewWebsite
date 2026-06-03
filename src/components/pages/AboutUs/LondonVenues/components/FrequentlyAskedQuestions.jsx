@@ -57,12 +57,12 @@ const FrequentlyAskedQuestions = () => {
          >
             <div className="container mx-auto max-w-[1100px]">
                 {/* Heading */}
-                <h2 className="text-center text-[48px] text-[#042C89] md:text-[48px] font-normal recline mb-6">
+                <h2 className="text-center text-[43px] text-[#042C89] md:text-[48px] font-normal recline mb-6">
                   <span className="text-[#0DD180] ">FAQs</span>  About London Football Classes
                 </h2>
 
-                <p className="text-[#5F5F6D] text-[20px] poppins text-center mb-14">
-                    Below are answers to a variety of frequently asked questions that we have received from our customers.
+                <p className="text-[#5F5F6D] md:text-[20px] poppins text-center mb-14">
+                    Below are answers to a variety of <br className="block md:hidden" /> frequently asked questions that we have received from our customers.
                 </p>
 
                 {/* FAQ List */}
@@ -73,7 +73,7 @@ const FrequentlyAskedQuestions = () => {
                         return (
                             <div
                                 key={index}
-                                className="bg-white rounded-xl shadow-md px-8 py-6 transition-all"
+                                className="bg-white rounded-[10px] shadow px-8 py-6 transition-all"
                             >
                                 {/* Question */}
                                 <button

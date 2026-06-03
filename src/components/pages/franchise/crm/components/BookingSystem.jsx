@@ -66,7 +66,7 @@ const InfoCard = ({ title, desc, imgSrc, imgAlt, color, reverse }) => {
       </div>
       <div className="md:w-1/2 md:p-4">
         <h4
-          className={`text-lg extra-small recline font-semibold mb-4 ${color}`}
+          className={`text-lg extra-small recline font-semibold pb-4 ${color}`}
         >{title}</h4>
         {desc.map((line, i) => (
           <p key={i} className="text-[#5F5F6D] whitespace-pre-line mb-4">
@@ -75,7 +75,7 @@ const InfoCard = ({ title, desc, imgSrc, imgAlt, color, reverse }) => {
         ))}
 
       </div>
-      <div className="md:w-1/2 md:flex hidden justify-center p-4">
+      <div className={`md:w-1/2  md:flex hidden ${!reverse ? 'justify-center':''} p-4`}>
         <div className="relative  max-w-[450px]  rounded-md overflow-hidden ">
           <img
             src={imgSrc}

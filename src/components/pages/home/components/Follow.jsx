@@ -13,14 +13,14 @@ const Follow = () => {
 
     return (
         <>
-            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl shadow-custom mt-10 md:mt-16 lg:mt-[100px]">
+            <div className="bg-white p-6 sm:p-8 md:p-10 md:px-15 rounded-2xl md:rounded-3xl shadow-custom mt-10 md:mt-16 lg:mt-[100px]">
                 <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-8">
 
                     {/* Left text col */}
-                    <div className="col md:max-w-[511px]">
+                    <div className="md:w-[60%] md:max-w-[511px]">
                         <h4 className="recline text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] blue-text">
                             Follow us{" "}
-                            <br className="md:block hidden" /> on Instagram
+                            <br className="md:block" /> on Instagram
                         </h4>
                         <p className="text-[12px] sm:text-[13px] md:text-[14px] text-[#797A88] py-3 md:py-4 leading-relaxed">
                             Relive every moment. Our photographers are always on the lookout for the best flicks, tricks and celebrations so you can add it to the family album. Follow the action from our kids football training in London by subscribing to our Instagram.
@@ -31,7 +31,7 @@ const Follow = () => {
                     </div>
 
                     {/* Gallery grid col */}
-                    <div className="col">
+                    <div className="md:w-[40%]">
                         <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                             {galleryImages.map((img, index) => (
                                 <div key={index} className='w-full aspect-square overflow-hidden '>

@@ -3,7 +3,7 @@ import EnquiryForm from '../../../Common/EnquiryForm'
 
 const Enquiry = () => {
   return (
-    <section className='py-[80px] relative overflow-hidden'>
+    <section id="enquiry-section" className='py-[80px] relative overflow-hidden'>
       <div className="container">
         <div className="md:flex justify-between max-w-[1200px] m-auto gap-10">
           <div className='md:w-[430px] text-center md:text-left mt-15 '>
@@ -16,7 +16,7 @@ const Enquiry = () => {
               Like what you hear? Fill out the form below to show your interest and a member of our team will call you shortly.
             </p>
           </div>
-          <div className='md:w-[690px] relative z-50'>
+          <div className='md:w-[690px] relative z-50 md:mt-0 mt-4'>
             <EnquiryForm /></div>
         </div>
       </div>

@@ -79,12 +79,23 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                     </div>
                     <div className="mt-8">
                         <button
+                            onClick={() => {
+                                const text = buttonText?.toLowerCase() || "";
+                                if (text.includes("class") || text.includes("membership")) {
+                                    window.location.href = "/find-a-class";
+                                } else if (text.includes("camp")) {
+                                    window.location.href = "/find-a-camp";
+                                } else if (text.includes("apply")) {
+                                    window.location.href = "/coaching/coach";
+                                } else {
+                                    document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
                             style={{ backgroundColor: color || "#0DD180" }}
                             className="text-white px-8 py-3 rounded-3xl poppins font-bold"
                         >
                             {buttonText}
                         </button>
-
                     </div>
                 </div>
             </div>

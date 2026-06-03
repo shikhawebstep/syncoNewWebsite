@@ -102,7 +102,7 @@ const Franchisee = () => {
                     {qualities.map((item, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-2xl p-3 shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                            className="bg-white rounded-2xl p-3 mainShadow"
                         >
                             <div
                                 className={` mb-4  ${item.iconColor}`}

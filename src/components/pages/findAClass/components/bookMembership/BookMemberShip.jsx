@@ -1,7 +1,8 @@
 "use client";
 
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { scrollToTopSmooth } from "../../../../../utils/scroll";
 
 import StepSelectTrialDate from "./components/StepSelectTrialDate";
 import StepChildrenCount from "./components/StepChildrenCount";
@@ -18,13 +19,60 @@ import { BookingContext, BookingProvider } from "./context/BookingContext";
 /* ================= CONTENT ================= */
 function BookMemberShipContent() {
   const navigate = useNavigate();
-  const { step, setStep } = useContext(BookingContext);
+  const [searchParams] = useSearchParams();
+  const classId = searchParams.get("classId");
+
+  const [classDetails, setClassDetails] = useState(null);
+  const [venueClasses, setVenueClasses] = useState([]);
+const location = useLocation();
+
+  useEffect(() => {
+    if (classId) {
+      fetch(`https://api.grabbite.com/api/open/find-class/${classId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Fetched class details on Membership:", data);
+          setClassDetails(data?.data);
+        })
+        .catch((err) => console.error("Error fetching class details:", err));
+    }
+  }, [classId]);
+
+  useEffect(() => {
+    if (classDetails?.venue?.id) {
+      fetch("https://api.grabbite.com/api/open/find-class")
+        .then((res) => res.json())
+        .then((data) => {
+          const venue = data?.data?.find(v => v.venueId === classDetails.venue.id);
+          if (venue && venue.classes) {
+            const flatClasses = Object.entries(venue.classes).flatMap(([day, classList]) =>
+              classList.map(c => ({ ...c, day }))
+            );
+            setVenueClasses(flatClasses);
+          }
+        })
+        .catch((err) => console.error("Error fetching venue classes:", err));
+    }
+  }, [classDetails]);
+
+  const { step, setStep, resetBooking, trialDate, setTrialDate } = useContext(BookingContext);
+
+  useEffect(() => {
+    scrollToTopSmooth(800); // 800ms slow smooth scroll
+  }, [step]);
+  useEffect(() => {
+  return () => {
+    resetBooking();
+    localStorage.removeItem("bookingSteps");
+  };
+}, [location.pathname]);
 
   // Stepper calculation
   const stepperStep = step <= 2 ? 1 : step <= 5 ? 2 : 3;
-console.log('stepperStep',stepperStep)
+    console.log('classDetails',classDetails)
+
   return (
-    <div className="poppins px-4 bg-[#F6F6F7] md:py-12 py-40">
+    <div className="poppins px-4 bg-[#F6F6F7] md:py-12 py-6">
       {/* Header */}
       <div className="flex items-center gap-3 md:max-w-[900px] mb-5 m-auto">
         <img
@@ -32,6 +80,7 @@ console.log('stepperStep',stepperStep)
           onClick={() => {
             navigate("/find-a-class");
             localStorage.removeItem("bookingSteps");
+            resetBooking();
             setStep(0)
           }}
           className="w-5 cursor-pointer"
@@ -43,50 +92,69 @@ console.log('stepperStep',stepperStep)
       </div>
 
       {/* Main Card */}
-      <div className={`w-full max-w-[1040px] m-auto bg-[#FDFDFF] rounded-[20px] ${step === 5 ? "md:p-6":"md:p-10"} p-5`}>
+      <div className={`w-full max-w-[1040px] m-auto bg-[#FDFDFF] rounded-[20px] ${step === 5 ? "md:p-6" : "md:p-10"} p-5`}>
         <Stepper currentStep={stepperStep} />
 
-        {step === 0 && <StepSelectTrialDate onNext={() => setStep(1)} />}
-        {step === 1 && (
-          <StepChildrenCount
-            onNext={() => setStep(2)}
-            onBack={() => setStep(0)}
-          />
-        )}
-        {step === 2 && (
-          <StepStudents
-            onNext={() => setStep(3)}
-            onBack={() => setStep(1)}
-          />
-        )}
-        {step === 3 && (
-          <StepParents
-            onNext={() => setStep(4)}
-            onBack={() => setStep(2)}
-          />
-        )}
+        <div key={step} className="animate-fade-slide-in">
+          {step === 0 && (
+            <StepSelectTrialDate
+              classDetails={classDetails}
+              selectedDate={trialDate}
+              onNext={(date) => {
+                setTrialDate(date);
+                setStep(1);
+              }}
+            />
+          )}
+          {step === 1 && (
+            <StepChildrenCount
+              onNext={() => setStep(2)}
+              onBack={() => setStep(0)}
+              classDetails={classDetails}
+            />
+          )}
+          {step === 2 && (
+            <StepStudents
+              onNext={() => setStep(3)}
+              onBack={() => setStep(1)}
+              classDetails={classDetails}
+              venueClasses={venueClasses}
+            />
+          )}
+          {step === 3 && (
+            <StepParents
+              onNext={() => setStep(4)}
+              onBack={() => setStep(2)}
+              classDetails={classDetails}
+            />
+          )}
 
-        {/* ✅ EMERGENCY STEP FIXED */}
-        {step === 4 && (
-          <StepEmergency
-            onNext={() => setStep(5)}
-            onBack={() => setStep(3)}
-          />
-        )}
+          {/* ✅ EMERGENCY STEP FIXED */}
+          {step === 4 && (
+            <StepEmergency
+              onNext={() => setStep(5)}
+              onBack={() => setStep(3)}
+            />
+          )}
 
-        {step === 5 && (
-          <PaymentStep
-            onNext={() => setStep(6)}
-            onBack={() => setStep(4)}
-          />
-        )}
-        {step === 6 && (
-          <CheckoutStep
-            onNext={() => setStep(7)}
-            onBack={() => setStep(5)}
-          />
-        )}
-        {step === 7 && <StepConfirm />}
+          {step === 5 && (
+            <PaymentStep
+              onNext={() => setStep(6)}
+              onBack={() => setStep(4)}
+              classDetails={classDetails}
+              venueClasses={venueClasses}
+            />
+          )}
+          {step === 6 && (
+            <CheckoutStep
+              onNext={() => setStep(7)}
+              onBack={() => setStep(5)}
+              classDetails={classDetails}
+              venueClasses={venueClasses}
+            />
+          )}
+          {step === 7 && <StepConfirm  classDetails={classDetails}/>}
+        </div>
       </div>
     </div>
   );

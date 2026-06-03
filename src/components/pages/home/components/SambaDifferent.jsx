@@ -25,11 +25,11 @@ const SambaDifferent = () => {
         <div className="text-center px-4 sm:px-0">
           <h3 className="blue-text text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
             What makes Samba Soccer
-            <span className="block text-[#0DD180] relative permanent-marker text-[28px] sm:text-[34px] md:text-[40px] lg:text-[48px]">
+            <span className="block text-[#0DD180] relative permanent-marker text-[48px]">
               different
             </span>
           </h3>
-          <p className="text-[#797A88] text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] pt-5 md:pt-8 lg:pt-10">
+          <p className="text-[#797A88] text-[15px] md:text-[16px] lg:text-[18px] pt-8 lg:pt-10">
             There are hundreds of soccer schools and football academies out{" "}
             <br className="md:block hidden" />
             there, so what makes us so special?
@@ -37,7 +37,7 @@ const SambaDifferent = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-9 md:gap-10 lg:gap-11 mt-8 md:mt-10 md:max-w-[1040px] m-auto px-4 sm:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-9 md:gap-10 lg:gap-[50px] mt-8 md:mt-10 md:max-w-[1033px] m-auto px-3 sm:px-0">
           {sambaItems.map((item, index) => (
             <div key={index} className="text-center">
               <div className="img-sec diffrentimages mb-2 flex justify-center">
@@ -50,7 +50,7 @@ const SambaDifferent = () => {
               <h6 className="blue-text my-3 md:pt-3 pb-2 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[26px] font-semibold">
                 {item.title}
               </h6>
-              <p className="mt-0 text-[12px] sm:text-[13px] md:text-[14px] text-[#797A88] leading-relaxed">
+              <p className="mt-0 text-[14px] text-[#797A88] leading-relaxed">
                 {item.desc}
               </p>
             </div>

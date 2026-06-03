@@ -1,29 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useToast, Toast } from "./pages/Common/Toast";
 
 const MobileFooter = () => {
-  return (
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { toasts, addToast, removeToast } = useToast();
+
+  const handleSubscribe = async () => {
+    if (!email.trim()) {
+      addToast("Please enter your email", "warning");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      addToast("Please enter a valid email", "warning");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("https://api.grabbite.com/api/open/join-our-mailing-list", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        addToast("Subscribed successfully!", "success");
+        setEmail("");
+      } else {
+        const result = await response.json();
+        addToast(result.message || "Something went wrong", "error");
+      }
+    } catch (error) {
+      addToast("Request failed. Please try again.", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+   return (
     <footer className="bg-[#042C89] md:hidden block poppins text-white">
+      <Toast toasts={toasts} removeToast={removeToast} />
 
       {/* Middle Section */}
       <div className="container mx-auto  py-12 md:flex  gap-10">
         {/* Logo & Navigate */}
         <div className="md:w-3/12">
           <img src="/assets/whitelogo.png" className="w-[165px]" alt="" />
-          <div className="mt-15 mb-5">
+          <div className="md:mt-15 mb-5 mt-5">
             <h6 className="text-green-400 poppins font-bold pb-6">NAVIGATE</h6>
             <div className="flex gap-10">
               <ul className="space-y-1">
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Find a Class</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Book Now</a></li>
+                <li><Link to="/about">About us</Link></li>
+                <li><Link to="/find-a-class">Find a Class</Link></li>
+                <li><Link to="/services/weekly">Services</Link></li>
+                <li><Link to="/find-a-class">Book Now</Link></li>
 
               </ul>
               <ul>
-                <li><a href="#">Franchise</a></li>
-                <li><a href="#">Reviews</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact Us</a></li></ul>
+                <li><Link to="/franchise">Franchise</Link></li>
+                <li><Link to="/about/reviews">Reviews</Link></li>
+                <li><Link to="/blogs">Blog</Link></li>
+                <li><Link to="/contact">Contact Us</Link></li></ul>
             </div>
           </div>
         </div>
@@ -32,8 +70,8 @@ const MobileFooter = () => {
         <div className="md:w-5/12">
           <h6 className="text-green-400 poppins font-bold pb-4">CUSTOMER SERVICE</h6>
           <ul className="space-y-1">
-            <li><a href="#">Terms & Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><Link to="#">Terms & Conditions</Link></li>
+            <li><Link to="#">Privacy Policy</Link></li>
           </ul>
           <div className="bg-[#fefefe1c] md:max-w-[480px] mt-6 p-6 rounded-2xl">
             <h6 className="font-bold pb-2 poppins">Join our Mailing List</h6>
@@ -41,11 +79,17 @@ const MobileFooter = () => {
             <div className="md:flex gap-4">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your Email"
                 className="p-3 rounded-3xl md:w-6/12 w-full bg-white text-black"
               />
-              <button className="bg-[#0DD180] p-3 mt-5 px-4 rounded-3xl w-full text-white font-bold">
-                Subscribe
+              <button
+                onClick={handleSubscribe}
+                disabled={loading}
+                className="bg-[#0DD180] p-3 mt-5 px-4 rounded-3xl w-full text-white font-bold disabled:opacity-50"
+              >
+                {loading ? "..." : "Subscribe"}
               </button>
             </div>
           </div>

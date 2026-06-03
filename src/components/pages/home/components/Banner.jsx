@@ -12,7 +12,7 @@ const Banner = () => {
                                 PASSION
                             </span>
                         </h1>
-                        <p className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-semibold py-4 md:py-7 px-4 sm:px-8 md:px-0 max-w-[600px] mx-auto">
+                        <p className="text-[16px] md:text-[18px] lg:text-[20px] font-semibold py-4 md:py-7 px-4 sm:px-8 md:px-0  mx-auto">
                             Football training built on <br className='block md:hidden' /> flair, confidence and <br className='block md:hidden' />  Brazilian rhythm since 2009.
                         </p>
                         <button className="bg-[#00A6E3] p-4 py-2 md:py-3 font-normal mt-3 md:mt-5 px-5 md:px-6 rounded-3xl permanent-marker text-xs md:text-sm">

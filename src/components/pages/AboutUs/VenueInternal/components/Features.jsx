@@ -1,5 +1,5 @@
-import { button } from 'framer-motion/client';
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Features = () => {
 
@@ -54,9 +54,12 @@ const Features = () => {
                       ))}
                       <p className='mb-4 leading-relaxed font-semibold text-[#00A6E3] poppins'>{section.highlightDescription}</p>
                       {section.buttonText && (
-                        <button className="mt-5 rounded-full bg-[#FFDE14] px-5 py-2.5 text-[18px] font-semibold text-[#042C89] recline">
-                          {section.buttonText}
-                        </button>)}
+                        <Link to="/find-a-class">
+                          <button className="mt-5 rounded-full bg-[#FFDE14] px-5 py-2.5 text-[18px] font-semibold text-[#042C89] recline">
+                            {section.buttonText}
+                          </button>
+                        </Link>
+                      )}
                     </div>
 
                     {/* Image with decorative yellow splashes */}

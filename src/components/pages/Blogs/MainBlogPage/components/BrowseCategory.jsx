@@ -19,7 +19,7 @@ const BrowseCategory = () => {
   return (
     <>
       <section
-        className="relative py-20 md:bg-[#F9FAFB]  bg-no-repeat bg-cover  bg-none md:bg-[url('/assets/TexturedBackground.png')]"
+        className="relative py-20 md:bg-[#F9FAFB] pb-0 md:pb-20  bg-no-repeat bg-cover  bg-none md:bg-[url('/assets/TexturedBackground.png')]"
       >
         <div className="container space-y-6">
           <div className="flex justify-between mb-0">
@@ -50,7 +50,7 @@ const BrowseCategory = () => {
                     <SwiperSlide key={index}>
                       <div
                         className={`
-                    rounded-2xl shadow-md cursor-pointer
+                    rounded-2xl mainShadow cursor-pointer
                     flex flex-col items-center justify-center
                     h-[260px] p-6 mx-auto
                     transition-all duration-300

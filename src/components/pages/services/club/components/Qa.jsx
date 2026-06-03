@@ -72,18 +72,20 @@ const Qa = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section className=" grey-bg faq py-20 px-4 lg:px-20">
+        <section className=" grey-bg faq md:py-20 py-15 px-4 lg:px-20">
             <div className="text-center mb-10">
-                <h3 className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
-                    Samba Soccer FC <span className="text-[#0DD180] font-medium permanent-marker">FAQs</span>
+                <h3 style={{ textAlign: 'center' }} className="text-3xl lg:text-4xl font-bold text-blue-900 recline">
+                    Samba Soccer FC <br className="block md:hidden" /> <span className="text-[#0DD180] font-medium  permanent-marker">FAQs</span>
                 </h3>
-                <p className="text-[#5F5F6D] mt-2 font-medium">
+                <p className="text-[#5F5F6D] hidden md:block mt-2 font-medium">
                     Since Samba Soccer FC is brand new, you’ll probably have a few questions if your <br /> child is interested in coming to one of our trial sessions.
                 </p>
+                <p className="text-[#5F5F6D] text-[17px] md:hidden block mt-2 font-medium">
+                    You’ll probably have a few questions if your child is interested in coming to a trial session for Samba Soccer FC.                 </p>
 
             </div>
 
-            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Enquire Now"} />
+            <Faq faqData={faqData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} buttonText={"Enquire Now"} btnColor={'#0DD180'} />
         </section>
     );
 };

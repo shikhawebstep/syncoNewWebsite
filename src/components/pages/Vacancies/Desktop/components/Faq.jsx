@@ -49,7 +49,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                         </div>
                         <div className='md:w-[50%]'>
                             {faqData[activeIndex].answer.map((paragraph, idx) => (
-                                <p key={idx} className="text-[#5F5F6D] mb-5 tracking-[0.2px] leading-[30px]">
+                                <p key={idx} className="text-[#5F5F6D] text-[15px] mb-5 tracking-[0.2px] leading-[30px]">
                                     {paragraph}
                                 </p>
                             ))}
@@ -90,6 +90,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                             )}
                             <div className="mt-8">
                                 <button
+                                    onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
                                     style={{ backgroundColor: color || "#042C89" }}
                                     className="text-white px-8 py-3 rounded-3xl poppins font-bold"
                                 >

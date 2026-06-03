@@ -4,7 +4,7 @@ export default function StepChildrenCount({
   onNext,
   onBack,
 }) {
-  const isValid = value >= 1 && value <= 3;
+  const isValid = value >= 1 && value <= 4;
 
   return (
     <div className="text-center poppins md:pt-0 pt-5">
@@ -35,7 +35,7 @@ export default function StepChildrenCount({
           const num = Number(val);
 
           // block invalid range
-          if (num < 1 || num > 3) return;
+          if (num < 1 || num > 4) return;
 
           setValue(num);
         }}
@@ -46,7 +46,7 @@ export default function StepChildrenCount({
       <div className="flex justify-center gap-3 mt-10">
         <button
           onClick={onBack}
-          className="px-7 py-3 text-[#042C89] rounded-xl border border-[#042C89] font-semibold hover:bg-gray-100"
+          className="px-4 py-2 text-[#042C89] rounded-xl border border-[#042C89] font-semibold hover:bg-gray-100"
         >
           Back
         </button>
@@ -54,7 +54,7 @@ export default function StepChildrenCount({
         <button
           onClick={onNext}
           disabled={!isValid}
-          className={`px-7 py-3 rounded-xl font-semibold text-white
+          className={`md:px-7 px-4 py-2 md:py-3 rounded-xl font-semibold text-white
             ${isValid
               ? "bg-[#042C89]"
               : "bg-[#042C89] opacity-40 cursor-not-allowed"

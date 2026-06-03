@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast, Toast } from "../../../../Common/Toast";
 export default function StepConfirm({
   venue,
   students,
@@ -8,18 +9,42 @@ export default function StepConfirm({
   sessionInfo,
   onBack,
   onCancel,
+  onConfirm,
 }) {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordLink, setPasswordLink] = useState(null);
+
+  const { toasts, addToast, removeToast } = useToast();
   const navigate = useNavigate();
+
+  const handleBookNow = async () => {
+    setIsSubmitting(true);
+    const result = await onConfirm();
+    setIsSubmitting(false);
+    if (result.success) {
+      setShowSuccessModal(true);
+      setPasswordLink(result.passwordLink || null); 
+    } else {
+      let errorMsg = result.message || "Something went wrong. Please try again.";
+      if (result.error && typeof result.error === 'object') {
+        const firstKey = Object.keys(result.error)[0];
+        errorMsg = result.error[firstKey];
+      }
+      addToast(errorMsg, "error");
+    }
+  };
+
   return (
-    <div className="max-w-3xl mx-auto text-center mt-16">
+    <div className="max-w-3xl mx-auto text-center md:mt-16 mt-5">
+      <Toast toasts={toasts} removeToast={removeToast} />
       {/* Heading */}
       <p className="text-[18px] text-[18px] text-[#282829] font-semibold mb-2">
         Confirm your details
       </p>
       <p className="text-[#5F5F6D] text-[14px] mb-7 mt-1">
-       Please see below for a summary of your waiting list details
+        Please see below for a summary <br className="md:hidden block" /> of your waiting list details
       </p>
 
       {/* Card */}
@@ -33,8 +58,8 @@ export default function StepConfirm({
         </div>
 
         {/* Session Info */}
-        <div className="bg-[#F6F6F7] border border-[#FCF9F6] rounded-xl md:p-6 p-3 mb-1">
-          <div className="grid grid-cols-3 items-center mb-4 max-w-[370px] m-auto">
+        <div className="bg-[#F6F6F7] border border-[#FCF9F6] rounded-xl md:p-6 p-3 mb-1 thankyou">
+          <div className="grid grid-cols-3 items-center mb-4 max-w-[370px] m-auto thankyou">
             <div className="text-left ps-4">
               <p className="font-semibold">{sessionInfo?.area}</p>
             </div>
@@ -46,17 +71,19 @@ export default function StepConfirm({
 
             <div className="text-left ps-8">
               <p className="font-semibold">Date</p>
-              <p className="text-sm text-gray-500">{sessionInfo?.date}</p>
+          <p className="text-sm text-gray-500">
+  {new Date().toLocaleDateString("en-GB").replaceAll("/", "-")}
+</p>
             </div>
           </div>
 
           <div className="border-t-4 border-[#FDFDFF]  pt-4 space-y-3">
-            <div className="md:max-w-[88%] m-auto">
+            <div className="md:max-w-[88%] m-auto grid gap-3">
               {students.length > 0 ? (
                 students.map((student, index) => (
                   <div
                     key={index}
-                    className="grid grid-cols-3 items-center justify-between text-sm text-gray-700 gap-4"
+                    className="grid grid-cols-3 items-center justify-between text-sm text-gray-700 gap-4 md:border-b-0 border-b-4 border-white last:border-0 pb-3 last:pb-0"
                   >
                     <div className="md:flex items-center text-center md:text-left justify-center gap-2 truncate">
                       <img src="/assets/User.png" alt="user" className="w-4 h-4 m-auto md:m-0 mb-2 md:mb-0 text-sky-500" />
@@ -69,12 +96,12 @@ export default function StepConfirm({
 
                     <div className="md:flex items-center text-center md:text-left justify-center gap-2 truncate">
                       <img src="/assets/content.png" alt="content" className="w-4 h-4 m-auto md:m-0 mb-2 md:mb-0 text-sky-500" />
-                      <span className="truncate">{sessionInfo?.ageGroup}</span>
+                      <span className="truncate">{student?.class}</span>
                     </div>
 
                     <div className="md:flex items-center text-center md:text-left justify-center gap-2 truncate">
                       <img src="/assets/clock.png" alt="clock" className="w-4 h-4 m-auto md:m-0 mb-2 md:mb-0 text-sky-500" />
-                      <span className="text-left truncate">{sessionInfo?.time}</span>
+                      <span className="text-left truncate">{student?.time}</span>
                     </div>
                   </div>
                 ))
@@ -91,7 +118,8 @@ export default function StepConfirm({
         <button
           type="button"
           onClick={() => setShowCancelModal(true)}
-          className="text-[#FF6C6C] font-semibold text-[12px] hover:underline"
+          disabled={isSubmitting}
+          className="text-[#FF6C6C] font-semibold text-[12px] hover:underline disabled:opacity-50"
         >
           Cancel
         </button>
@@ -99,19 +127,19 @@ export default function StepConfirm({
         <button
           type="button"
           onClick={onBack}
-          className="px-4 py-2 ms-3 rounded-lg font-semibold border border-[#042C89] text-[#042C89] text-[12px] hover:bg-blue-50"
+          disabled={isSubmitting}
+          className="px-4 py-2 ms-3 rounded-lg font-semibold border border-[#042C89] text-[#042C89] text-[12px] hover:bg-blue-50 disabled:opacity-50"
         >
           Back
         </button>
 
         <button
           type="button"
-          onClick={() => {
-            setShowSuccessModal(true);
-          }}
-          className="px-4 py-2 rounded-lg bg-[#042C89] font-bold text-[14px] text-white hover:bg-blue-900"
+          disabled={isSubmitting}
+          onClick={handleBookNow}
+          className="px-4 py-2 rounded-lg bg-[#042C89] font-bold md:text-[14px] text-white hover:bg-blue-900 disabled:bg-gray-400 text-[12px]"
         >
-          Add to waiting list
+          {isSubmitting ? "Submitting..." : "Add to waiting list"}
         </button>
       </div>
       {showCancelModal && (
@@ -180,9 +208,25 @@ export default function StepConfirm({
             </p>
 
             <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
-             A member of our team will contact you when a space becomes available.
+              A member of our team will contact you when a space becomes available.
             </p>
-
+    {passwordLink && (
+        <div className="my-4 p-4 bg-[#F1F4FC] rounded-xl border border-[#D0E7FF] text-left">
+          <p className="text-[#004B9E] font-semibold text-[14px] mb-1">
+            🔐 Set up your Parent Dashboard
+          </p>
+          <p className="text-[#2D3748] text-[13px] leading-relaxed">
+            A parent account has been created for you. Set up your password to access your{" "}
+            <strong>Parent Dashboard</strong> — track sessions, manage bookings, and stay updated.
+          </p>
+          <button
+            onClick={() => window.open(passwordLink, "_blank")}
+            className="w-full mt-3 bg-[#042C89] text-white font-semibold text-[14px] py-2.5 rounded-xl hover:bg-blue-800 transition"
+          >
+            Set Up My Password →
+          </button>
+        </div>
+      )}
             {/* Actions */}
             <div className="grid grid-cols-2 justify-center gap-4">
               <button

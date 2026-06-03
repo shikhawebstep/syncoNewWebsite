@@ -28,7 +28,7 @@ const Features = () => {
   ];
   return (
     <>
-      <section className=" md:py-10 md:pt-15 ">
+      <section className="md:pt-0 pt-10 md:py-5  ">
         <div className="container">
 
           <div>
@@ -43,7 +43,7 @@ const Features = () => {
                   >
                     {/* Text Content */}
 
-                    <div className="md:w-5/12 md:p-15 relative">
+                    <div className="md:w-5/12 md:p-15 relative md:pe-5">
                       <img
                         src={section.image}
                         alt={section.imageAlt}
@@ -52,20 +52,25 @@ const Features = () => {
 
 
                     </div>
-                    <div className="md:w-7/12 text-gray-700">
+                    <div className="md:w-7/12 text-gray-700 mt-4 md:mt-0">
                       <h2 className="text-[36px] recline font-bold text-[#0DD180] mb-4">
 
                       </h2>
                       <h1 className='md:text-[52px] text-[40px] md:w-9/12 text-left recline blue-text '> <span className='text-[#0DD180] permanent-marker' >  {section.title1}</span>  {section.title2}
                       </h1>
+                      <div className='max-w-[674px]'>
                       {section.description.split("\n\n").map((para, i) => (
-                        <p key={i} className="my-4 leading-relaxed text-[#797A88] poppins">
+                        <p key={i} className="my-4 leading-[30px] text-[#797A88] poppins tracking-[-0.9%]">
                           {para}
                         </p>
                       ))}
                       <p className='mb-4 leading-relaxed font-semibold text-[#00A6E3] poppins'>{section.highlightDescription}</p>
+
+                      </div>
                       {section.buttonText && (
-                        <button className="mt-5 rounded-full bg-[#00A6E3] px-5 py-2.5 text-[16px] font-medium text-white poppins">
+                        <button 
+                          onClick={() => document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' })}
+                          className="mt-5 rounded-full bg-[#00A6E3] px-5 py-2.5 text-[16px] font-medium text-white poppins">
                           {section.buttonText}
                         </button>)}
                     </div>

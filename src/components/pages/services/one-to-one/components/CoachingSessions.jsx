@@ -9,9 +9,9 @@ const CoachingSessions = () => {
             >
                 <div className="container mx-auto">
                     <div className="md:text-center text-white recline md:max-w-[1030px] m-auto">
-                        <h3 className='recline small text-white pb-3 md:text-center'><span className="permanent-marker text-[#00A6E3] ">How Much </span>are your <br className='hidden md:block' />
+                        <h3 className='recline small text-white pb-5 md:text-center'><span className="permanent-marker text-[#00A6E3] ">How Much </span>are your <br className='hidden md:block' />
                             One to One football coaching sessions?</h3>
-                        <p className="md:text-[20px] text-[16px] font-regular mb-5">
+                        <p className="md:text-[20px] text-[16px] font-regular pb-5">
                             We aim to keep our pricing structure as low as possible, even as other costs and prices are rising around us, but we do understand the need to balance affordability and cost-effectiveness.
                         </p>
                         <p className='md:text-[20px] text-[16px]'>We offer two price options for our 1-to-1 football coaching sessions:</p>

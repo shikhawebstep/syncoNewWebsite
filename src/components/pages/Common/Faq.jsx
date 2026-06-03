@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
+const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color,btnColor }) => {
     return (
         <>
             <div className="lg:flex gap-4 lg:max-w-[1200px] mt-5 m-auto lg:space-x-10">
@@ -69,7 +69,7 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
                         ))}
                         </ul>
                         {faqData[activeIndex].lists && faqData[activeIndex].lists.map((list, idx) => (
-                            <li key={idx} className="text-[#5F5F6D] mb-1 tracking-[0.2px] leading-[30px] flex gap-2 items-center "><img className="h-7 w-7" src="/assets/greenCheck.png" alt="" />
+                            <li key={idx} className="text-[#5F5F6D] mb-1 tracking-[0.2px] leading-[30px] flex gap-2 items-center "><img className="h-4 w-4" src="/assets/greenCheck.png" alt="" />
                                 {list}
                             </li>
                         ))}
@@ -78,15 +78,22 @@ const Faq = ({ faqData, activeIndex, setActiveIndex, buttonText, color }) => {
 
                         )}
                           {faqData[activeIndex].answer2?.map((paragraph, idx) => (
-                            <p key={idx} className="text-[#5F5F6D] mb-5 onlyMobile block recline  tracking-[0.2px] leading-[30px]">
+                            <p key={idx} className="text-[#5F5F6D] mb-5 onlyMobile block  text-sm mt-3 tracking-[0.2px] leading-[27px]">
                                 {paragraph}
                             </p>
                         ))}
                     </div>
                     <div className="mt-8">
                         <button
-                            style={{ backgroundColor: color || "#042C89" }}
-                            className="text-white px-8 py-3 rounded-3xl poppins font-bold"
+                            onClick={() => {
+                                if (buttonText === "Find a class" || buttonText === "Book a Membership") {
+                                    window.location.href = "/find-a-class";
+                                } else {
+                                    document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                            style={{ backgroundColor: btnColor || "#042C89" }}
+                            className="text-white px-8 py-3 tracking-[0.4px] rounded-3xl poppins font-bold"
                         >
                             {buttonText}
                         </button>
