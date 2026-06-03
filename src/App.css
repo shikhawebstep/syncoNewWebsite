@@ -1,0 +1,1423 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-BlackItalic.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-BlackItalic.woff) format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Black.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Black.woff) format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-ExtraBold.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-ExtraBold.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Bold.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Bold.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-MediumItalic.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-MediumItalic.woff) format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Medium.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Medium.woff) format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Light.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Light.woff) format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Regular.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Heavy.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-Heavy.woff) format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-UltraLight.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-UltraLight.woff) format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-SemiBold.woff2) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/Gilroy-SemiBold.woff) format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Permanent Marker;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/PermanentMarker-Regular.woff2?v=1702463741) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/PermanentMarker-Regular.woff?v=1702463741) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: Recline;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/font.woff2?v=1703078530) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/font.woff?v=1703078529) format("woff")
+}
+
+@font-face {
+  font-family: Roam;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/RoamRegular.woff2?v=1702463741) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/RoamRegular.woff?v=1702463741) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: STONE HARBOUR;
+  src: url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/STONEHARBOUR-Italic.woff2?v=1702463777) format("woff2"), url(https://cdn.shopify.com/s/files/1/0536/8145/5277/files/STONEHARBOUR-Italic.woff?v=1702463777) format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.small15 {
+  font-size: 15px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+h3 {
+  font-size: 56px;
+  font-family: "Recline", sans-serif;
+  line-height: 1.2;
+}
+
+h3.big {
+  font-size: 58px;
+}
+
+h3.small {
+  font-size: 52px;
+}
+
+h4 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: 48px;
+  color: #042C89;
+}
+
+h4.small {
+  font-size: 42px;
+}
+
+h4.extra-small {
+  font-size: 36px;
+}
+
+h4.medium {
+  font-size: 45px;
+  color: #00A6E3;
+}
+
+.text-white {
+  color: #fff;
+}
+
+h3 span {
+  font-family: permanent marker;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+
+}
+
+.poppins,
+input,
+select,
+textarea {
+  font-family: "Poppins", sans-serif;
+}
+
+.permanent-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.recline {
+  font-family: 'Recline', sans-serif;
+}
+
+.roam {
+  font-family: 'Roam', sans-serif;
+}
+
+p.small {
+  font-size: 14px;
+}
+
+h5 {
+  font-family: Recline;
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 0.2px;
+
+}
+
+h6 {
+  font-family: Recline;
+  font-weight: 700;
+  font-size: 26px;
+
+}
+
+h6.small {
+  font-size: 22px;
+}
+
+.text22 {
+  font-size: 22px;
+}
+
+.blue-text {
+  color: #042C89;
+}
+
+
+
+.light-blue-text {
+  color: #00A6E3;
+}
+
+.yellow-text {
+  color: #FFDE14;
+}
+
+.green-text {
+  color: #0DD180;
+}
+
+.howmuchText {
+  color: #0DD180;
+
+}
+
+button,
+li,
+a {
+  cursor: pointer;
+}
+
+button {
+  outline: none;
+}
+
+/* header css start here */
+header.desktopHeader {
+  background-size: cover;
+  background-image: url('/assets/header-bg.webp');
+  background-position: center;
+  padding: 30px;
+  position: relative;
+}
+
+header.mobileHeader {
+  background-size: cover;
+  background-position: right;
+  padding: 30px;
+  position: absolute;
+}
+
+header.mobileHeader {
+  background-color: #042C89;
+  background-image: none;
+}
+
+header.mobileHeader.homeHeader {
+  background-color: #10101452;
+  background-image: url('/assets/headerTexture.png');
+}
+
+header.desktopHeader::after {
+  content: '';
+  width: 48%;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 55%;
+  border-top: 1px solid #ccc;
+}
+
+header.desktopHeader::before {
+  content: '';
+  width: 43%;
+  height: 1px;
+  position: absolute;
+  right: 0;
+  top: 55%;
+  border-top: 1px solid #ccc;
+}
+
+.logo {
+  max-width: 70px;
+}
+
+header nav ul li a {
+  font-family: recline;
+}
+
+header nav ul li {
+  font-family: Recline;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  position: relative;
+  font-family: recline;
+}
+
+h2.big {
+  font-size: 64px;
+  font-family: Recline;
+
+}
+
+a,
+li {
+  font-family: "Poppins", sans-serif;
+
+}
+
+h2.big span {
+  font-family: permanent marker;
+}
+
+button.bg-blue {
+  background-color: #042C89;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button.bg-blue:hover {
+  background-color: #036;
+}
+
+button.bg-green {
+  background-color: #0DD180;
+  color: #042C89;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button.bg-yellow {
+  background-color: #FFDE14;
+  color: #042C89;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.banner {
+  background-image: url(/assets/HeroBanner.png);
+  background-size: cover;
+  background-position: center;
+  padding: 130px 0 200px 0;
+}
+
+.services {
+  background-image: url(/assets/serviceMainBanner.png);
+  background-size: cover;
+  background-position: top;
+  padding: 200px 0 80px;
+}
+
+.servicesBenifit {
+  background-image: url(/assets/serviceMainBannerCoach.png);
+  background-size: cover;
+  background-position: top;
+  padding: 200px 0 80px;
+}
+
+.whatDoesRoleInclude {
+  background-image: url(/assets/serviceMainBannerCoach.png);
+  background-size: cover;
+  background-position: top;
+  padding: 200px 0 80px;
+}
+
+.services.services1 {
+  background-image: url(/assets/benefits.png);
+}
+
+input.placeholder::placeholder {
+  color: #5F5F6D;
+  font-weight: 600;
+}
+
+.nearest {
+  background-image: url(/assets/transparent-bg.png);
+  background-size: cover;
+  background-position: center;
+}
+
+@media(min-width:992px){
+  footer ul li {
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+}
+@media(max-width:992px){
+  .banner h1 span {
+  letter-spacing: 20px;
+  line-height: normal;
+}
+}
+.banner h1 span {
+  letter-spacing: 10px;
+  line-height: normal;
+}
+.banner h1 {
+  line-height: 54px;
+}
+
+.benefits-banner {
+  background-image: url(/assets/benefits.png);
+}
+
+.grey-bg {
+  background-image: url(/assets/grey_bg.png);
+  background-size: cover;
+  background-position: center;
+
+}
+
+.book-trial {
+  background-image: url(/assets/Book_a_free_trial_banner.png);
+  background-size: cover;
+  background-position: center;
+
+}
+
+.top-footer {
+  background-image: url(/assets/Banner_footer.png);
+  background-size: cover;
+  background-position: center;
+
+}
+
+.JoinMail {
+  background-image: url(/assets/bg-banner-waves-yellow-green.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.contact-sec {
+  background-image: url(/assets/contactus.png);
+  background-size: cover;
+  background-position: center;
+
+}
+
+.faq .acc p {
+  line-height: 30px;
+}
+
+.gray-bg {
+  background-image: url(/assets/grey_bg.png);
+  background-size: cover;
+  background-position: center;
+
+}
+
+.shadow-custom {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.blog-section h6 {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+}
+
+.blog-section h4 {
+  font-size: 24px;
+}
+
+.top-footer h4 {
+  color: #fff;
+  font-size: 36px;
+}
+
+footer h6 {
+  font-size: 20px;
+}
+
+
+
+.contact-sec h6 {
+  font-size: 24px;
+}
+
+.swiper-slide.swiper-slide-active.active p {
+  font-size: 18px;
+}
+
+.swiper-slide.swiper-slide-active p.mt-3.text-\[\#042C89\].text-sm {
+  font-size: 15px;
+}
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+header nav ul li::before {
+  content: '';
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: url(/assets/Vector_1.png);
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+.mobileheader.active::before {
+    content: '';
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: url(/assets/Vector_1.png);
+    background-size: cover;
+    background-position: center;
+}
+header nav ul li::after {
+    content: '';
+    height: 3px;
+    width: 4px;
+    position: absolute;
+    right: -20px;
+    top: 7px;
+    background: #ffde14;
+    border-radius: 10px;
+}
+
+header nav ul li:last-child:after {
+  display: none;
+  opacity: 0;
+}
+
+li.group ul li {
+  text-transform: capitalize;
+}
+
+li.group ul li:hover {
+  color: #FFDE14;
+}
+
+li.group ul li::after,
+li.group ul li::before {
+  display: none;
+  opacity: 0;
+}
+
+@media(min-width:2000px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  .campBook {
+    margin-top: -200px;
+  }
+}
+
+header nav ul li.active-tab::before,
+header nav ul li.active-tab::after {
+  display: block;
+}
+
+header nav ul li:hover::before {
+  display: block;
+}
+
+header nav ul li:hover {
+  color: #FFDE14;
+}
+
+@media(min-width:1600px) {
+  .weekly-banner {
+    padding: 130px 0;
+    min-height: 870px;
+  }
+
+  .campBanner {
+    padding: 130px 0;
+    min-height: 840px;
+  }
+
+  .weekly-whyus {
+    margin-top: -160px;
+    padding: 200px 0 80px;
+  }
+
+  .campBook {
+    margin-top: -170px;
+    padding-top: 220px;
+  }
+}
+
+@media(min-width:1024px) and (max-width:1070px) {
+  .campBanner {
+    padding: 50px 0;
+    min-height: 500px;
+  }
+}
+
+@media (min-width:1070px) and (max-width:1140px) {
+  .campBanner {
+    padding: 50px 0;
+    min-height: 590px;
+  }
+}
+
+@media (min-width:1141px) and (max-width:1240px) {
+  .campBanner {
+    padding: 50px 0;
+    min-height: 590px;
+  }
+}
+
+@media (min-width:1241px) and (max-width:1360px) {
+  .campBanner {
+    padding: 50px 0;
+    min-height: 610px;
+  }
+}
+
+button.activeTab {
+  box-shadow: rgb(13 209 128 / 47%) 0px 0px 28px;
+  margin-bottom: 20px;
+}
+
+button.activeTabCamp {
+  box-shadow: #00a6e3 0px 0px 28px;
+  margin-bottom: 20px;
+}
+
+button.activeTabCamp2 {
+  box-shadow: #00a6e3 0px 0px 28px;
+
+}
+
+.border-btn {
+  border: 1px solid #FFDE14;
+}
+
+.shadowBox {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.text44 {
+  font-size: 44px;
+}
+
+.list-disc {
+  list-style: disc;
+}
+
+.padding {
+  padding-left: 30px;
+}
+
+.mainShadow {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 0px 3px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px
+}
+
+.react-tel-input {
+  width: 10% !important;
+}
+
+.custom-radio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.custom-radio input {
+  display: none;
+}
+
+/* Default ring (GRAY) */
+.radio-circle {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cfd4dc;
+  /* gray */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+/* Inner dot */
+.radio-dot {
+  width: 6px;
+  height: 6px;
+  background: #1fd286;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* When checked → green ring + dot */
+.custom-radio input:checked+.radio-circle {
+  border-color: #1fd286;
+}
+
+.custom-radio input:checked+.radio-circle .radio-dot {
+  opacity: 1;
+}
+
+.MeetTheTeamCoaches {
+  position: relative;
+  /* REQUIRED */
+}
+
+.MeetTheTeamCoaches::before {
+  content: "";
+  position: absolute;
+  width: 330px;
+  height: 600px;
+  background-image: url('/assets/coahCoach.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  top: -100px;
+  bottom: 0;
+}
+
+.MeetTheTeamCoaches::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  background-image: url('/assets/davidCoach.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  top: -100px;
+  right: 0;
+  bottom: 0;
+}
+
+.venueManagersSec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/assets/GreyTexureBg.png') no-repeat center;
+  background-size: cover;
+  top: -218px;
+  background-position: top;
+}
+
+.trainingKitSec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/assets/WhiteTexureBg.png') no-repeat center;
+  background-size: cover;
+  top: -200px;
+  background-position: top;
+}
+
+.managerSlider::before,
+.managerSlider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  height: 42px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.managerSlider::before {
+  left: -55px;
+  background-image: url('/assets/leftIcon.png');
+}
+
+.managerSlider::after {
+  right: -55px;
+  background-image: url('/assets/rightIcon.png');
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.yellowLine::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 5px;
+  background: #FFDE14;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  max-width: 70%;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.innerVenueBanner::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  background-image: url('/assets/YellowSplash1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  top: -100px;
+  right: -100px;
+  bottom: 0;
+}
+
+.innerVenueBanner::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  background-image: url('/assets/YellowSplash2.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: block;
+  top: -100px;
+  left: -100px;
+  bottom: 0;
+}
+
+.freeTrialkids::before {
+  background: url('/assets/img-kids-picture-2.png');
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  z-index: 99;
+}
+
+.blueshortLine::after {
+  position: absolute;
+  content: '';
+  right: 0;
+  background: url('/assets/blueshortLine.png');
+  width: 40px;
+  height: 5px;
+}
+
+.blueshortLine::after {
+  position: absolute;
+  content: '';
+  background: url('/assets/blueshortLine.png');
+  width: 30px;
+  height: 3px;
+  top: 50%;
+  right: -40px;
+}
+
+.blueRightArrow::after {
+  position: absolute;
+  content: '';
+  background: url('/assets/blueRightArrow.png');
+  width: 30px;
+  background-repeat: no-repeat;
+  height: 100%;
+  top: 30%;
+  cursor: pointer;
+  right: -40px;
+}
+
+section.different-sec h3 span::before {
+  background: url(/assets/diffblueline.png);
+  content: '';
+  width: 100%;
+  height: 30px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -25px;
+  right: 0;
+  left: 0;
+}
+
+/* .whitetop::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-image: url('/assets/bg-light-wave-bottom.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: block;
+    top: 79%;
+    bottom: -14%;
+}
+.whitetop{
+  position: relative;
+} */
+section.services h3 span::before {
+  background: url(/assets/serviceLine.png);
+  content: '';
+  width: 100%;
+  height: 30px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -15px;
+}
+
+section.unforgattable h3 span::before {
+  background: url(/assets/serviceLine.png);
+  content: '';
+  width: 100%;
+  height: 30px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -15px;
+}
+
+section.blog-section h3 span::before {
+    background-size: contain !important;
+    background: url(/assets/yellowLine.png);
+    content: '';
+    width: 100%;
+    height: 116px;
+    background-position: center;
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: -42px;
+    z-index: -1;
+}
+
+.nearest .right-side-content h3 span::before {
+  background: url(/assets/blueLine.png);
+  content: '';
+  width: 100%;
+  height: 30px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -15px;
+}
+
+section.benefits-banner h3 span.blueLineBelow::before {
+  background: url(/assets/blueLine.png);
+  content: '';
+  width: 100%;
+  height: 30px;
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  bottom: -15px;
+}
+
+.weekly-banner {
+  background-image: url('/assets/weeklyclassbanner.png');
+}
+
+.campBook {
+  background-image: url(/assets/bg-primary-texture.png);
+}
+
+.whyShoulIChoose {
+  background-image: url(/assets/whyus.png);
+}
+
+.OnetoOne {
+  background-image: url(/assets/bg-header-one-to-one.png);
+}
+
+.holidayCampbanner {
+  background-image: url(/assets/campBanner.png);
+}
+
+.birthdayPartyBanner {
+  background-image: url(/assets/bdayBanner.png);
+}
+
+.clubBackground {
+  background-image: url(/assets/clubBanner.png);
+}
+
+.mainFranchiseBanner {
+  background-image: url(/assets/franchiseBanner.png);
+}
+
+.regionalManagerSection {
+  background-image: url(/assets/RegionalManagerBg.png);
+}
+
+.onlyDesktop {
+  display: block !important;
+}
+
+.onlyMobile {
+  display: none !important;
+}
+
+.FranchiseInvestmentBanner {
+  background-image: url(/assets/investmentBanner.png);
+}
+ 
+.idealCandidate {
+  background-image: url("/assets/candidate.png");
+}
+
+.crmSection {
+  background-image: url("/assets/crmBanner.png");
+}
+
+.BecomeACoachBannerSection {
+  background-image: url("/assets/BecomeACoachBanner.png");
+}
+
+@media (max-width: 768px) {
+  .trainingKitSec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/assets/WhiteTexureBg.png') no-repeat center;
+  background-size:contain;
+  top: -200px;
+  background-position: top;
+}
+
+  .banner {
+    background-image: url("/assets/mobileHeroBanner.png");
+    padding: 300px 0 150px 0;
+    /* optional mobile spacing */
+  }
+ .MeetTheTeamCoaches::before,
+  .MeetTheTeamCoaches::after {
+    display: none;
+  }
+ 
+  .nearest-class h2 {
+    padding: 0 20px;
+  }
+
+
+  .right-side-content {
+    margin-top: 30px;
+  }
+
+  .services {
+    top: -50px;
+    padding: 100px 5px;
+    background-position: top;
+    background-image: url(/assets/Vector301211.png);
+    background-size: cover;
+    position: relative;
+  }
+
+  .servicesBenifit {
+    top: -50px;
+    padding: 100px 10px;
+    background-position: top;
+    background-image: url(/assets/Vector301211.png);
+    background-size: cover;
+    position: relative;
+  }
+  .service-card p{
+    line-height: 20px;
+  }
+  .blog-section h6{
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .whatDoesRoleInclude {
+    padding: 100px 10px;
+    background-position: top;
+    background-image: url(/assets/Vector301211.png);
+    background-size: cover;
+    position: relative;
+  }
+
+  .campBook {
+    background-image: url(/assets/Vector301211.png);
+    top: -50px;
+    padding: 100px 10px;
+    background-position: top;
+    background-size: cover;
+    position: relative;
+  }
+
+  section.services h3 {
+    font-size: 38px;
+  }
+
+
+
+  .endtext h2,
+  .endtext button {
+    text-align: start;
+    width: 50%;
+    margin: 0 50%;
+    max-width: max-content;
+
+  }
+
+  section.services h2 {
+    font-size: 32px;
+
+  }
+
+  h3 {
+    font-size: 48px;
+  }
+
+  h2.text-\[42px\].md\:text-\[64px\].font-bold.recline.text-\[\#0DD180\] {
+    max-width: 50% !important;
+    line-height: 1;
+  }
+
+  .mreInfo {
+    font-size: 10px;
+    padding: 6px 20px;
+  }
+
+  .mobilebtnn {
+    top: 85%;
+    color: #042C89;
+  }
+
+  .mobilebtnngreen {
+    top: 89%;
+    color: #0DD180;
+  }
+
+  section.unforgattable h3 {
+    font-size: 48px;
+    text-align: left;
+    padding: 20px;
+  }
+
+  .buildingConfidence h3 {
+    font-size: 37px;
+  }
+
+  .review-img {
+    background: #fff;
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+
+  section.blog-section.py-12 h3 {
+    padding: 0 20px;
+  }
+
+  h4,
+  h3,
+  h2,
+  h1 {
+    line-height: 1.2;
+  }
+
+  .benifith3 {
+    font-size: 40px;
+  }
+
+  section.different-sec h3,
+  .gallery h3 {
+    font-size: 48px;
+  }
+
+
+
+  .img-sec.diffrentimages.mb-2 {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .mobilepoppins {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 600;
+  }
+
+  .unforgattable .container {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .leftMobileBtnn {
+    left: 5%;
+  }
+
+  .rightMobileBtnn {
+    right: 5%;
+  }
+
+  .weekly-banner {
+    background-image: url('/assets/weeklyMainBannerMobile.png');
+  }
+
+
+  .bluedot2,
+  .bluedot1 {
+    max-width: 200px;
+  }
+
+  .coacingSessions h4 {
+    font-size: 32px;
+  }
+
+  .coacingSessions h3 {
+    font-size: 46px !important;
+    line-height: 1.2;
+  }
+
+  .benefits-banner {
+    top: -50px;
+    padding: 100px 10px;
+    background-position: top;
+    background-image: url(/assets/Vector301211.png);
+    background-size: cover;
+    position: relative;
+  }
+
+  .glorytext {
+    font-size: 36px !important;
+  }
+
+  .services.services1 {
+    background-image: url(/assets/Vector301211.png);
+    padding: 100px 20px;
+  }
+
+  .whyShoulIChoose {
+    background-image: url(/assets/whyChoosemobile.png);
+    margin-top: -50px;
+  }
+
+  .crmSection {
+    background-image: url("/assets/crmBannerMobile.png");
+  }
+
+  .BecomeACoachBannerSection {
+    background-image: url("/assets/BecomeACoachBannerMobile.png");
+  }
+
+  .OnetoOne {
+    background-image: url(/assets/onetooneMobileBanner.png);
+  }
+
+  .regionalManagerSection {
+    background-image: url(/assets/RegionalManagerBgMobile.png);
+  }
+
+  .holidayCampbanner {
+    background-image: url(/assets/holidayMobileBanner.png);
+  }
+
+  .birthdayPartyBanner {
+    background-image: url(/assets/birthdayPartyBanner.png);
+  }
+
+  .clubBackground {
+    background-image: url(/assets/clubBgMobile.png);
+  }
+
+  .mainFranchiseBanner {
+    background-image: url(/assets/franchisemainMobileBanner.png);
+  }
+
+  .idealCandidate {
+    background-image: url("/assets/CandidatebannerMobile.png");
+  }
+
+  .onlyDesktop {
+    display: none !important;
+  }
+
+  .onlyMobile {
+    display: block !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: #cfd6e6;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #2ee59d !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #2ee59d !important;
+    font-weight: 900 !important;
+  }
+
+  .text-32 {
+    font-size: 32px;
+  }
+
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -50px;
+  }
+
+  .FranchiseInvestmentBanner {
+    background-image: url(/assets/FranchiseInvestmentMobile.png);
+  }
+
+  .howmuchText {
+    color: #fff;
+  }
+
+  .pxImp24 {
+    font-size: 24px !important;
+  }
+  
+.innerVenueBanner::after,.innerVenueBanner::before  {
+    display: none;
+}
+
+
+.footballClassinvenue{
+    background-image: url('/assets/footballClassBannerMobile.png');
+  background-size: cover;
+  background-position: top;
+
+}
+.JoinMail {
+  background-image: url('/assets/EverythingYouNeedBgMobile.png');
+}
+}
+
+.overflowvisible {
+  overflow: visible !important;
+}
+
+.z-999IMP {
+  z-index: 9999999999999999 !important;
+}
+
+.z-9Imp {
+  z-index: 9999999 !important;
+
+}
+header.mobileHeader {
+    background-color: #042C89;
+    background-image: none;
+    z-index: 999999;
+}
