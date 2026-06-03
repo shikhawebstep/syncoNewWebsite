@@ -117,6 +117,7 @@ export default function BookFreeTrial() {
         medicalInformation: s.medical || "None",
         classScheduleId: s.classScheduleId || classDetails?.id || 80
       })),
+      password: parents[0]?.password || "",
       parents: parents.map(p => ({
         parentFirstName: p.parentFirstName,
         parentLastName: p.parentLastName,
@@ -127,6 +128,7 @@ export default function BookFreeTrial() {
         howDidYouHear: p.howDidHear || "Search",
         interestReason: p.interestReason || "",
         interestReasonOther: p.interestReasonOther || "",
+        password: p.password || "",
       })),
 
     };

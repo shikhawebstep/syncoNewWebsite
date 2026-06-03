@@ -213,21 +213,31 @@ export default function StepConfirm({
             </p>
 
             {/* Actions */}
-            <div className="grid grid-cols-2 justify-center gap-4">
+            <div className="grid grid-cols-3 justify-center gap-4">
               <button
                 onClick={() => {
                   setShowSuccessModal(false);
                   onCancel();
                   navigate('/find-a-camp');
                 }}
-                className="md:px-8  px-6 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold"
+                className="md:px-4 px-2 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold text-[14px]"
               >
                 Go Home
               </button>
 
               <button
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  navigate('https://parent-dash.netlify.app/auth/login');
+                }}
+                className="md:px-4 px-2 py-2 rounded-lg bg-[#00A6E3] text-white font-semibold text-[14px]"
+              >
+                Parent Login
+              </button>
+
+              <button
                 onClick={() => setShowSuccessModal(false)}
-                className="md:px-8  px-6 py-2 rounded-lg bg-[#042C89] text-white font-semibold"
+                className="md:px-4 px-2 py-2 rounded-lg bg-[#042C89] text-white font-semibold text-[14px]"
               >
                 Close
               </button>

@@ -12,14 +12,13 @@ const emailSanitizer = (v) =>
 /* ============================================================ */
 
 const relationOptions = [
-  { value: "", label: "Select" },
   { value: "father", label: "Father" },
   { value: "mother", label: "Mother" },
   { value: "guardian", label: "Guardian" },
 ];
 
 const hearOptions = [
-  { value: "", label: "Select" },
+ 
   { value: "Google", label: "Google" },
   { value: "Facebook", label: "Facebook" },
   { value: "Instagram", label: "Instagram" },
@@ -28,7 +27,7 @@ const hearOptions = [
 ];
 
 const interestOptions = [
-  { value: "", label: "Select" },
+ 
   { value: "To build my child's confidence", label: "To build my child's confidence" },
   { value: "To improve their technical football skills", label: "To improve their technical football skills" },
   { value: "Because my child loves football", label: "Because my child loves football" },
@@ -54,10 +53,10 @@ const emptyParent = () => ({
 const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onBack }) => {
   const [errors, setErrors] = useState({});
   const [emailMessages, setEmailMessages] = useState({});
-  const [emailExists, setEmailExists] = useState(false);
-  const [showAccountScreen, setShowAccountScreen] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailExists, setEmailExists] = useState(parents[0]?.emailExists || false);
+  const [showAccountScreen, setShowAccountScreen] = useState(!!parents[0]?.password);
+  const [password, setPassword] = useState(parents[0]?.password || "");
+  const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");
   const [openRelationDropdowns, setOpenRelationDropdowns] = useState({});
   const [openHearDropdowns, setOpenHearDropdowns] = useState({});
@@ -65,12 +64,20 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
 
   const checkEmail = (parentId, email) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-       setEmailMessages(prev => {
-         const copy = {...prev};
-         delete copy[parentId];
-         return copy;
-       });
-       return;
+      setEmailMessages(prev => {
+        const copy = { ...prev };
+        delete copy[parentId];
+        return copy;
+      });
+      if (parents[0] && parentId === parents[0].id) {
+        setEmailExists(false);
+        setParents((prev) => {
+          const updated = [...prev];
+          if (updated[0]) updated[0].emailExists = false;
+          return updated;
+        });
+      }
+      return;
     }
 
     const myHeaders = new Headers();
@@ -99,6 +106,11 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
         } catch (e) {}
         if (parents[0] && parentId === parents[0].id) {
           setEmailExists(exists);
+          setParents((prev) => {
+            const updated = [...prev];
+            if (updated[0]) updated[0].emailExists = exists;
+            return updated;
+          });
         }
         setEmailMessages((prev) => ({ ...prev, [parentId]: msg }));
       })
@@ -433,6 +445,11 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
       onClick={() => {
         setEmailExists(true);
         setAccountError("");
+        setParents((prev) => {
+          const updated = [...prev];
+          if (updated[0]) updated[0].emailExists = true;
+          return updated;
+        });
       }}
       className="text-[#00A6E3] font-semibold hover:underline"
     >

@@ -33,7 +33,7 @@ const ToastItem = ({ toast, removeToast }) => {
                 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
         >
             <div className="mt-0.5">{ICONS[toast.type]}</div>
-            <span className="flex-1 break-words leading-snug">{toast.message}</span>
+            <span className="flex-1 break-words leading-snug text-left">{toast.message}</span>
             <button
                 onClick={handleClose}
                 className="mt-0.5 shrink-0 text-white/70 hover:text-white transition-colors"

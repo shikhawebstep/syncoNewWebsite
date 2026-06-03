@@ -41,10 +41,10 @@ const selectClass = (hasError = false) =>
 const StepParents = ({ parents, setParents, onNext, onBack }) => {
   const [errors, setErrors] = useState({});
   const [emailMessages, setEmailMessages] = useState({});
-  const [emailExists, setEmailExists] = useState(false);
-  const [showAccountScreen, setShowAccountScreen] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailExists, setEmailExists] = useState(parents[0]?.emailExists || false);
+  const [showAccountScreen, setShowAccountScreen] = useState(!!parents[0]?.password);
+  const [password, setPassword] = useState(parents[0]?.password || "");
+  const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");
 
   const checkEmail = (parentId, email) => {
@@ -54,6 +54,14 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
         delete copy[parentId];
         return copy;
       });
+      if (parents[0] && parentId === parents[0].id) {
+        setEmailExists(false);
+        setParents((prev) => {
+          const updated = [...prev];
+          if (updated[0]) updated[0].emailExists = false;
+          return updated;
+        });
+      }
       return;
     }
 
@@ -83,6 +91,11 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
         } catch (e) { }
         if (parents[0] && parentId === parents[0].id) {
           setEmailExists(exists);
+          setParents((prev) => {
+            const updated = [...prev];
+            if (updated[0]) updated[0].emailExists = exists;
+            return updated;
+          });
         }
         setEmailMessages((prev) => ({ ...prev, [parentId]: msg }));
       })
@@ -307,6 +320,11 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
                     onClick={() => {
                       setEmailExists(true);
                       setAccountError("");
+                      setParents((prev) => {
+                        const updated = [...prev];
+                        if (updated[0]) updated[0].emailExists = true;
+                        return updated;
+                      });
                     }}
                     className="text-[#00A6E3] font-semibold hover:underline"
                   >

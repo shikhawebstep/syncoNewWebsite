@@ -24,7 +24,6 @@ const hearOptions = [
 ];
 
 const interestOptions = [
-  { value: "", label: "Select" },
   { value: "To build my child's confidence", label: "To build my child's confidence" },
   { value: "To improve their technical football skills", label: "To improve their technical football skills" },
   { value: "Because my child loves football", label: "Because my child loves football" },
@@ -61,10 +60,10 @@ const StepParents = ({ classDetails }) => {
   const { parents, setParents, setStep, step } = useContext(BookingContext);
   const [errors, setErrors] = useState({});
   const [emailMessages, setEmailMessages] = useState({});
-  const [emailExists, setEmailExists] = useState(false);
-  const [showAccountScreen, setShowAccountScreen] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailExists, setEmailExists] = useState(parents[0]?.emailExists || false);
+  const [showAccountScreen, setShowAccountScreen] = useState(!!parents[0]?.password);
+  const [password, setPassword] = useState(parents[0]?.password || "");
+  const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");
   const [openInterestDropdowns, setOpenInterestDropdowns] = useState({});
   const [isSizeChartOpen, setIsSizeChartOpen] = useState(false); // ✅ Size chart modal state
@@ -78,6 +77,14 @@ const StepParents = ({ classDetails }) => {
          delete copy[parentId];
          return copy;
        });
+       if (parents[0] && parentId === parents[0].id) {
+         setEmailExists(false);
+         setParents((prev) => {
+           const updated = [...prev];
+           if (updated[0]) updated[0].emailExists = false;
+           return updated;
+         });
+       }
        return;
     }
 
@@ -107,6 +114,11 @@ const StepParents = ({ classDetails }) => {
         } catch (e) {}
         if (parents[0] && parentId === parents[0].id) {
           setEmailExists(exists);
+          setParents((prev) => {
+            const updated = [...prev];
+            if (updated[0]) updated[0].emailExists = exists;
+            return updated;
+          });
         }
         setEmailMessages((prev) => ({ ...prev, [parentId]: msg }));
       })
@@ -346,6 +358,11 @@ const StepParents = ({ classDetails }) => {
       onClick={() => {
         setEmailExists(true);
         setAccountError("");
+        setParents((prev) => {
+          const updated = [...prev];
+          if (updated[0]) updated[0].emailExists = true;
+          return updated;
+        });
       }}
       className="text-[#00A6E3] font-semibold hover:underline"
     >

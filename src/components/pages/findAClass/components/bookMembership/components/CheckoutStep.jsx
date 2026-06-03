@@ -246,6 +246,7 @@ const CheckoutStep = ({ classDetails }) => {
           medicalInformation: s.medical || "None",
           classScheduleId: s.classScheduleId || classDetails?.id,
         })),
+        password: parents[0]?.password || "",
         parents: parents.map((p) => ({
           parentFirstName: p.parentFirstName,
           parentLastName: p.parentLastName,
@@ -256,6 +257,7 @@ const CheckoutStep = ({ classDetails }) => {
           howDidYouHear: p.howDidHear || "Website",
           interestReason: p.interestReason,
           interestReasonOther: p.interestReasonOther,
+          password: p.password || "",
         })),
         emergency: {
           emergencyFirstName: emergency[0]?.emergencyFirstName || "",
@@ -267,7 +269,7 @@ const CheckoutStep = ({ classDetails }) => {
         starterPack: joiningFee,
         paymentPlanId: plan.id,
         discountId: discount?.id || null,
-        starterPackSize: parents[0]?.starterPackSize || "",
+        size: parents[0]?.starterPackSize || "",
         payment: {
           paymentType: "bank",
           firstName: nameOnCard.split(" ")[0] || "",

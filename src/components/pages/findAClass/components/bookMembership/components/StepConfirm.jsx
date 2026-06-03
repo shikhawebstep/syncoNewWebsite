@@ -83,6 +83,15 @@ export default function StepConfirm({ classDetails }) {
                 <p className="text-sm text-gray-500">No students added yet.</p>
               )}
             </div>
+            <button
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  navigate('https://parent-dash.netlify.app/auth/login');
+                }}
+                className="md:px-4 px-2 mt-8 py-2 rounded-lg bg-[#00A6E3] text-white font-semibold text-[14px]"
+              >
+                Parent Login
+              </button>
           </div>
         </div>
       </div>

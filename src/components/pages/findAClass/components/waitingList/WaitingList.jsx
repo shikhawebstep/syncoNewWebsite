@@ -150,6 +150,7 @@ const formatDateSafe = (dateInput) => {
         medicalInformation: s.medical || "none",
         classScheduleId: s.classScheduleId || classDetails?.id || 78
       })),
+      password: parents[0]?.password || "",
       parents: parents.map(p => ({
         parentFirstName: p.parentFirstName,
         parentLastName: p.parentLastName,
@@ -159,7 +160,8 @@ const formatDateSafe = (dateInput) => {
         relationToChild: p.relationChild || "Father",
         howDidYouHear: p.howDidHear || "Instagram",
         interestReason: p.interestReason || "To build my child's confidence",
-        interestReasonOther: p.interestReasonOther || ""
+        interestReasonOther: p.interestReasonOther || "",
+        password: p.password || ""
       })),
 
     };

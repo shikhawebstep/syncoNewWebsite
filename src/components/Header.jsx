@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const location = useLocation();
     const path = location.pathname;
-
+  const navigate= useNavigate();
     const isActive = (target) => path === target;
 
     return (
@@ -84,7 +84,7 @@ const Header = () => {
                             <NavLink to="/find-a-class">
                                 <button className='bg-white text-[#042C89] rounded-3xl p-2 px-4 recline'>Book a FREE Trial</button>
                             </NavLink>
-                            <button className='bg-[#FFDE14] text-[#042C89] rounded-3xl p-2 px-4 recline'>Login</button>
+                            <button onClick={()=>navigate('https://parent-dash.netlify.app/auth/login')} className='bg-[#FFDE14] text-[#042C89] rounded-3xl p-2 px-4 recline'>Login</button>
                         </div>
                         <div className='bottombar'>
                             <nav>

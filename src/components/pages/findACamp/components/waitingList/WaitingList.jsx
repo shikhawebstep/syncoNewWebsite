@@ -115,6 +115,7 @@ export default function WaitingList() {
         time: s.time || "",
         classScheduleId: s.classScheduleId || classDetails?.id || 1
       })),
+      password: parents[0]?.password || "",
       parents: parents.map((p) => ({
         parentFirstName: p.parentFirstName,
         parentLastName: p.parentLastName,
