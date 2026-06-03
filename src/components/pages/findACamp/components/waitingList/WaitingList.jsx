@@ -125,6 +125,7 @@ export default function WaitingList() {
         howDidYouHear: p.howDidHear || "Instagram",
         interestReason: p.interestReason,
         interestReasonOther: p.interestReasonOther,
+        password: p.password || "",
       })),
 
     };
