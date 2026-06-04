@@ -84,7 +84,13 @@ const Header = () => {
                             <NavLink to="/find-a-class">
                                 <button className='bg-white text-[#042C89] rounded-3xl p-2 px-4 recline'>Book a FREE Trial</button>
                             </NavLink>
-                            <button onClick={()=>navigate('https://parent-dash.netlify.app/auth/login')} className='bg-[#FFDE14] text-[#042C89] rounded-3xl p-2 px-4 recline'>Login</button>
+                            <button   onClick={() =>
+    window.open(
+      "https://parent-dash.netlify.app/auth/login",
+      "_blank",
+      "noopener,noreferrer"
+    )
+  } className='bg-[#FFDE14] text-[#042C89] rounded-3xl p-2 px-4 recline'>Login</button>
                         </div>
                         <div className='bottombar'>
                             <nav>

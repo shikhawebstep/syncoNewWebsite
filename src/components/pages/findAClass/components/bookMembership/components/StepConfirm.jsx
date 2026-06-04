@@ -86,7 +86,11 @@ export default function StepConfirm({ classDetails }) {
             <button
                 onClick={() => {
                   setShowSuccessModal(false);
-                  navigate('https://parent-dash.netlify.app/auth/login');
+                   window.open(
+                    "https://parent-dash.netlify.app/auth/login",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
                 }}
                 className="md:px-4 px-2 mt-8 py-2 rounded-lg bg-[#00A6E3] text-white font-semibold text-[14px]"
               >

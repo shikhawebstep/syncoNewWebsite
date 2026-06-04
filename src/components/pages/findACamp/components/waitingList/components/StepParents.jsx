@@ -295,7 +295,9 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
             {/* Forgot Password (Only for Login) */}
             {emailExists && (
               <div className="mt-4">
-                <a href="#" className="text-[#00A6E3] text-[14px] font-semibold hover:underline">
+                <a href="https://parent-dash.netlify.app/auth/forgot-password"
+                  target="_blank"
+                  rel="noopener noreferrer" className="text-[#00A6E3] text-[14px] font-semibold hover:underline">
                   Forgot Password?
                 </a>
               </div>
