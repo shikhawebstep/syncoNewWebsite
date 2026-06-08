@@ -58,6 +58,7 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
   const [password, setPassword] = useState(parents[0]?.password || "");
   const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");
+  const [forcedLogin, setForcedLogin] = useState(false);
   const [openRelationDropdowns, setOpenRelationDropdowns] = useState({});
   const [openHearDropdowns, setOpenHearDropdowns] = useState({});
   const [openInterestDropdowns, setOpenInterestDropdowns] = useState({});
@@ -71,6 +72,7 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
       });
       if (parents[0] && parentId === parents[0].id) {
         setEmailExists(false);
+        setForcedLogin(false);
         setParents((prev) => {
           const updated = [...prev];
           if (updated[0]) updated[0].emailExists = false;
@@ -106,6 +108,7 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
         } catch (e) {}
         if (parents[0] && parentId === parents[0].id) {
           setEmailExists(exists);
+          setForcedLogin(false);
           setParents((prev) => {
             const updated = [...prev];
             if (updated[0]) updated[0].emailExists = exists;
@@ -445,6 +448,7 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
     <button
       type="button"
       onClick={() => {
+        setForcedLogin(true);
         setEmailExists(true);
         setAccountError("");
         setParents((prev) => {
@@ -466,7 +470,18 @@ const StepParents = ({ parents, setParents, emergency, setEmergency, onNext, onB
         {/* Buttons */}
         <div className="flex md:justify-center md:mt-10 gap-3 mt-5 justify-center mb-5">
           <button
-            onClick={() => setShowAccountScreen(false)}
+            onClick={() => {
+              setShowAccountScreen(false);
+              if (forcedLogin) {
+                setEmailExists(false);
+                setForcedLogin(false);
+                setParents((prev) => {
+                  const updated = [...prev];
+                  if (updated[0]) updated[0].emailExists = false;
+                  return updated;
+                });
+              }
+            }}
             className="px-8 py-2.5 rounded-[8px] border border-[#042C89] font-semibold text-[#042C89] hover:bg-gray-50 transition-colors"
           >
             Back
