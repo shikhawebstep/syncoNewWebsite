@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { X } from "lucide-react";
 import { useToast, Toast } from "../../../../Common/Toast";
 import { BookingContext } from "../context/BookingContext";
+
+import { motion } from "framer-motion";
+
 export default function StepConfirm({ classDetails }) {
 
   const { toasts, addToast, removeToast } = useToast();

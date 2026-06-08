@@ -42,7 +42,7 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
   const [errors, setErrors] = useState({});
   const [emailMessages, setEmailMessages] = useState({});
   const [emailExists, setEmailExists] = useState(parents[0]?.emailExists || false);
-  const [showAccountScreen, setShowAccountScreen] = useState(!!parents[0]?.password);
+  const [showAccountScreen, setShowAccountScreen] = useState(() => !!parents[0]?.password);
   const [password, setPassword] = useState(parents[0]?.password || "");
   const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");

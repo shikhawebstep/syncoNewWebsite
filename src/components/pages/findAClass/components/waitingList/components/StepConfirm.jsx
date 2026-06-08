@@ -68,9 +68,9 @@ export default function StepConfirm({
 
             <div className="text-left ps-8">
               <p className="font-semibold">Date</p>
-          <p className="text-sm text-gray-500">
-  {new Date().toLocaleDateString("en-GB").replaceAll("/", "-")}
-</p>
+              <p className="text-sm text-gray-500">
+                {new Date().toLocaleDateString("en-GB").replaceAll("/", "-")}
+              </p>
             </div>
           </div>
 
@@ -185,7 +185,7 @@ export default function StepConfirm({
 
       {showSuccessModal && (
         <div className="fixed p-6 inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white w-[500px] rounded-3xl p-6 text-center relative">
+          <div className="bg-white w-[500px] rounded-3xl p-8 py-10 text-center relative">
 
             {/* Trophy Image */}
             <img
@@ -207,7 +207,9 @@ export default function StepConfirm({
             <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
               A member of our team will contact you when a space becomes available.
             </p>
-
+            <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
+              You can manage your booking in your Parent Connect account with login link
+            </p>
             {/* Actions */}
             <div className="grid grid-cols-3 justify-center gap-4">
               <button
@@ -224,7 +226,7 @@ export default function StepConfirm({
               <button
                 onClick={() => {
                   setShowSuccessModal(false);
-                   window.open(
+                  window.open(
                     "https://parent-dash.netlify.app/auth/login",
                     "_blank",
                     "noopener,noreferrer"

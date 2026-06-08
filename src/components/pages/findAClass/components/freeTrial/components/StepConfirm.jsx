@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useToast, Toast } from "../../../../Common/Toast";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function StepConfirm({
   venue,
@@ -131,14 +132,16 @@ export default function StepConfirm({
           Back
         </button>
 
-        <button
+        <motion.button
           type="button"
           disabled={isSubmitting}
           onClick={handleBookNow}
+          animate={!isSubmitting ? { scale: [1, 1.04, 1] } : {}}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="px-4 py-2 rounded-lg bg-[#042C89] font-bold md:text-[14px] text-white hover:bg-blue-900 disabled:bg-gray-400 text-[12px]"
         >
           {isSubmitting ? "Booking..." : "Book FREE Trial"}
-        </button>
+        </motion.button>
       </div>
 
       {showCancelModal && (
@@ -185,7 +188,7 @@ export default function StepConfirm({
 
       {showSuccessModal && (
         <div className="fixed p-6 inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white w-[500px] rounded-3xl p-6 text-center relative">
+          <div className="bg-white w-[500px] rounded-3xl p-8 py-10 text-center relative">
             {/* Trophy Image */}
             <img
               src="/assets/win.png"
@@ -206,6 +209,9 @@ export default function StepConfirm({
             <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
               We'll send you an email confirming your free trial session.
             </p>
+            <p className="text-[#5F5F6D] text-[14px] mb-8 -tracking-[0.1px]">
+              You can manage your booking in your Parent Connect account with login link
+            </p>
 
             {/* Actions */}
             <div className="grid grid-cols-3 justify-center gap-4">
@@ -223,7 +229,7 @@ export default function StepConfirm({
               <button
                 onClick={() => {
                   setShowSuccessModal(false);
-                   window.open(
+                  window.open(
                     "https://parent-dash.netlify.app/auth/login",
                     "_blank",
                     "noopener,noreferrer"

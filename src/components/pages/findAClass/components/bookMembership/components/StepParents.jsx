@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Eye, EyeOff } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { BookingContext } from "../context/BookingContext";
 import PhoneInput from "react-phone-input-2";
@@ -61,33 +61,34 @@ const StepParents = ({ classDetails }) => {
   const [errors, setErrors] = useState({});
   const [emailMessages, setEmailMessages] = useState({});
   const [emailExists, setEmailExists] = useState(parents[0]?.emailExists || false);
-  const [showAccountScreen, setShowAccountScreen] = useState(!!parents[0]?.password);
+  const [showAccountScreen, setShowAccountScreen] = useState(() => !!parents[0]?.password);
   const [password, setPassword] = useState(parents[0]?.password || "");
   const [confirmPassword, setConfirmPassword] = useState(parents[0]?.password || "");
   const [accountError, setAccountError] = useState("");
   const [forcedLogin, setForcedLogin] = useState(false);
   const [openInterestDropdowns, setOpenInterestDropdowns] = useState({});
   const [isSizeChartOpen, setIsSizeChartOpen] = useState(false); // ✅ Size chart modal state
-
+  const [showAccountPassword, setShowAccountPassword] = useState(false);
+  const [showAccountConfirmPassword, setShowAccountConfirmPassword] = useState(false);
   const isStarterPack = classDetails?.venue?.starterPack === true;
 
   const checkEmail = (parentId, email) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-       setEmailMessages(prev => {
-         const copy = {...prev};
-         delete copy[parentId];
-         return copy;
-       });
-       if (parents[0] && parentId === parents[0].id) {
-         setEmailExists(false);
-         setForcedLogin(false);
-         setParents((prev) => {
-           const updated = [...prev];
-           if (updated[0]) updated[0].emailExists = false;
-           return updated;
-         });
-       }
-       return;
+      setEmailMessages(prev => {
+        const copy = { ...prev };
+        delete copy[parentId];
+        return copy;
+      });
+      if (parents[0] && parentId === parents[0].id) {
+        setEmailExists(false);
+        setForcedLogin(false);
+        setParents((prev) => {
+          const updated = [...prev];
+          if (updated[0]) updated[0].emailExists = false;
+          return updated;
+        });
+      }
+      return;
     }
 
     const myHeaders = new Headers();
@@ -113,7 +114,7 @@ const StepParents = ({ classDetails }) => {
           const parsed = JSON.parse(result);
           msg = parsed.message || parsed.msg || parsed.error || result;
           if (typeof parsed.exists !== 'undefined') exists = parsed.exists;
-        } catch (e) {}
+        } catch (e) { }
         if (parents[0] && parentId === parents[0].id) {
           setEmailExists(exists);
           setForcedLogin(false);
@@ -128,11 +129,11 @@ const StepParents = ({ classDetails }) => {
       .catch((error) => console.error(error));
   };
 
-  useEffect(() => {
-    if (!parents || parents.length === 0) {
-      setParents([emptyParent()]);
-    }
-  }, [parents, setParents]);
+useEffect(() => {
+  if (!parents || parents.length === 0) {
+    setParents([emptyParent()]);
+  }
+}, []); // ← empty deps, runs once only
 
   const toggleInterestDropdown = (parentId) => {
     setOpenInterestDropdowns(prev => ({
@@ -170,8 +171,21 @@ const StepParents = ({ classDetails }) => {
     }
     setParents(updated);
 
+    // Only clear error while typing, never set new ones
     const key = `${updated[index].id}-${field}`;
+    setErrors((prev) => {
+      const copy = { ...prev };
+      delete copy[key];
+      return copy;
+    });
+  };
+
+  const handleParentBlur = (index, field) => {
+    const parent = parents[index];
+    const value = parent[field] || "";
     const errorMsg = validateField(field, value);
+    const key = `${parent.id}-${field}`;
+
     setErrors((prev) => {
       const copy = { ...prev };
       if (errorMsg) copy[key] = errorMsg;
@@ -251,11 +265,11 @@ const StepParents = ({ classDetails }) => {
       setAccountError("Passwords do not match");
       return;
     }
-    
+
     const updated = [...parents];
     updated[0].password = password;
     setParents(updated);
-    
+
     setStep(step + 1);
   };
 
@@ -274,109 +288,125 @@ const StepParents = ({ classDetails }) => {
           transition={{ duration: 0.3 }}
           className="mb-2 poppins md:p-6 p-4 rounded-3xl space-y-6 relative text-center bg-[#FDFDFF]"
         >
-          <h2 className="text-[18px] font-semibold text-[#282829] mb-2">
-            {emailExists ? "Parent Connect Account Found" : "Setup Your Parent Connect Account"}
-          </h2>
-          <p className="text-[14px] text-[#5F5F6D] mb-8 leading-relaxed pt-5">
-            <span>You're Almost Done! 🎉</span><br />
-            {emailExists 
-              ? "We found an existing Parent Connect account linked to your email address.\nPlease enter your password to continue your booking."
-              : "Set your password below to create your Parent Connect account and manage your bookings."}
-          </p>
 
-          <div className="max-w-[500px] m-auto text-left space-y-5">
-            {/* Email Field */}
-            <div>
-              <label className="block text-[14px] text-[#282829] font-medium mb-1">
-                Account Email { !emailExists && <span className="text-gray-500 font-normal italic text-[12px]">(This will be used to log in to Parent Connect)</span>}
-              </label>
-              <input
-                disabled
-                className="w-full mt-1 mainShadow bg-gray-50 text-gray-500 font-normal rounded-[6px] px-4 py-3 outline-none cursor-not-allowed"
-                value={parents[0]?.parentEmail || ""}
-              />
-            </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-[16px] shadow-sm px-6 py-6">
+            <div className="max-w-[500px] m-auto  py-10">
+              <div className="flex justify-center max-w-[120px] m-auto mb-4">
 
-            {/* Password Field */}
-            <div>
-              <label className="block text-[14px] text-[#282829] font-medium mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Enter your Password"
-                className={`w-full mt-1 mainShadow bg-white text-[#494949] font-normal placeholder:text-[#494949] placeholder:font-normal rounded-[6px] px-4 py-3 outline-none ${accountError && !password ? "border border-red-500" : ""}`}
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setAccountError("");
-                }}
-              />
-            </div>
-
-            {/* Confirm Password Field (Only for Setup) */}
-            {!emailExists && (
-              <div>
-                <label className="block text-[14px] text-[#282829] font-medium mb-1">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter your Password"
-                  className={`w-full mt-1 mainShadow bg-white text-[#494949] font-normal placeholder:text-[#494949] placeholder:font-normal rounded-[6px] px-4 py-3 outline-none ${accountError && accountError.includes("match") ? "border border-red-500" : ""}`}
-                  value={confirmPassword}
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                    setAccountError("");
-                  }}
-                />
+                <img src="/assets/sss-logo-parents.png" alt="Parent Connect" className=" w-full" />
               </div>
-            )}
+              <h2 className="text-[18px] font-semibold text-[#282829] mb-2">
+                {emailExists ? "Parent Connect Account Found" : "Setup Your Parent Connect Account"}
+              </h2>
+              <p className="text-[14px] text-[#5F5F6D] mb-8 leading-relaxed pt-5">
+                <span>You're Almost Done! 🎉</span><br />
+                {emailExists
+                  ? "We found an existing Parent Connect account linked to your email address.\nPlease enter your password to continue your booking."
+                  : "Set your password below to create your Parent Connect account and manage your bookings."}
+              </p>
 
-            {/* Forgot Password (Only for Login) */}
-            {emailExists && (
-              <div className="mt-4">
-                <a  href="https://parent-dash.netlify.app/auth/forgot-password"
-  target="_blank"
-  rel="noopener noreferrer" className="text-[#00A6E3] text-[14px] font-semibold hover:underline">
-                  Forgot Password?
-                </a>
+              <div className="max-w-[500px] m-auto text-left space-y-5">
+                {/* Email Field */}
+                <div>
+                  <label className="block text-[14px] text-[#282829] font-medium mb-1">
+                    Account Email {!emailExists && <span className="text-gray-500 font-normal italic text-[12px]">(This will be used to log in to Parent Connect)</span>}
+                  </label>
+                  <input
+                    disabled
+                    className="w-full mt-1 mainShadow bg-gray-50 text-gray-500 font-normal rounded-[6px] px-4 py-3 outline-none cursor-not-allowed"
+                    value={parents[0]?.parentEmail || ""}
+                  />
+                </div>
+
+                {/* Password Field */}
+                {/* Password Field */}
+                <div>
+                  <label className="block text-[14px] text-[#282829] font-medium mb-1">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showAccountPassword ? "text" : "password"}
+                      placeholder="Enter your Password"
+                      className={`w-full mt-1 mainShadow bg-white text-[#494949] font-normal placeholder:text-[#494949] placeholder:font-normal rounded-[6px] px-4 py-3 outline-none pr-12 ${accountError && !password ? "border border-red-500" : ""}`}
+                      value={password}
+                      onChange={(e) => { setPassword(e.target.value); setAccountError(""); }}
+                    />
+                    <button type="button" onClick={() => setShowAccountPassword(!showAccountPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                      {showAccountPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Confirm Password Field (Only for Setup) */}
+                {!emailExists && (
+                  <div>
+                    <label className="block text-[14px] text-[#282829] font-medium mb-1">
+                      Confirm Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showAccountConfirmPassword ? "text" : "password"}
+                        placeholder="Enter your Password"
+                        className={`w-full mt-1 mainShadow bg-white text-[#494949] font-normal placeholder:text-[#494949] placeholder:font-normal rounded-[6px] px-4 py-3 outline-none pr-12 ${accountError && accountError.includes("match") ? "border border-red-500" : ""}`}
+                        value={confirmPassword}
+                        onPaste={(e) => e.preventDefault()}
+                        onChange={(e) => { setConfirmPassword(e.target.value); setAccountError(""); }}
+                      />
+                      <button type="button" onClick={() => setShowAccountConfirmPassword(!showAccountConfirmPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        {showAccountConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {/* Forgot Password (Only for Login) */}
+                {emailExists && (
+                  <div className="mt-4">
+                    <a href="https://parent-dash.netlify.app/auth/forgot-password"
+                      target="_blank"
+                      rel="noopener noreferrer" className="text-[#00A6E3] text-[14px] font-semibold hover:underline">
+                      Forgot Password?
+                    </a>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {accountError && (
+                  <p className="text-red-500 text-[13px] text-center mt-2">{accountError}</p>
+                )}
+
+                {/* OR Log In (Only for Setup) */}
+                {!emailExists && (
+                  <div className="text-center mt-8">
+                    <div className="relative flex items-center justify-center mb-4">
+                      <div className="w-full border-t border-gray-300"></div>
+                      <span className="absolute px-4 bg-[#FDFDFF] text-gray-400 text-sm font-medium">OR</span>
+                    </div>
+                    <p className="pt-2 text-[14px] text-[#282829] font-bold">
+                      Already have a Parent Connect account?{" "}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setForcedLogin(true);
+                          setEmailExists(true);
+                          setAccountError("");
+                          setParents((prev) => {
+                            const updated = [...prev];
+                            if (updated[0]) updated[0].emailExists = true;
+                            return updated;
+                          });
+                        }}
+                        className="text-[#00A6E3] font-semibold hover:underline"
+                      >
+                        Log in
+                      </button>
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
-
-            {/* Error Message */}
-            {accountError && (
-              <p className="text-red-500 text-[13px] text-center mt-2">{accountError}</p>
-            )}
-
-            {/* OR Log In (Only for Setup) */}
-            {!emailExists && (
-             <div className="text-center mt-8">
-  <div className="relative flex items-center justify-center mb-4">
-    <div className="w-full border-t border-gray-300"></div>
-    <span className="absolute px-4 bg-[#FDFDFF] text-gray-400 text-sm font-medium">OR</span>
-  </div>
-  <p className="pt-2 text-[14px] text-[#282829] font-bold">
-    Already have a Parent Connect account?{" "}
-    <button
-      type="button"
-      onClick={() => {
-        setForcedLogin(true);
-        setEmailExists(true);
-        setAccountError("");
-        setParents((prev) => {
-          const updated = [...prev];
-          if (updated[0]) updated[0].emailExists = true;
-          return updated;
-        });
-      }}
-      className="text-[#00A6E3] font-semibold hover:underline"
-    >
-      Log in
-    </button>
-  </p>
-</div>
-            )}
+            </div>
           </div>
         </motion.div>
 
@@ -449,7 +479,9 @@ const StepParents = ({ classDetails }) => {
                 className={inputClass(!!errors[`${parent.id}-parentFirstName`])}
                 value={parent.parentFirstName}
                 placeholder="Enter first name"
+
                 onChange={(e) => handleParentChange(index, "parentFirstName", onlyLetters(e.target.value))}
+                onBlur={() => handleParentBlur(index, "parentFirstName")}
               />
               {errors[`${parent.id}-parentFirstName`] && (
                 <span className="text-red-500 text-[12px] mt-1 block">{errors[`${parent.id}-parentFirstName`]}</span>
@@ -466,6 +498,7 @@ const StepParents = ({ classDetails }) => {
                 value={parent.parentLastName}
                 placeholder="Enter last name"
                 onChange={(e) => handleParentChange(index, "parentLastName", onlyLetters(e.target.value))}
+                onBlur={() => handleParentBlur(index, "parentLastName")}
               />
               {errors[`${parent.id}-parentLastName`] && (
                 <span className="text-red-500 text-[12px] mt-1 block">{errors[`${parent.id}-parentLastName`]}</span>
@@ -488,18 +521,19 @@ const StepParents = ({ classDetails }) => {
                   handleParentChange(index, "parentEmail", emailSanitizer(e.target.value));
                   if (emailMessages[parent.id]) {
                     setEmailMessages(prev => {
-                      const copy = {...prev};
+                      const copy = { ...prev };
                       delete copy[parent.id];
                       return copy;
                     });
                   }
                 }}
-                onBlur={() => checkEmail(parent.id, parent.parentEmail)}
+                onBlur={() => {
+                  handleParentBlur(index, "parentEmail");
+                  checkEmail(parent.id, parent.parentEmail);
+                }}
               />
               {errors[`${parent.id}-parentEmail`] ? (
                 <span className="text-red-500 text-[12px] mt-1 block">{errors[`${parent.id}-parentEmail`]}</span>
-              ) : emailMessages[parent.id] ? (
-                <span className="text-green-500 text-[15px] mt-1 block">{emailMessages[parent.id]}</span>
               ) : null}
             </div>
 
@@ -512,7 +546,7 @@ const StepParents = ({ classDetails }) => {
                   country={"gb"}
                   value={parent.phoneNumber}
                   onChange={(value, data) => handleParentChange(index, "phoneNumber", value, data)}
-                  containerClass="!w-full !mt-2 mainShadow !rounded-[6px] !bg-white !border !border-[#E2E1E5]"
+                  onBlur={() => handleParentBlur(index, "phoneNumber")} containerClass="!w-full !mt-2 mainShadow !rounded-[6px] !bg-white !border !border-[#E2E1E5]"
                   inputStyle={{ width: '100%', height: '46px', fontSize: '16px', paddingLeft: '65px', borderRadius: '6px', border: 'none', backgroundColor: 'transparent' }}
                   buttonStyle={{ backgroundColor: 'transparent', border: 'none', borderRadius: '6px 0 0 6px', width: '55px' }}
                   dropdownClass="!bg-white !rounded-[12px] !shadow-lg"
@@ -536,7 +570,7 @@ const StepParents = ({ classDetails }) => {
                 className={inputClass(!!errors[`${parent.id}-relationChild`])}
                 value={parent.relationChild}
                 onChange={(e) => handleParentChange(index, "relationChild", e.target.value)}
-              >
+                onBlur={() => handleParentBlur(index, "relationChild")}              >
                 <option value="">Select relation</option>
                 {relationOptions.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
@@ -586,7 +620,7 @@ const StepParents = ({ classDetails }) => {
                   className={inputClass(!!errors[`${parent.id}-starterPackSize`])}
                   value={parent.starterPackSize}
                   onChange={(e) => handleParentChange(index, "starterPackSize", e.target.value)}
-                >
+                  onBlur={() => handleParentBlur(index, "starterPackSize")}                >
                   <option value="">Select size</option>
                   {kitSizeOptions.map((o) => (
                     <option key={o.value} value={o.value}>{o.label}</option>
