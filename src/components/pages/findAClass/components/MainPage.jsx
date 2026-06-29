@@ -401,7 +401,7 @@ function VenueCard({
   };
 
   const venueId = venueData.venueId ?? Math.random();
-  const venueName = venueData.venueName ?? "Unknown Venue";
+  const venueName = venueData.address ?? "Unknown Venue";
   const postalCode = venueData.postal_code ?? "Unknown Venue";
   const location = venueData.area ?? "";
   const distance = venueData.distanceMiles ? `${venueData.distanceMiles} miles` : "";
@@ -423,9 +423,9 @@ function VenueCard({
     <div className="rounded-[30px] bg-white p-2.5 border border-[#E2E1E5] mb-4">
       {/* Blue header bar */}
       <div className="relative sm:flex items-center justify-between rounded-[22px] bg-[#042C89] px-5 py-3 text-white">
-        <div className="flex items-center text-[16px] poppins gap-2 mb-3 md:mb-0 text-sm">
+        <div className="flex items-center font-medium text-[16px] poppins gap-2 mb-3 md:mb-0 text-sm">
           <FaMapMarkerAlt size={20} />
-          {venueName} , {postalCode}
+          {venueName}
         </div>
 
         <div className="flex gap-3">

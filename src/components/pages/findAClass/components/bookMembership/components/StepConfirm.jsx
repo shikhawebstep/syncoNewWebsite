@@ -88,7 +88,7 @@ export default function StepConfirm({ classDetails }) {
             </div>
             <button
                 onClick={() => {
-                  setShowSuccessModal(false);
+              
                    window.open(
                     "https://parent-dash.netlify.app/auth/login",
                     "_blank",

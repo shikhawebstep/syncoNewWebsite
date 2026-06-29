@@ -16,6 +16,7 @@ export default function StepConfirm({
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ export default function StepConfirm({
     const result = await onConfirm();
     setIsSubmitting(false);
     if (result.success) {
+      setIsBooked(true);
       setShowSuccessModal(true);
     } else {
       let errorMsg = result.message || "Something went wrong. Please try again.";
@@ -117,7 +119,7 @@ export default function StepConfirm({
         <button
           type="button"
           onClick={() => setShowCancelModal(true)}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isBooked}
           className="text-[#FF6C6C] font-semibold text-[12px] hover:underline disabled:opacity-50"
         >
           Cancel
@@ -126,22 +128,54 @@ export default function StepConfirm({
         <button
           type="button"
           onClick={onBack}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isBooked}
           className="px-4 py-2 ms-3 rounded-lg font-semibold border border-[#042C89] text-[#042C89] text-[12px] hover:bg-blue-50 disabled:opacity-50"
         >
           Back
         </button>
 
-        <motion.button
-          type="button"
-          disabled={isSubmitting}
-          onClick={handleBookNow}
-          animate={!isSubmitting ? { scale: [1, 1.04, 1] } : {}}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="px-4 py-2 rounded-lg bg-[#042C89] font-bold md:text-[14px] text-white hover:bg-blue-900 disabled:bg-gray-400 text-[12px]"
-        >
-          {isSubmitting ? "Booking..." : "Book FREE Trial"}
-        </motion.button>
+        {isBooked ? (
+          <>
+            <button
+              type="button"
+              disabled
+              className="px-4 py-2 rounded-lg bg-[#16C784] font-bold md:text-[14px] text-white text-[12px] cursor-not-allowed flex items-center gap-2"
+            >
+              ✓ Booked
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/find-a-class', { replace: true })}
+              className="px-4 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold md:text-[14px] text-[12px] hover:bg-blue-50"
+            >
+              Go to Home
+            </button>
+          </>
+        ) : (
+          <motion.button
+            type="button"
+            disabled={isSubmitting}
+            onClick={handleBookNow}
+            animate={
+              !isSubmitting
+                ? {
+                  scale: [1, 1.04, 1, 1.02, 1],
+                  x: [0, -2, 2, -1, 0],
+                  y: [0, 0, -1, 0, 0],
+                }
+                : {}
+            }
+            transition={{
+              duration: 2.4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              times: [0, 0.25, 0.5, 0.75, 1],
+            }}
+            className="px-4 py-2 rounded-lg bg-[#042C89] font-bold md:text-[14px] text-white hover:bg-blue-900 disabled:bg-gray-400 text-[12px]"
+          >
+            {isSubmitting ? "Booking..." : "Book FREE Trial"}
+          </motion.button>
+        )}
       </div>
 
       {showCancelModal && (
@@ -198,7 +232,7 @@ export default function StepConfirm({
 
             {/* Heading */}
             <h2 className="md:text-[32px] text-[24px] font-bold -tracking-[0px] text-[#16C784] mb-2">
-              Congratulations {parents.length > 0 ? parents[0]?.parentFirstName + " " + parents[0]?.parentLastName : ""}!
+              Congratulations {parents.length > 0 ? parents[0]?.parentFirstName : ""}!
             </h2>
 
             {/* Subtext */}
@@ -219,7 +253,7 @@ export default function StepConfirm({
                 onClick={() => {
                   setShowSuccessModal(false);
                   onCancel();
-                  navigate('/find-a-class');
+                  navigate('/find-a-class', { replace: true });
                 }}
                 className="md:px-4 px-2 py-2 rounded-lg border border-[#042C89] text-[#042C89] font-semibold text-[14px]"
               >
@@ -234,6 +268,8 @@ export default function StepConfirm({
                     "_blank",
                     "noopener,noreferrer"
                   )
+                  onCancel();
+                  navigate('/', { replace: true });
                 }}
                 className="md:px-4 px-2 py-2 rounded-lg bg-[#00A6E3] text-white font-semibold text-[14px]"
               >

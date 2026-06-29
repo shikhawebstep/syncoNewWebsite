@@ -200,7 +200,7 @@ export default function StepConfirm({
 
             {/* Heading */}
             <h2 className="md:text-[32px] text-[24px] font-bold -tracking-[0px] text-[#16C784] mb-2">
-              Congratulations {parents.length > 0 ? parents[0]?.parentFirstName + " " + parents[0]?.parentLastName : ""}!
+              Congratulations {parents.length > 0 ? parents[0]?.parentFirstName : ""}!
             </h2>
 
             {/* Subtext */}
