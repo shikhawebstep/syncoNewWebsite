@@ -181,7 +181,7 @@ function VenueCard({ venue, onShowMap }) {
           <div className="flex items-start gap-2 text-white min-w-0">
             <img src="/assets/location-02.png" alt="location" className="flex-shrink-0 w-6" />
             <span className="font-medium md:text-[16px] text-[14px] leading-snug">
-              {venue.venueName}, {venue.address}
+              {venue.address}
             </span>
           </div>
 

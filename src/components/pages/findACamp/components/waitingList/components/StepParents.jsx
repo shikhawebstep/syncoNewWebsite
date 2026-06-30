@@ -481,10 +481,6 @@ const StepParents = ({ parents, setParents, onNext, onBack }) => {
                 <span className="text-red-500 text-[12px] mt-1 block">
                   {errors[`${parent.id}-parentEmail`]}
                 </span>
-              ) : emailMessages[parent.id] ? (
-                <span className="text-green-500 text-[15px] mt-1 block">
-                  {emailMessages[parent.id]}
-                </span>
               ) : null}
             </div>
 
