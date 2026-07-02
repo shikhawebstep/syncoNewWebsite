@@ -24,7 +24,7 @@ const CheckoutStep = ({ classDetails }) => {
 
   const {
     step, setStep, childrenCount, trialDate, selectedPlan,
-    students, parents, emergency, paymentDetails, discount
+    students, parents, emergency, paymentDetails, discount, selectedAddressData, setSelectedAddressData
   } = useContext(BookingContext);
 
   const [loading, setLoading] = useState(false);
@@ -124,7 +124,7 @@ const CheckoutStep = ({ classDetails }) => {
   // ✅ Starter pack: joiningFee + deliveryFee + proRataAmount
   // ✅ Regular: joiningFee + proRataAmount
   const initialPayment = isStarterPack
-    ? joiningFeeAfterDiscount +deliveryFee 
+    ? joiningFeeAfterDiscount + deliveryFee
     : joiningFeeAfterDiscount + proRataAmount;
 
   const firstPaymentDate = "1st of next month";
@@ -232,6 +232,11 @@ const CheckoutStep = ({ classDetails }) => {
   const handleCompleteBooking = async () => {
     if (!validateAll()) return;
     setLoading(true);
+
+    const deliveryLine1 = selectedAddressData?.line1  || "NA";
+    const buildingNumber = selectedAddressData?.buildingNumber|| "NA";
+    const deliveryCity = selectedAddressData?.city || "NA";
+    const deliveryPostcode = selectedAddressData?.postcode || "NA";
     try {
       const payload = {
         venueId: classDetails?.venue?.id,
@@ -243,6 +248,7 @@ const CheckoutStep = ({ classDetails }) => {
           dateOfBirth: formatDateSafe(s.dob),
           age: parseInt(s.age) || 0,
           gender: s.gender,
+          size: s.size,
           medicalInformation: s.medical || "None",
           classScheduleId: s.classScheduleId || classDetails?.id,
         })),
@@ -269,7 +275,13 @@ const CheckoutStep = ({ classDetails }) => {
         starterPack: joiningFee,
         paymentPlanId: plan.id,
         discountId: discount?.id || null,
-        size: parents[0]?.starterPackSize || "",
+         starterPackDeliveryAddress: isStarterPack? {
+                    line1: deliveryLine1,
+                    city: deliveryCity,
+                    buildingNumber: buildingNumber,
+                    postcode: deliveryPostcode,
+                }
+                : null,
         payment: {
           paymentType: "bank",
           firstName: nameOnCard.split(" ")[0] || "",
@@ -522,9 +534,8 @@ const CheckoutStep = ({ classDetails }) => {
             <button
               disabled={!isFormValid || loading}
               onClick={handleCompleteBooking}
-              className={`mt-6 px-6 py-2 rounded-[6px] bg-blue-900 text-white font-semibold ${
-                !isFormValid || loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"
-              }`}
+              className={`mt-6 px-6 py-2 rounded-[6px] bg-blue-900 text-white font-semibold ${!isFormValid || loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"
+                }`}
               type="button"
             >
               {loading ? "Processing..." : "Complete Booking"}

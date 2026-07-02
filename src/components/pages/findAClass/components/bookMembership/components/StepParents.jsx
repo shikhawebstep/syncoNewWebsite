@@ -7,8 +7,7 @@ import "react-phone-input-2/lib/style.css";
 
 const onlyLetters = (v) => v.replace(/[^a-zA-Z\s]/g, "");
 const onlyNumbers = (v, max = 12) => v.replace(/\D/g, "").slice(0, max);
-const emailSanitizer = (v) => v.replace(/[^a-zA-Z0-9._%+-@]/g, "");
-
+const emailSanitizer = (v) => v.replace(/[^a-zA-Z0-9._%+\-@]/g, "");
 const relationOptions = [
   { value: "father", label: "Father" },
   { value: "mother", label: "Mother" },
@@ -43,15 +42,9 @@ const emptyParent = () => ({
   howDidHear: "",
   interestReason: "",
   interestReasonOther: "",
-  starterPackSize: "",
 });
 
-const kitSizeOptions = [
-  { value: "Small", label: "Small" },
-  { value: "Medium", label: "Medium" },
-  { value: "Large", label: "Large" },
-  { value: "XL", label: "Extra Large" }
-];
+
 
 const inputClass = (hasError = false) =>
   `w-full mt-1 mainShadow bg-white text-[#494949] font-normal placeholder:text-[#494949] placeholder:font-normal rounded-[6px] px-4 py-3 outline-none${hasError ? " border border-red-500" : ""}`;
@@ -67,10 +60,8 @@ const StepParents = ({ classDetails }) => {
   const [accountError, setAccountError] = useState("");
   const [forcedLogin, setForcedLogin] = useState(false);
   const [openInterestDropdowns, setOpenInterestDropdowns] = useState({});
-  const [isSizeChartOpen, setIsSizeChartOpen] = useState(false); // ✅ Size chart modal state
   const [showAccountPassword, setShowAccountPassword] = useState(false);
   const [showAccountConfirmPassword, setShowAccountConfirmPassword] = useState(false);
-  const isStarterPack = classDetails?.venue?.starterPack === true;
 
   const checkEmail = (parentId, email) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -153,9 +144,6 @@ useEffect(() => {
       case "phoneNumber": return value.trim() ? "" : "Phone number is required";
       case "relationChild": return value ? "" : "Relation is required";
       case "interestReason": return value ? "" : "Interest reason is required";
-      case "starterPackSize":
-        if (isStarterPack && !value) return "Starter pack kit size is required";
-        return "";
       default: return "";
     }
   };
@@ -207,26 +195,19 @@ useEffect(() => {
     });
   };
 
-  const validateParents = () => {
-    const newErrors = {};
-    let valid = true;
-    const parent = parents[0];
-    if (!parent) return false;
-
-    const fields = ["parentFirstName", "parentLastName", "parentEmail", "phoneNumber", "relationChild", "interestReason"];
-    if (isStarterPack) fields.push("starterPackSize");
-
+ const validateParents = () => {
+  const newErrors = {};
+  let valid = true;
+  const fields = ["parentFirstName","parentLastName","parentEmail","phoneNumber","relationChild","interestReason"];
+  parents.forEach((parent) => {
     fields.forEach((field) => {
       const msg = validateField(field, parent[field] || "");
-      if (msg) {
-        newErrors[`${parent.id}-${field}`] = msg;
-        valid = false;
-      }
+      if (msg) { newErrors[`${parent.id}-${field}`] = msg; valid = false; }
     });
-
-    setErrors(newErrors);
-    return valid;
-  };
+  });
+  setErrors(newErrors);
+  return valid;
+};
 
   const isParentValid = () => {
     const parent = parents[0];
@@ -242,7 +223,6 @@ useEffect(() => {
       parent.interestReason &&
       relevantKeys.length === 0;
 
-    if (isStarterPack) return baseValid && parent.starterPackSize;
     return baseValid;
   };
 
@@ -599,39 +579,7 @@ useEffect(() => {
           </div>
 
           {/* ✅ Starter Pack Size with Size Chart button */}
-          {isStarterPack && index === 0 && (
-            <div className="md:flex gap-4">
-              <div className="w-full mb-5 md:mb-0">
-                {/* Label row with Size Chart button */}
-                <div className="flex justify-between items-center mb-1">
-                  <label className="block text-[14px] text-[#282829] font-medium">
-                    Starter Pack Kit Size<span className="text-red-500 ml-0.5">*</span>
-                  </label>
-                  {/* ✅ Size Chart button */}
-                  <button
-                    type="button"
-                    onClick={() => setIsSizeChartOpen(true)}
-                    className="text-[13px] text-[#237FEA] font-semibold underline underline-offset-2 hover:text-blue-700 transition-colors"
-                  >
-                    Size Chart
-                  </button>
-                </div>
-                <select
-                  className={inputClass(!!errors[`${parent.id}-starterPackSize`])}
-                  value={parent.starterPackSize}
-                  onChange={(e) => handleParentChange(index, "starterPackSize", e.target.value)}
-                  onBlur={() => handleParentBlur(index, "starterPackSize")}                >
-                  <option value="">Select size</option>
-                  {kitSizeOptions.map((o) => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
-                  ))}
-                </select>
-                {errors[`${parent.id}-starterPackSize`] && (
-                  <span className="text-red-500 text-[12px] mt-1 block">{errors[`${parent.id}-starterPackSize`]}</span>
-                )}
-              </div>
-            </div>
-          )}
+       
 
           {/* Interest Reason */}
           <div className="grid gap-4">
@@ -717,99 +665,7 @@ useEffect(() => {
         </button>
       </div>
 
-      {/* ✅ Size Chart Modal */}
-      <AnimatePresence>
-        {isSizeChartOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 overflow-y-auto"
-            onClick={() => setIsSizeChartOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              transition={{ type: "spring", duration: 0.4 }}
-              className="bg-white rounded-3xl w-full max-w-5xl shadow-2xl relative flex flex-col max-h-[90vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="flex justify-between items-center px-8 py-5 border-b border-gray-100">
-                <div>
-                  <span className="text-[12px] uppercase tracking-wider text-[#237FEA] font-bold">Size guides</span>
-                  <h2 className="text-[22px] font-bold text-gray-900 leading-tight">Kids Size Chart</h2>
-                </div>
-                <button
-                  onClick={() => setIsSizeChartOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors focus:outline-none"
-                >
-                  <X className="w-6 h-6 text-gray-400 hover:text-gray-600" />
-                </button>
-              </div>
-
-              {/* Modal Body */}
-              <div className="p-8 space-y-6 overflow-y-auto">
-                <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-                  <table className="w-full text-center border-collapse text-sm">
-                    <thead>
-                      <tr className="bg-gray-900 text-white text-[13px] font-semibold tracking-wider uppercase">
-                        <th rowSpan="2" className="py-3 px-4 border-r border-gray-800 align-middle">Size</th>
-                        <th rowSpan="2" className="py-3 px-4 border-r border-gray-800 align-middle">Age</th>
-                        <th colSpan="2" className="py-2 px-4 border-r border-gray-800">Height</th>
-                        <th colSpan="2" className="py-2 px-4 border-r border-gray-800">Chest</th>
-                        <th colSpan="2" className="py-2 px-4">Waist</th>
-                      </tr>
-                      <tr className="bg-gray-800 text-gray-200 text-[11px] font-semibold uppercase">
-                        <th className="py-2 px-4 border-r border-gray-700">cm</th>
-                        <th className="py-2 px-4 border-r border-gray-700">in</th>
-                        <th className="py-2 px-4 border-r border-gray-700">cm</th>
-                        <th className="py-2 px-4 border-r border-gray-700">in</th>
-                        <th className="py-2 px-4 border-r border-gray-700">cm</th>
-                        <th className="py-2 px-4">in</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 text-gray-700">
-                      {[
-                        { size: "Small", age: "4-5", height: { cm: "107", in: "42" }, chest: { cm: "68", in: "26" }, waist: { cm: "46", in: "18" } },
-                        { size: "Medium", age: "6-7", height: { cm: "119", in: "46" }, chest: { cm: "74", in: "29" }, waist: { cm: "50", in: "20" } },
-                        { size: "Large", age: "8-9", height: { cm: "131", in: "51" }, chest: { cm: "84", in: "33" }, waist: { cm: "54", in: "21" } },
-                        { size: "Extra Large", age: "10-12", height: { cm: "143", in: "56" }, chest: { cm: "89", in: "34" }, waist: { cm: "58", in: "23" } },
-                        { size: "XXL", age: "13-14", height: { cm: "152", in: "60" }, chest: { cm: "98", in: "38" }, waist: { cm: "68", in: "26" } },
-                      ].map((row, idx) => (
-                        <tr key={idx} className="hover:bg-gray-50/70 transition-colors odd:bg-white even:bg-gray-50/30">
-                          <td className="py-3.5 px-4 font-semibold text-gray-900 border-r border-gray-100">{row.size}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.age}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.height.cm}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.height.in}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.chest.cm}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.chest.in}</td>
-                          <td className="py-3.5 px-4 border-r border-gray-100">{row.waist.cm}</td>
-                          <td className="py-3.5 px-4">{row.waist.in}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="border-l-4 border-[#237FEA] pl-4 py-1">
-                  <span className="text-[16px] font-bold text-gray-900">How to measure?</span>
-                  <p className="text-sm text-gray-600 mt-1">To choose the correct size, measure your child's body as follows:</p>
-                </div>
-
-                <div className="flex justify-center items-center py-6 bg-[#fcfcfc] rounded-2xl border border-gray-100 shadow-inner">
-                  <img
-                    src="/assets/Kids-Size-Guide.png"
-                    alt="Kids Measuring Guide"
-                    className="max-h-[380px] w-auto object-contain rounded-xl hover:scale-[1.01] transition-transform duration-300"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+   
     </div>
   );
 };

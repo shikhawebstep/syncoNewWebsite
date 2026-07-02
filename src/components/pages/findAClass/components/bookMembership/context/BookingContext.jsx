@@ -6,6 +6,7 @@ export const BookingContext = createContext();
 
 export function BookingProvider({ children }) {
     const [step, setStep] = useState(0);
+    const [selectedAddressData, setSelectedAddressData] = useState(null); // ← FIX 1: added missing state
 
     // Shared states
     const [trialDate, setTrialDate] = useState(null);
@@ -108,7 +109,7 @@ export function BookingProvider({ children }) {
                 paymentDetails,
                 setPaymentDetails,
                 discount,
-                setDiscount
+                setDiscount,selectedAddressData, setSelectedAddressData
             }}
         >
             {children}

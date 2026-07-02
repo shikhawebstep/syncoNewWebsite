@@ -1,6 +1,26 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
+import { Truck, AlertTriangle, MapPin, Check } from "lucide-react";
+import Select from "react-select";
 import { BookingContext } from "../context/BookingContext";
 import { useToast, Toast } from "../../../../Common/Toast";
+import { getAddressesByPostcode } from "../../../../Common/getAddressesByPostcode";
+
+// simple react-select style helper (replace with your design tokens if you have shared one)
+const rsStyles = (hasError = false) => ({
+  control: (base, state) => ({
+    ...base,
+    borderRadius: 10,
+    borderColor: hasError ? "#e53e3e" : state.isFocused ? "#3b7df6" : "#e7ebf1",
+    boxShadow: "none",
+    minHeight: 46,
+    "&:hover": { borderColor: "#3b7df6" },
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? "#3b7df6" : state.isFocused ? "#eff6ff" : "white",
+    color: state.isSelected ? "white" : "#282829",
+  }),
+});
 
 const PaymentStep = ({ classDetails }) => {
   const {
@@ -12,7 +32,7 @@ const PaymentStep = ({ classDetails }) => {
     paymentDetails,
     setPaymentDetails,
     discount,
-    setDiscount
+    setDiscount,selectedAddressData, setSelectedAddressData
   } = useContext(BookingContext);
 
   const { accountHolder, sortCode, accountNumber } = paymentDetails;
@@ -22,6 +42,17 @@ const PaymentStep = ({ classDetails }) => {
   const [discountCode, setDiscountCode] = useState(discount?.code || "");
   const [applyingDiscount, setApplyingDiscount] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
+  const [addressList, setAddressList] = useState([]);
+  const [showAddrSelect, setShowAddrSelect] = useState(false);
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [addressError, setAddressError] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  // ✅ FIX: build options from addressList instead of undefined addressOptions
+  const addressOptions = (addressList || [])
+        .filter((a) => a && a.address)
+        .map((a) => ({ value: a.address, label: a.address, all: a }));
 
   const setAccountHolder = (val) => setPaymentDetails(prev => ({ ...prev, accountHolder: val }));
   const setSortCode = (val) => setPaymentDetails(prev => ({ ...prev, sortCode: val }));
@@ -50,11 +81,7 @@ const PaymentStep = ({ classDetails }) => {
   const isStarterPack = classDetails?.venue?.starterPack === true;
   const starterPackItem = classDetails?.starterPack?.[0];
 
-  console.log('discount', discount);
-
   const starterPackPrice = starterPackItem?.price || 0;
-
-  // ✅ Delivery fee: £3.99 only when isStarterPack is true
   const deliveryFee = isStarterPack ? 3.99 : 0;
 
   const joiningFee = isStarterPack
@@ -65,7 +92,10 @@ const PaymentStep = ({ classDetails }) => {
     ? `£${joiningFee.toFixed(2)}`
     : (plan.joiningFee || `£${joiningFee.toFixed(2)}`);
 
-  const discountAmount = discount?.amount || 0;
+  // ✅ FIX: track "is a discount actually applied" instead of amount > 0
+  const isDiscountApplied = !!discount?.code;
+  const discountAmount = discount?.amount ?? 0;
+  const joiningFeeAfterDiscount = isDiscountApplied ? discountAmount : joiningFee;
 
   const allTermGroups = classDetails?.venue?.termGroups || [];
   const sessionDates = new Set();
@@ -87,9 +117,6 @@ const PaymentStep = ({ classDetails }) => {
     const d = String(date.getDate()).padStart(2, "0");
     return `${y}-${m}-${d}`;
   };
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
 
   const selectedDateStr = formatDate(trialDate);
 
@@ -113,9 +140,10 @@ const PaymentStep = ({ classDetails }) => {
     : null;
   const nextMonthStr = formatDate(nextMonthFirst);
 
-  const proRataLessonsCountRaw = Array.from(sessionDates)
-    .filter(d => d >= selectedDateStr && d < nextMonthStr)
-    .length;
+  // ✅ FIX: guard against null selectedDateStr / nextMonthStr
+  const proRataLessonsCountRaw = selectedDateStr && nextMonthStr
+    ? Array.from(sessionDates).filter(d => d >= selectedDateStr && d < nextMonthStr).length
+    : 0;
 
   const totalAvailableSessions = monthSessionDates.length;
   const isFirstSessionSelected =
@@ -131,13 +159,10 @@ const PaymentStep = ({ classDetails }) => {
   );
   const proRataAmount = proRataLessonsCount * perSessionPrice;
 
-  const joiningFeeAfterDiscount = discountAmount > 0 ? discountAmount : joiningFee;
+  const initialPayment = isStarterPack
+    ? joiningFeeAfterDiscount + deliveryFee
+    : joiningFeeAfterDiscount + proRataAmount;
 
-  // ✅ Include deliveryFee in total — only adds when isStarterPack is true
-const initialPayment = isStarterPack
-  ? joiningFeeAfterDiscount + deliveryFee
-  : joiningFeeAfterDiscount + proRataAmount;
-  
   const startDate = trialDate
     ? trialDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
     : "TBD";
@@ -160,10 +185,10 @@ const initialPayment = isStarterPack
       const data = result?.data;
 
       if (response.ok) {
-        const amountOff = parseFloat(data.finalPrice) || 0;
+        const finalPrice = parseFloat(data.finalPrice);
         setDiscount({
           code: discountCode,
-          amount: amountOff,
+          amount: isNaN(finalPrice) ? 0 : finalPrice,
           id: data.discountId
         });
         addToast("Discount applied successfully! 🎉", "success");
@@ -186,7 +211,6 @@ const initialPayment = isStarterPack
       <div className="bg-[#F1F4FC] p-6 rounded-xl md:w-[365px] text-sm text-gray-800">
         <p className="text-[20px] text-[#042C89] font-bold mb-4">Summary</p>
 
-        {/* Plan details */}
         <div className="mb-4 grid gap-3">
           <p>
             <span className="font-semibold text-[#042C89] text-[16px]">{planTitle}</span>
@@ -209,19 +233,17 @@ const initialPayment = isStarterPack
 
         <hr className="my-4 border-gray-300" />
 
-        {/* Starter Pack / Joining Fee */}
         <div className="mb-4 grid gap-3">
           <p>
             <span className="font-semibold text-[#042C89] text-[16px]">
               {classDetails?.venue?.name || "Venue"}
             </span>
             <span className="float-right">
-              {discountAmount > 0 ? `£${discountAmount.toFixed(2)}` : joiningFeeStr}
+              {isDiscountApplied ? `£${discountAmount.toFixed(2)}` : joiningFeeStr}
             </span>
           </p>
           <p>{isStarterPack ? starterPackItem?.title || "Starter Pack Price" : "Joining Fee"}</p>
 
-          {/* ✅ Delivery Fee row — only shown when isStarterPack is true */}
           {isStarterPack && (
             <p>
               <span className="text-[14px] font-medium text-[#34353B]">Delivery Fee</span>
@@ -232,7 +254,6 @@ const initialPayment = isStarterPack
 
         <hr className="my-4 border-gray-300" />
 
-        {/* Pro-rata */}
         <div className="mb-4 grid gap-2">
           <p>
             <span className="font-semibold text-[#042C89] text-[16px]">Pro-rata lessons</span>
@@ -248,7 +269,6 @@ const initialPayment = isStarterPack
 
         <hr className="my-4 border-gray-300" />
 
-        {/* ✅ Total — includes deliveryFee only when isStarterPack */}
         <p className="font-bold text-lg font-semibold text-[#042C89] text-[16px]">
           Total to pay now{" "}
           <span className="float-right text-[22px] font-bold">
@@ -291,9 +311,7 @@ const initialPayment = isStarterPack
               maxLength={6}
               value={sortCode}
               onChange={(e) => setSortCode(e.target.value)}
-              className={`input w-full mt-1 mainShadow bg-white placeholder:text-[#494949] placeholder:font-medium rounded-[6px] px-4 py-2 ${
-                !isSortCodeValid && sortCode ? "border-red-500" : ""
-              }`}
+              className={`input w-full mt-1 mainShadow bg-white placeholder:text-[#494949] placeholder:font-medium rounded-[6px] px-4 py-2 ${!isSortCodeValid && sortCode ? "border-red-500" : ""}`}
             />
             <span className="text-[11px] text-[#797A88]">Must be 6 digits long</span>
           </label>
@@ -306,15 +324,96 @@ const initialPayment = isStarterPack
               maxLength={8}
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
-              className={`input w-full mt-1 mainShadow bg-white placeholder:text-[#494949] placeholder:font-medium rounded-[6px] px-4 py-2 ${
-                !isAccountNumberValid && accountNumber ? "border-red-500" : ""
-              }`}
+              className={`input w-full mt-1 mainShadow bg-white placeholder:text-[#494949] placeholder:font-medium rounded-[6px] px-4 py-2 ${!isAccountNumberValid && accountNumber ? "border-red-500" : ""}`}
             />
             <span className="text-[11px] text-[#797A88]">Must be 8 digits long</span>
           </label>
         </div>
 
-        {/* Discount Section */}
+        {isStarterPack && (
+          <div className="border border-[#e7ebf1] rounded-[14px] p-4 mt-1 mb-5">
+            <div className="font-bold text-[14px] mb-3 flex flex-wrap items-center gap-2">
+              <Truck size={16} /> Delivery address <span className="font-medium text-[#6b7685] text-[14px]">— where should we send the starter pack?</span>
+            </div>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3">
+              <div className="flex-1">
+                <label className="block text-[14px] font-semibold mb-1.5">Postcode</label>
+                <input
+                  className="w-full font-inherit text-[14px] border border-[#e7ebf1] rounded-[10px] px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-[#3b7df6]"
+                  value={postcode}
+                  onChange={(e) => {
+                    setPostcode(e.target.value);
+                    setAddressError("");
+                    setAddressList([]);
+                    setSelectedAddress("");
+                    setSelectedAddressData(null);
+                  }}
+                  placeholder="e.g. OX25 4JT"
+                />
+              </div>
+              <button
+                className="bg-[#3b7df6] text-white rounded-[12px] px-5 py-[11px] font-semibold text-[14px] whitespace-nowrap border border-[#3b7df6] disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto flex items-center justify-center"
+                disabled={!postcode || addressLoading}
+                onClick={async () => {
+                  setAddressLoading(true);
+                  setAddressError("");
+                  try {
+                    const result = await getAddressesByPostcode(postcode);
+                    if (result?.success) {
+                      setAddressList(result.addresses || []);
+                      setShowAddrSelect(true);
+                    } else {
+                      setAddressError(result?.message || "Could not find addresses for this postcode.");
+                      setShowAddrSelect(false);
+                    }
+                  } catch (err) {
+                    setAddressError(err?.message || "Could not find addresses for this postcode.");
+                    setShowAddrSelect(false);
+                  } finally {
+                    setAddressLoading(false);
+                  }
+                }}
+              >
+                {addressLoading ? "Searching..." : "Find address"}
+              </button>
+            </div>
+            {addressError && (
+              <div className="mt-3 text-[14px] text-[#e53e3e] bg-[#fff5f5] border border-[#feb2b2] rounded-lg px-3.5 py-2.5 flex items-start gap-2">
+                <AlertTriangle size={16} className="shrink-0 mt-0.5" />
+                <span>{addressError}</span>
+              </div>
+            )}
+            {showAddrSelect && addressOptions.length > 0 && (
+              <div className="mt-3">
+                <label className="block text-[14px] font-semibold mb-1.5">Select your address</label>
+                <Select
+                  styles={rsStyles(false)}
+                  options={addressOptions}
+                  value={addressOptions.find((o) => o.value === selectedAddress) || null}
+                  placeholder="Select from the list"
+                  onChange={(opt) => {
+                    setSelectedAddress(opt?.value || "");
+                    setSelectedAddressData(opt?.all || null);
+                  }}
+                />
+                {selectedAddress && (
+                  <div className="mt-3 text-[10.5px] text-[#0e7a4d] font-semibold bg-[#e7f8f0] rounded-lg px-3.5 py-2.5 flex items-center gap-2">
+                    <Check size={14} />
+                    Starter pack will ship here.
+                    <span className="text-[#3b7df6] cursor-pointer underline ml-1.5" onClick={() => { setSelectedAddress(""); setSelectedAddressData(null); }}>Change</span>
+                  </div>
+                )}
+              </div>
+            )}
+            {showAddrSelect && addressOptions.length === 0 && !addressLoading && (
+              <div className="mt-3 text-[14px] text-[#8a6d00] bg-[#fffcf0] border border-[#ffd21f] rounded-lg px-3.5 py-2.5 flex items-center gap-2">
+                <MapPin size={16} />
+                No addresses found for this postcode. Try a different one.
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="mb-6">
           <label className="block text-gray-700 font-regular text-[14px] mb-1">
             Discount Code
@@ -376,9 +475,7 @@ const initialPayment = isStarterPack
           <button
             onClick={() => setStep(step + 1)}
             disabled={!canSubmit}
-            className={`bg-[#042C89] text-white rounded-[6px] px-4 py-2 font-semibold ${
-              !canSubmit ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"
-            }`}
+            className={`bg-[#042C89] text-white rounded-[6px] px-4 py-2 font-semibold ${!canSubmit ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-800"}`}
             type="button"
           >
             Save and continue
