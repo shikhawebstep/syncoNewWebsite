@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useToast, Toast } from "./Toast";
 import Select from "react-select";
 
@@ -32,6 +32,8 @@ const validateStep2 = (data) => {
     errors.ageGroups = "Please select at least one age group.";
   return errors;
 };
+
+
 
 const validateStep3 = (data) => {
   const errors = {};
@@ -97,8 +99,9 @@ const ApplicationForm = () => {
         const list = result?.data ?? result?.venues ?? result?.classes ?? [];
         const normalised = Array.isArray(list)
           ? list.map((item) => ({
-            id: item.id ?? item._id ?? item.venueId ?? item.classId,
-            label: item.name ?? item.title ?? item.venueName ?? String(item),
+            id: item.venueId ?? item.id ?? item._id,
+            label: item.venueName ?? item.name ?? String(item),
+            postcode: item.postal_code ?? "",
           }))
           : [];
         setVenueOptions(normalised);
@@ -109,7 +112,13 @@ const ApplicationForm = () => {
       })
       .finally(() => setVenuesLoading(false));
   }, []); // empty deps — stable forever
-
+  // "RM11 3SW" -> "RM11"
+  const getOutwardCode = (postcode) => {
+    if (!postcode) return "";
+    const cleaned = postcode.trim().toUpperCase().replace(/\s+/g, "");
+    const match = cleaned.match(/^[A-Z]{1,2}\d[A-Z\d]?/);
+    return match ? match[0] : "";
+  };
   // Fetch once on mount
   useEffect(() => {
     getVenues();
@@ -137,6 +146,21 @@ const ApplicationForm = () => {
     }));
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
+
+  const userOutward = useMemo(
+    () => getOutwardCode(formData.postcode),
+    [formData.postcode]
+  );
+
+  const filteredVenueOptions = useMemo(() => {
+    if (!userOutward) return venueOptions;
+    return venueOptions.filter(
+      (v) => getOutwardCode(v.postcode) === userOutward
+    );
+  }, [venueOptions, userOutward]);
+
+  console.log('venueOptions',venueOptions);
+  console.log('filteredVenueOptions',filteredVenueOptions);
 
   const goToStep = (targetStep) => {
     if (targetStep > step) {
@@ -430,8 +454,8 @@ const ApplicationForm = () => {
                 isMulti
                 isLoading={venuesLoading}
                 isDisabled={isSubmitting || venuesLoading}
-                options={venueOptions.map((v) => ({ value: v.id, label: v.label }))}
-                value={venueOptions
+                options={filteredVenueOptions.map((v) => ({ value: v.id, label: v.label }))}
+                value={filteredVenueOptions
                   .filter((v) => formData.venues.includes(v.id))
                   .map((v) => ({ value: v.id, label: v.label }))}
                 onChange={(selected) => {
@@ -444,7 +468,11 @@ const ApplicationForm = () => {
                 }}
                 placeholder={venuesLoading ? "Loading venues…" : "Select venues"}
                 noOptionsMessage={() =>
-                  venuesLoading ? "Loading…" : "No venues available"
+                  venuesLoading
+                    ? "Loading…"
+                    : userOutward
+                      ? `No venues found near ${userOutward}`
+                      : "No venues available"
                 }
                 className="w-full"
                 classNamePrefix="react-select"
