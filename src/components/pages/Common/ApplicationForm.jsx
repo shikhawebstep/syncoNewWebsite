@@ -159,8 +159,7 @@ const ApplicationForm = () => {
     );
   }, [venueOptions, userOutward]);
 
-  console.log('venueOptions',venueOptions);
-  console.log('filteredVenueOptions',filteredVenueOptions);
+  
 
   const goToStep = (targetStep) => {
     if (targetStep > step) {
