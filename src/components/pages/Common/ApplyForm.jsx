@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 
 import { useToast, Toast } from "./Toast";
 
@@ -15,6 +15,7 @@ const validateStep = (step, data) => {
         if (!data.email.trim()) errs.email = "Email is required.";
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim()))
             errs.email = "Enter a valid email address.";
+        if (!data.gender) errs.gender = "Gender is required.";
         if (!data.age) {
             errs.age = "Age is required.";
         } else if (isNaN(data.age) || Number(data.age) <= 0) {
@@ -51,6 +52,7 @@ const ApplyForm = () => {
         surname: "",
         phone: "+44",
         email: "",
+        gender: "",
         age: "",
         postcode: "",
         qualification: "",
@@ -67,6 +69,23 @@ const ApplyForm = () => {
     const addToastRef = useRef(addToast);
     useEffect(() => { addToastRef.current = addToast; }, [addToast]);
 
+    const extractCreatedBy = (item) => {
+        const cb = item.createdBy ?? item.created_by;
+        if (cb === undefined || cb === null) return null;
+        if (typeof cb === "object") return String(cb.id ?? cb._id ?? cb.userId ?? "");
+        return String(cb);
+    };
+
+    const extractPostcode = (item) => {
+        const pc = item.postal_code ?? item.postcode ?? item.postalCode;
+        if (pc) return pc;
+        if (item.address) {
+            const match = item.address.match(/[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}/i);
+            if (match) return match[0];
+        }
+        return "";
+    };
+
     const getVenues = useCallback(() => {
         setVenuesLoading(true);
         fetch("https://api.grabbite.com/api/open/find-class", {
@@ -79,6 +98,9 @@ const ApplyForm = () => {
                 const normalised = list.map((item) => ({
                     label: item.name ?? item.title ?? item.venueName ?? String(item),
                     value: item.venueId ?? item._id ?? item.name ?? String(item),
+                    postcode: extractPostcode(item),
+                    address: item.address ?? "",
+                    createdBy: extractCreatedBy(item),
                 }));
                 setVenueOptions(normalised);
             })
@@ -87,12 +109,57 @@ const ApplyForm = () => {
                 addToastRef.current("Failed to load venues. Please refresh.", "error");
             })
             .finally(() => setVenuesLoading(false));
-    }, []); // stable — empty deps, addToast accessed via ref
+    }, []);
 
-    // Fetch venues once on mount only
+    const getOutwardCode = (postcode) => {
+        if (!postcode) return "";
+        const cleaned = postcode.trim().toUpperCase().replace(/\s+/g, "");
+        const match = cleaned.match(/^[A-Z]{1,2}\d[A-Z\d]?/);
+        return match ? match[0] : "";
+    };
+
     useEffect(() => {
         getVenues();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
+
+    const filteredVenueOptions = useMemo(() => {
+        if (!formData.postcode || !formData.postcode.trim()) return venueOptions;
+
+        const userRaw = formData.postcode.trim().toUpperCase();
+        const userClean = userRaw.replace(/\s+/g, "");
+        const userOutward = getOutwardCode(userRaw);
+
+        const matchingCreatedBys = new Set();
+
+        venueOptions.forEach((v) => {
+            if (!v.createdBy) return;
+            const vPostcodeClean = (v.postcode || "").trim().toUpperCase().replace(/\s+/g, "");
+            const vAddressClean = (v.address || "").trim().toUpperCase().replace(/\s+/g, "");
+
+            const isExactMatch = vPostcodeClean && (vPostcodeClean === userClean || userClean.includes(vPostcodeClean) || vPostcodeClean.includes(userClean));
+            const isAddressMatch = vAddressClean && userClean.length >= 3 && vAddressClean.includes(userClean);
+            const isOutwardMatch = userOutward && getOutwardCode(v.postcode || v.address) === userOutward;
+
+            if (isExactMatch || isAddressMatch || isOutwardMatch) {
+                matchingCreatedBys.add(v.createdBy);
+            }
+        });
+
+        if (matchingCreatedBys.size > 0) {
+            return venueOptions.filter(
+                (v) => v.createdBy && matchingCreatedBys.has(v.createdBy)
+            );
+        }
+
+        if (userOutward) {
+            const outwardFiltered = venueOptions.filter(
+                (v) => getOutwardCode(v.postcode || v.address) === userOutward
+            );
+            if (outwardFiltered.length > 0) return outwardFiltered;
+        }
+
+        return venueOptions;
+    }, [venueOptions, formData.postcode]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -132,6 +199,7 @@ const ApplyForm = () => {
             fd.append("lastName", formData.surname);
             fd.append("email", formData.email);
             fd.append("phoneNumber", formData.phone);
+            fd.append("gender", formData.gender);
             fd.append("age", formData.age); // FIX 4: `age` was collected but never sent.
             fd.append("postcode", formData.postcode);
             fd.append("howDidYouHear", formData.source);
@@ -159,7 +227,7 @@ const ApplyForm = () => {
 
             addToast("Application submitted successfully! 🎉", "success");
             setFormData({
-                firstName: "", surname: "", phone: "", email: "",
+                firstName: "", surname: "", phone: "", email: "", gender: "",
                 age: "", postcode: "", qualification: "", experience: "",
                 venues: [], coverNote: "", source: "",
             });
@@ -216,6 +284,18 @@ const ApplyForm = () => {
                             onChange={handleChange} error={errors.phone} required />
                         <Input label="Email Address" name="email" type="email" value={formData.email}
                             onChange={handleChange} error={errors.email} required />
+                        <SelectInput
+                            label="Gender"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                            error={errors.gender}
+                            required
+                            options={[
+                                { value: "Male", label: "Male" },
+                                { value: "Female", label: "Female" }
+                            ]}
+                        />
                         <Input label="Age" name="age" type="number" value={formData.age}
                             onChange={handleChange} error={errors.age} required />
                         <Input label="London Postcode" name="postcode" value={formData.postcode}
@@ -296,10 +376,10 @@ const ApplyForm = () => {
                                 >
                                     {venuesLoading ? (
                                         <option disabled>Loading venues…</option>
-                                    ) : venueOptions.length === 0 ? (
+                                    ) : filteredVenueOptions.length === 0 ? (
                                         <option disabled>No venues available</option>
                                     ) : (
-                                        venueOptions.map((venue) => (
+                                        filteredVenueOptions.map((venue) => (
                                             <option key={venue.value} value={venue.value}>
                                                 {venue.label}
                                             </option>
@@ -401,6 +481,39 @@ const Input = ({ label, name, type = "text", value, onChange, error, required })
                 ${error
                     ? "bg-red-50 border-red-400 focus:ring-2 focus:ring-red-300"
                     : "bg-[#F6F6F7] border-transparent focus:ring-2 focus:ring-green-400"}`} />
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+    </div>
+);
+
+const SelectInput = ({ label, name, value, onChange, error, required, options }) => (
+    <div>
+        <label className="text-[#101014] poppins text-[16px]">
+            {label} {required && <span className="text-red-500">*</span>}
+        </label>
+        <div className="relative w-full mt-1">
+            <select
+                name={name}
+                value={value}
+                onChange={onChange}
+                className={`w-full appearance-none rounded-lg px-4 py-3 pr-12 outline-none transition border ${
+                    error
+                        ? "bg-red-50 border-red-400 focus:ring-2 focus:ring-red-300"
+                        : "bg-[#F6F6F7] border-transparent focus:ring-2 focus:ring-green-400"
+                } ${value === "" ? "text-[#9CA3AF]" : "text-[#5F5F6D]"}`}
+            >
+                <option value="" disabled>Select {label}</option>
+                {options.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                    </option>
+                ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                <svg className="w-5 h-5 text-[#1c3c87]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
         {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
 );

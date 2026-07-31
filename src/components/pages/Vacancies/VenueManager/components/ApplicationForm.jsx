@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useToast, Toast } from "../../../Common/Toast";
+import Select from "react-select";
 
 // ===== TOAST =====
 
@@ -19,6 +20,7 @@ const validateStep1 = (data) => {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     errors.email = "Enter a valid email address.";
   }
+  if (!data.gender) errors.gender = "Gender is required.";
   if (!data.age.trim()) {
     errors.age = "Age is required.";
   } else if (isNaN(data.age) || Number(data.age) < 16 || Number(data.age) > 80) {
@@ -44,6 +46,8 @@ const validateStep2 = (data) => {
 
 const validateStep3 = (data) => {
   const errors = {};
+  if (!data.venues || data.venues.length === 0)
+    errors.venues = "Please select at least one venue.";
   if (!data.weekendAvailability) errors.weekendAvailability = "Please select an option.";
   if (!data.cv) errors.cv = "Please upload your CV.";
   if (!data.coverNote.trim()) {
@@ -61,6 +65,7 @@ const initialState = {
   surname: "",
   phone: "+44",
   email: "",
+  gender: "",
   age: "",
   postcode: "",
   hasVehicle: "",
@@ -69,6 +74,7 @@ const initialState = {
   coachingExperience: "",
   managementExperience: "",
   ageGroups: [],
+  venues: [],
   cv: null,
   coverNote: "",
   source: "",
@@ -82,6 +88,110 @@ const ApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
   const fileRef = useRef(null);
+
+  // ===== VENUE STATE =====
+  const [venueOptions, setVenueOptions] = useState([]);
+  const [venuesLoading, setVenuesLoading] = useState(false);
+
+  // Stable ref so addToast never causes the fetch to re-run
+  const addToastRef = useRef(addToast);
+  useEffect(() => { addToastRef.current = addToast; }, [addToast]);
+
+  const extractCreatedBy = (item) => {
+    const cb = item.createdBy ?? item.created_by;
+    if (cb === undefined || cb === null) return null;
+    if (typeof cb === "object") return String(cb.id ?? cb._id ?? cb.userId ?? "");
+    return String(cb);
+  };
+
+  const extractPostcode = (item) => {
+    const pc = item.postal_code ?? item.postcode ?? item.postalCode;
+    if (pc) return pc;
+    if (item.address) {
+      const match = item.address.match(/[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}/i);
+      if (match) return match[0];
+    }
+    return "";
+  };
+
+  const getVenues = useCallback(() => {
+    setVenuesLoading(true);
+    fetch("https://api.grabbite.com/api/open/find-class", {
+      method: "GET",
+      redirect: "follow",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const list = result?.data ?? result?.venues ?? result?.classes ?? [];
+        const normalised = Array.isArray(list)
+          ? list.map((item) => ({
+            id: item.venueId ?? item.id ?? item._id,
+            label: item.venueName ?? item.name ?? String(item),
+            postcode: extractPostcode(item),
+            address: item.address ?? "",
+            createdBy: extractCreatedBy(item),
+          }))
+          : [];
+        setVenueOptions(normalised);
+      })
+      .catch((err) => {
+        console.error(err);
+        addToastRef.current("Failed to load venues. Please refresh.", "error");
+      })
+      .finally(() => setVenuesLoading(false));
+  }, []);
+
+  const getOutwardCode = (postcode) => {
+    if (!postcode) return "";
+    const cleaned = postcode.trim().toUpperCase().replace(/\s+/g, "");
+    const match = cleaned.match(/^[A-Z]{1,2}\d[A-Z\d]?/);
+    return match ? match[0] : "";
+  };
+
+  useEffect(() => {
+    getVenues();
+  }, []);
+
+  const filteredVenueOptions = useMemo(() => {
+    if (!formData.postcode || !formData.postcode.trim()) return venueOptions;
+
+    const userRaw = formData.postcode.trim().toUpperCase();
+    const userClean = userRaw.replace(/\s+/g, "");
+    const userOutward = getOutwardCode(userRaw);
+
+    const matchingCreatedBys = new Set();
+
+    venueOptions.forEach((v) => {
+      if (!v.createdBy) return;
+      const vPostcodeClean = (v.postcode || "").trim().toUpperCase().replace(/\s+/g, "");
+      const vAddressClean = (v.address || "").trim().toUpperCase().replace(/\s+/g, "");
+
+      const isExactMatch = vPostcodeClean && (vPostcodeClean === userClean || userClean.includes(vPostcodeClean) || vPostcodeClean.includes(userClean));
+      const isAddressMatch = vAddressClean && userClean.length >= 3 && vAddressClean.includes(userClean);
+      const isOutwardMatch = userOutward && getOutwardCode(v.postcode || v.address) === userOutward;
+
+      if (isExactMatch || isAddressMatch || isOutwardMatch) {
+        matchingCreatedBys.add(v.createdBy);
+      }
+    });
+
+    // If matching createdBy ID(s) found, show ALL venues created by that createdBy
+    if (matchingCreatedBys.size > 0) {
+      return venueOptions.filter(
+        (v) => v.createdBy && matchingCreatedBys.has(v.createdBy)
+      );
+    }
+
+    // Fallback: outward code match or all venues
+    if (userOutward) {
+      const outwardFiltered = venueOptions.filter(
+        (v) => getOutwardCode(v.postcode || v.address) === userOutward
+      );
+      if (outwardFiltered.length > 0) return outwardFiltered;
+    }
+
+    return venueOptions;
+  }, [venueOptions, formData.postcode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,6 +243,7 @@ const ApplicationForm = () => {
       const fd = new FormData();
       fd.append("firstName", formData.firstName.trim());
       fd.append("lastName", formData.surname.trim());
+      fd.append("gender", formData.gender);
       fd.append("age", formData.age.trim());
       fd.append("email", formData.email.trim());
       fd.append("phoneNumber", formData.phone.replace(/\s+/g, ""));
@@ -145,7 +256,7 @@ const ApplicationForm = () => {
       fd.append("uploadCv", formData.cv);
       fd.append("coverNote", formData.coverNote.trim());
       fd.append("ageGroupExperience", formData.ageGroups.join(", "));
-      fd.append("availableVenueWork", JSON.stringify([54]));
+      fd.append("availableVenueWork", JSON.stringify(formData.venues));
       fd.append("fullWeekendAvailablity", formData.weekendAvailability === "Yes" ? "true" : "false");
 
       const response = await fetch(
@@ -215,6 +326,19 @@ const ApplicationForm = () => {
             <ValidatedInput label="Surname" name="surname" value={formData.surname} onChange={handleChange} error={errors.surname} disabled={isSubmitting} required />
             <ValidatedInput label="Telephone Number" name="phone" value={formData.phone} onChange={handleChange} error={errors.phone} disabled={isSubmitting} required />
             <ValidatedInput label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} disabled={isSubmitting} required />
+            <ValidatedSelect
+              label="Gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              error={errors.gender}
+              disabled={isSubmitting}
+              required
+              options={[
+                { value: "Male", label: "Male" },
+                { value: "Female", label: "Female" },
+              ]}
+            />
             <ValidatedInput label="Age" name="age" type="text" value={formData.age} onChange={handleChange} error={errors.age} disabled={isSubmitting} required />
             <ValidatedInput label="London Postcode" name="postcode" value={formData.postcode} onChange={handleChange} error={errors.postcode} disabled={isSubmitting} required />
 
@@ -379,6 +503,67 @@ const ApplicationForm = () => {
               <ErrorMsg name="weekendAvailability" />
             </div>
 
+            {/* Venues — dynamic from API, multi-select */}
+            <div className="mb-2">
+              <p className="label text-[16px] text-[#101014] font-normal mb-3">
+                Please select which venues you are available for work <RequiredStar />
+              </p>
+
+              <Select
+                isMulti
+                isLoading={venuesLoading}
+                isDisabled={isSubmitting || venuesLoading}
+                options={filteredVenueOptions.map((v) => ({ value: v.id, label: v.label }))}
+                value={filteredVenueOptions
+                  .filter((v) => formData.venues.includes(v.id))
+                  .map((v) => ({ value: v.id, label: v.label }))}
+                onChange={(selected) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    venues: selected ? selected.map((item) => item.value) : [],
+                  }));
+                  if (errors.venues)
+                    setErrors((prev) => ({ ...prev, venues: undefined }));
+                }}
+                placeholder={venuesLoading ? "Loading venues…" : "Select venues"}
+                noOptionsMessage={() =>
+                  venuesLoading
+                    ? "Loading…"
+                    : userOutward
+                      ? `No venues found near ${userOutward}`
+                      : "No venues available"
+                }
+                className="w-full"
+                classNamePrefix="react-select"
+                styles={{
+                  control: (base, state) => ({
+                    ...base,
+                    minHeight: "50px",
+                    borderRadius: "0.5rem",
+                    borderWidth: "2px",
+                    borderColor: errors.venues
+                      ? "#f87171"
+                      : state.isFocused
+                        ? "#1c3c87"
+                        : "#E5E7EB",
+                    boxShadow: "none",
+                    "&:hover": { borderColor: "#1c3c87" },
+                    opacity: venuesLoading ? 0.5 : 1,
+                    cursor: venuesLoading ? "not-allowed" : "pointer",
+                  }),
+                  placeholder: (base) => ({ ...base, color: "#9CA3AF" }),
+                  multiValue: (base) => ({ ...base, backgroundColor: "#E8EEFf" }),
+                  multiValueLabel: (base) => ({ ...base, color: "#1c3c87" }),
+                  multiValueRemove: (base) => ({
+                    ...base,
+                    color: "#1c3c87",
+                    ":hover": { backgroundColor: "#1c3c87", color: "#fff" },
+                  }),
+                }}
+              />
+              <ErrorMsg name="venues" />
+            </div>
+
             {/* CV Upload */}
             <div className="w-full">
               <label className="label text-[16px] text-[#101014] font-normal">
@@ -504,6 +689,38 @@ const ValidatedInput = ({ label, name, type = "text", value, onChange, error, di
           : "bg-[#F6F6F7] focus:ring-green-400"
         }`}
     />
+    {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+  </div>
+);
+
+const ValidatedSelect = ({ label, name, value, onChange, error, disabled, required, options }) => (
+  <div>
+    <label className="text-[#101014] poppins text-[16px]">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
+    <div className="relative w-full mt-1">
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        className={`w-full appearance-none rounded-lg border px-4 py-3 pr-12 bg-[#F6F6F7] focus:outline-none focus:ring-2 ${
+          error ? "bg-red-50 border-red-400 focus:ring-red-300" : "border-[#E5E7EB] focus:ring-green-400"
+        } ${value === "" ? "text-[#9CA3AF]" : "text-[#5F5F6D]"}`}
+      >
+        <option value="" disabled>Select {label}</option>
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+      <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+        <svg className="w-5 h-5 text-[#1c3c87]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
     {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
   </div>
 );

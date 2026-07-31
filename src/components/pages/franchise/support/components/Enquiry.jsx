@@ -8,7 +8,7 @@ const Enquiry = () => {
                     <div className='md:w-[430px] text-center md:text-start mb-8 md:mb-0'>
                         <h3 className="text-[18px]  permanent-marker font-normal text-[#00A6E3]">
                             Step 1
-                            <span className='recline block blue-text' >Enquire Today</span>
+                            <span className='recline block blue-text' >Application Form</span>
                         </h3>
                         <p className="md:text22 text-[18px] text-[#797A88] mt-5 mb-5 md:mb-0">
                             Your Samba Soccer Schools franchise journey begins here. Simply fill out the form below, and we’ll be in touch within 48 hours to answer any questions and get you started on your franchise journey.

@@ -1,13 +1,27 @@
 import { useState } from "react";
 import { useToast, Toast } from "./Toast";
 
+const calculateAge = (dob) => {
+  if (!dob) return "";
+  const today = new Date();
+  const birthDate = new Date(dob);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+  return age >= 0 ? age : "";
+};
+
 const initialState = {
   firstName: "",
   lastName: "",
   email: "",
   phoneNumber: "",
+  gender: "",
+  dateOfBirth: "",
+  postcode: "",
   desiredFranchiseLocation: "",
   liquidCapital: "",
+  managementExperience: "",
   heardFrom: "",
   message: "",
 };
@@ -26,16 +40,24 @@ const validate = (fields) => {
   } else if (!/^\+?[\d\s\-().]{7,20}$/.test(fields.phoneNumber)) {
     errors.phoneNumber = "Please enter a valid phone number.";
   }
+  if (!fields.gender.trim()) errors.gender = "Gender is required.";
+  if (!fields.dateOfBirth) {
+    errors.dateOfBirth = "Date of birth is required.";
+  } else {
+    const age = calculateAge(fields.dateOfBirth);
+    if (age === "" || age < 18) errors.dateOfBirth = "You must be at least 18 years old.";
+  }
+  if (!fields.postcode.trim()) errors.postcode = "Postcode is required.";
   if (!fields.desiredFranchiseLocation.trim())
     errors.desiredFranchiseLocation = "Desired location is required.";
   if (!fields.liquidCapital.trim())
     errors.liquidCapital = "Liquid capital is required.";
+  if (!fields.managementExperience.trim())
+    errors.managementExperience = "Management experience is required.";
   if (!fields.heardFrom.trim())
     errors.heardFrom = "Please tell us how you heard about us.";
   return errors;
 };
-
-
 
 const R = () => <span className="text-red-500 ml-0.5">*</span>;
 
@@ -50,6 +72,10 @@ export default function FranchiseForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+    // Clear DOB error when DOB changes
+    if (name === "dob" && errors.dob) {
+      setErrors((prev) => ({ ...prev, dob: undefined }));
     }
   };
 
@@ -70,8 +96,13 @@ export default function FranchiseForm() {
         lastName: form.lastName,
         email: form.email,
         phoneNumber: form.phoneNumber,
+        gender: form.gender,
+        dateOfBirth: form.dateOfBirth || form.dob,
+        age: calculateAge(form.dateOfBirth || form.dob),
+        postcode: form.postcode,
         desiredFranchiseLocation: form.desiredFranchiseLocation,
         liquidCapital: form.liquidCapital,
+        managementExperience: form.managementExperience,
         heardFrom: form.heardFrom,
         message: form.message,
       });
@@ -222,6 +253,97 @@ export default function FranchiseForm() {
             )}
           </div>
 
+          {/* Gender */}
+          <div>
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-[#101014] poppins mb-1"
+            >
+              Gender <R />
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              value={form.gender}
+              onChange={handleChange}
+              className={inputClass("gender")}
+              disabled={loading}
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            {errors.gender && (
+              <p className="mt-1 text-xs text-red-500">{errors.gender}</p>
+            )}
+          </div>
+
+          {/* Date of Birth + Age (side by side) */}
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label
+                htmlFor="dob"
+                className="block text-sm font-medium text-[#101014] poppins mb-1"
+              >
+                Date of Birth <R />
+              </label>
+              <input
+                id="dob"
+                name="dob"
+                type="date"
+                max={new Date().toISOString().split("T")[0]}
+                value={form.dob}
+                onChange={handleChange}
+                className={inputClass("dob")}
+                disabled={loading}
+              />
+              {errors.dob && (
+                <p className="mt-1 text-xs text-red-500">{errors.dob}</p>
+              )}
+            </div>
+
+            <div className="w-[110px]">
+              <label
+                htmlFor="age"
+                className="block text-sm font-medium text-[#101014] poppins mb-1"
+              >
+                Age
+              </label>
+              <input
+                id="age"
+                name="age"
+                type="text"
+                value={form.dob ? calculateAge(form.dob) : ""}
+                readOnly
+                placeholder="Auto"
+                className="w-full px-3 py-2 rounded-md bg-[#EFEFEF] text-gray-500 cursor-not-allowed focus:outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Postcode */}
+          <div>
+            <label
+              htmlFor="postcode"
+              className="block text-sm font-medium text-[#101014] poppins mb-1"
+            >
+              Postcode <R />
+            </label>
+            <input
+              id="postcode"
+              name="postcode"
+              type="text"
+              placeholder="e.g. SW1A 1AA"
+              value={form.postcode}
+              onChange={handleChange}
+              className={inputClass("postcode")}
+              disabled={loading}
+            />
+            {errors.postcode && (
+              <p className="mt-1 text-xs text-red-500">{errors.postcode}</p>
+            )}
+          </div>
+
           {/* Desired Location */}
           <div>
             <label
@@ -267,6 +389,35 @@ export default function FranchiseForm() {
             />
             {errors.liquidCapital && (
               <p className="mt-1 text-xs text-red-500">{errors.liquidCapital}</p>
+            )}
+          </div>
+
+          {/* Management Experience */}
+          <div>
+            <label
+              htmlFor="managementExperience"
+              className="block text-sm font-medium text-[#101014] poppins mb-1"
+            >
+              Management Experience <R />
+            </label>
+            <select
+              id="managementExperience"
+              name="managementExperience"
+              value={form.managementExperience}
+              onChange={handleChange}
+              className={inputClass("managementExperience")}
+              disabled={loading}
+            >
+              <option value="">Select your management experience</option>
+              <option value="No experience">No experience</option>
+              <option value="Less than 1 year">Less than 1 year</option>
+              <option value="1-2 years">1–2 years</option>
+              <option value="3-5 years">3–5 years</option>
+              <option value="5-10 years">5–10 years</option>
+              <option value="10+ years">10+ years</option>
+            </select>
+            {errors.managementExperience && (
+              <p className="mt-1 text-xs text-red-500">{errors.managementExperience}</p>
             )}
           </div>
 
