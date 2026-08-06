@@ -302,6 +302,7 @@ export default function FranchiseForm() {
               )}
             </div>
 
+
             <div className="w-[110px]">
               <label
                 htmlFor="age"
