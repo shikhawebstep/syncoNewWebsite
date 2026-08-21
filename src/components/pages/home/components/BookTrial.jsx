@@ -24,10 +24,10 @@ const BookTrial = () => {
                                     <h4 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[48px] blue-text permanent-marker py-3 md:py-0">
                                         Book a <br className='block md:hidden' /> Free trial
                                     </h4>
-                                    <p className="text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] text-[#797A88] pt-3 md:pt-5">
+                                    <p className="text-[13px] sm:text-[15px] md:text-[16px] leading-loose text-[#797A88] pt-3 md:pt-5">
                                         There are countless football schools around, but we like to think we're a little different. This is football training where flair, confidence, and close ball control take centre stage alongside a samba rhythm.
                                     </p>
-                                    <p className="text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] py-3 md:py-4 text-[#797A88]">
+                                    <p className="text-[13px] sm:text-[15px] md:text-[16px] leading-loose py-3 md:py-4 text-[#797A88]">
                                         Booking a free trial only takes two minutes, and with venues across London, there's probably one right on your doorstep.
                                     </p>
                                     <Link to="/find-a-class">

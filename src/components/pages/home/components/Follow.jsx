@@ -3,12 +3,12 @@ import { FaInstagram } from 'react-icons/fa';
 
 const Follow = () => {
     const galleryImages = [
-        "/assets/gallary1.png",
-        "/assets/gallary2.png",
-        "/assets/gallary3.png",
-        "/assets/gallary4.png",
-        "/assets/gallary5.png",
-        "/assets/gallary6.png",
+        { img: "/assets/gallary1.webp", link: "https://www.instagram.com/p/DVjc-s0j9zl/" },
+        { img: "/assets/gallary2.webp", link: "https://www.instagram.com/p/DVgxVGEgVhs/" },
+        { img: "/assets/gallary3.webp", link: "https://www.instagram.com/p/DVeFnkHDPjq/" },
+        { img: "/assets/gallary4.webp", link: "https://www.instagram.com/p/DVbnwTIDYDG/" },
+        { img: "/assets/gallary5.webp", link: "https://www.instagram.com/p/DVRUiLIj92j/" },
+        { img: "/assets/gallary6.webp", link: "https://www.instagram.com/p/DVOo3ApjWhr/" },
     ];
 
     return (
@@ -25,7 +25,7 @@ const Follow = () => {
                         <p className="text-[12px] sm:text-[13px] md:text-[14px] text-[#797A88] py-3 md:py-4 leading-relaxed">
                             Relive every moment. Our photographers are always on the lookout for the best flicks, tricks and celebrations so you can add it to the family album. Follow the action from our kids football training in London by subscribing to our Instagram.
                         </p>
-                        <button className="bg-[#042C89] text-white px-4 py-2 rounded-3xl flex gap-2 md:gap-3 font-bold text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] items-center">
+                        <button onClick={() => window.open('https://www.instagram.com/sambasoccer_uk/', '_blank')} className="bg-[#042C89] text-white px-4 py-2 rounded-3xl flex gap-2 md:gap-3 font-bold text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] items-center">
                             <FaInstagram /> Follow on Instagram
                         </button>
                     </div>
@@ -33,14 +33,20 @@ const Follow = () => {
                     {/* Gallery grid col */}
                     <div className="md:w-[40%]">
                         <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-                            {galleryImages.map((img, index) => (
-                                <div key={index} className='w-full aspect-square overflow-hidden '>
+                            {galleryImages.map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className='w-full aspect-square overflow-hidden block group cursor-pointer'
+                                >
                                     <img
-                                        src={img}
+                                        src={item.img}
                                         alt={`Gallery ${index + 1}`}
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                     />
-                                </div>
+                                </a>
                             ))}
                         </div>
                     </div>

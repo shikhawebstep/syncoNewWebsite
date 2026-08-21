@@ -2,13 +2,31 @@ import React from "react";
 import Follow from "./Follow";
 
 const Gallary = () => {
-  const galleryImages = [
-    "/assets/gallary1.png",
-    "/assets/gallary2.png",
-    "/assets/gallary3.png",
-    "/assets/gallary4.png",
-    "/assets/gallary5.png",
-    "/assets/gallary6.png",
+  const galleryItems = [
+    {
+      img: "/assets/gallary1.webp",
+      link: "https://www.instagram.com/p/DVjc-s0j9zl/",
+    },
+    {
+      img: "/assets/gallary2.webp",
+      link: "https://www.instagram.com/p/DVgxVGEgVhs/",
+    },
+    {
+      img: "/assets/gallary3.webp",
+      link: "https://www.instagram.com/p/DVeFnkHDPjq/",
+    },
+    {
+      img: "/assets/gallary4.webp",
+      link: "https://www.instagram.com/p/DVbnwTIDYDG/",
+    },
+    {
+      img: "/assets/gallary5.webp",
+      link: "https://www.instagram.com/p/DVRUiLIj92j/",
+    },
+    {
+      img: "/assets/gallary6.webp",
+      link: "https://www.instagram.com/p/DVOo3ApjWhr/",
+    },
   ];
 
   return (
@@ -29,18 +47,21 @@ const Gallary = () => {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3  gap-6 md:gap-5 lg:gap-[60px] my-6 md:my-8 lg:my-10">
-            {galleryImages.map((img, index) => (
-              <div
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-5 lg:gap-[40px] my-6 md:my-8 lg:my-10">
+            {galleryItems.map((item, index) => (
+              <a
                 key={index}
-                className="w-full aspect-square overflow-hidden "
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full aspect-square overflow-hidden block group cursor-pointer"
               >
                 <img
-                  src={img}
+                  src={item.img}
                   alt={`Gallery ${index + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
+              </a>
             ))}
           </div>
 

@@ -242,7 +242,6 @@ h5 {
 
 h6 {
   font-family: Recline;
-  font-weight: 700;
   font-size: 26px;
 
 }
@@ -408,10 +407,9 @@ button.bg-yellow {
 }
 
 .banner {
-  background-image: url(/assets/HeroBanner.png);
   background-size: cover;
   background-position: center;
-  padding: 130px 0 200px 0;
+  padding: 12.5em 0 18em  0;
 }
 
 .services {
@@ -465,7 +463,7 @@ input.placeholder::placeholder {
 }
 
 .banner h1 span {
-  letter-spacing: 10px;
+  letter-spacing: 20px;
   line-height: normal;
 }
 
@@ -590,11 +588,11 @@ header nav ul li::before {
 
 header nav ul li::after {
   content: '';
-  height: 3px;
-  width: 4px;
+  height: 5px;
+  width: 5px;
   position: absolute;
   right: -20px;
-  top: 7px;
+  top: 8px;
   background: #ffde14;
   border-radius: 10px;
 }
@@ -1580,6 +1578,12 @@ header.mobileHeader {
   color: #5F5F6D;
 }
 
+@media (min-width:1500px) {
+.blog-section  h3{
+  font-size: 60px;
+}
+
+}
 @media (min-width:1900px) {
   .image-absolute {
     max-width: 600px;

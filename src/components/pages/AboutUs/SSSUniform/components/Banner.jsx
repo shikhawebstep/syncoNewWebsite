@@ -25,9 +25,17 @@ const Banner = () => {
                     <p className="md:text-[20px] text-[16px] text-[#FDFDFF] leading-8 mt-5 md:mb-10 mb-4">
                         Get them excited about the beautiful game with our exclusive range of kids’ football kits. Whether you’re taking them to their lesson or kicking the ball about in the garden, our official kids’ football kit will make their day!
                     </p>
-                    <button className="bg-[#FFDE14] text-[#042C89] flex justify-center items-center rounded-3xl p-2 px-4 text-[18px] font-semibold recline">Online Shop!</button>
+                    <a
+                        href="https://shop.sambasoccerschools.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#FFDE14] text-[#042C89] inline-flex justify-center items-center rounded-3xl p-2 px-4 text-[18px] font-semibold recline"
+                    >
+                        Online Shop!
+                    </a>
                     <p className="md:text-[20px] text-[14px] text-[#FDFDFF] leading-8 md:mt-12 mt-4">
-                        You can buy your kit directly on our online shop!                             </p>
+                        You can buy your kit directly on our online shop!
+                    </p>
                 </div>
             </div>
             

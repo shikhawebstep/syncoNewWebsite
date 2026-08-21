@@ -41,11 +41,11 @@ const BuildConfidence = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col-reverse md:flex-row buildingConfidence items-center gap-4 md:gap-0">
+                    <div className="grid lg:grid-cols-2 md:flex-row buildingConfidence items-stretch gap-4 md:gap-0">
 
                         {/* Left / Image */}
-                        <div className="image-sec flex justify-center md:justify-end md:w-6/12 mt-10">
-                            <div className="playboy-img md:max-w-[550px] md:-mr-[90px]">
+                        <div className="image-sec col flex justify-center md:justify-end md:mr-[-40px] mt-10">
+                            <div className="playboy-img md:max-w-[550px]">
                                 <picture>
                                     <source media="(max-width: 767px)" srcSet="/assets/Frame1000002538.png" />
                                     <img src="/assets/player-pointing.png" alt="" className="w-full h-auto max-w-[320px] sm:max-w-[400px] md:max-w-full mx-auto" />
@@ -54,18 +54,18 @@ const BuildConfidence = () => {
                         </div>
 
                         {/* Right / Text */}
-                        <div className="right-side-content md:w-6/12 max-w-[515px] text-center  sm:px-0 mt-6 md:mt-0">
-                            <h3 className="recline blue-text text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
+                        <div className="right-side-content relative  col md:mr-[50px] text-center  sm:px-0 mt-6 md:mt-0">
+                           <div className="max-w-[515px] absolute left-[-70px] top-[27%]">
+                             <h3 className="recline blue-text text-[26px] sm:text-[30px] md:text-[34px] lg:text-[40px]">
                                 Building confidence, mastering skills – doing it in{" "}
                                 <span className="text-[#0DD180] relative">STYLE</span>
                             </h3>
-                            <p className="leading-relaxed text-[#5F5F6D] text-[14px] md:text-[15px] lg:text-[16px] mt-3 px-2">
-                                Samba Soccer Schools is more than just football coaching. We improve
-                                your child's social skills and confidence, developing technique,
-                                flair, and footballing ability through
-                                <br className="lg:block hidden" />
-                                our unique Brazilian style.
+                            <p className="leading-[30px] text-[#5F5F6D] text-[14px] md:text-[15px]  mt-3">
+                                Samba Soccer Schools is more than just football coaching. <br className="hidden md:block" /> We improve
+                                your child's social skills and confidence,<br className="hidden md:block" />  developing technique,
+                                flair, and footballing ability through our <br className="lg:block hidden" />unique Brazilian style.
                             </p>
+                           </div>
                         </div>
                     </div>
                 </div>

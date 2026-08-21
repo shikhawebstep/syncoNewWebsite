@@ -37,11 +37,11 @@ const Blogs = () => {
     <section className="blog-section py-10 md:py-12 lg:py-16">
       <div className="container">
         {/* Heading */}
-        <div className="text-center md:max-w-[686px] m-auto px-4 sm:px-0">
+        <div className="text-center md:max-w-[756px] m-auto px-4 sm:px-0">
           <h3 className="blue-text text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px]">
             Check out our <span className="text-[#0DD180] relative">blogs</span>
           </h3>
-          <p className="font-medium md:text-[#797A88] text-[#042C89] text-[14px] sm:text-[14px] md:text-[15px] lg:text-[16px] py-3 md:py-4">
+          <p className="font-medium blue-text text-[14px] sm:text-[14px] md:text-[15px] lg:text-[16px] py-3 md:py-4">
             Our weekly blog brings you everything you need to know about
             children's football training in London, as well as tips and in-depth
             footballing breakdowns that can help your child reach the next level.
@@ -49,7 +49,7 @@ const Blogs = () => {
         </div>
 
         {/* Blogs Grid */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mt-6 md:mt-8 m-auto max-w-[1280px]">
+        <div className="grid md:grid-cols-2 gap-6 mt-6 md:mt-8 m-auto max-w-[1400px]">
           {/* Featured Blog */}
           <div className="left-img">
             <div className="inner-box">

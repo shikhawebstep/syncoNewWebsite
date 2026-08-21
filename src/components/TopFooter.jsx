@@ -6,7 +6,6 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
 
 const TopFooter = () => {
   return (
@@ -22,28 +21,68 @@ const TopFooter = () => {
 
         {/* Social Icons */}
         <div className="flex gap-4 mt-4 md:w-fit w-full md:mt-0">
-          <a href="#" className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl">
+          <a
+            href="https://www.facebook.com/sambasoccerschools"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl hover:scale-110 transition-transform"
+          >
             <FaFacebookF />
           </a>
-          <a href="#" className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl">
+          <a
+            href="https://www.instagram.com/sambasoccer_uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl hover:scale-110 transition-transform"
+          >
             <FaInstagram />
           </a>
-          <a href="#" className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl">
+          <a
+            href="https://www.youtube.com/channel/UCtt-dIsSs2zi_IIUm0-BmUQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl hover:scale-110 transition-transform"
+          >
             <FaYoutube />
           </a>
-          <a href="#" className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl">
+          <a
+            href="https://www.linkedin.com/company/samba-soccer-schools"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl hover:scale-110 transition-transform"
+          >
             <FaLinkedinIn />
           </a>
-          <a href="#" className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl">
+          <a
+            href="https://twitter.com/Samba_Soccer"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+            className="bg-white w-[47px] h-[47px] rounded-full text-[#0DD180] flex justify-center items-center text-xl hover:scale-110 transition-transform"
+          >
             <FaTwitter />
           </a>
         </div>
 
         {/* Shop Button */}
         <div className="mt-4 md:w-fit w-full md:mt-0">
-          <button className="flex items-center md:w-fit w-full text-center justify-center  gap-2 bg-white text-[#00A6E3] px-5 py-3 rounded-full text-[18px] font-semibold hover:bg-gray-200 transition">
-            <FaShoppingCart /> Shop Online
-          </button>
+          <a
+            href="https://shop.sambasoccerschools.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center md:w-fit w-full text-center justify-center gap-2.5 bg-white text-[#00A6E3] px-6 py-3 rounded-full text-[18px] font-semibold hover:bg-gray-100 transition"
+          >
+            <img
+              src="/assets/cart.png.webp"
+              alt="Cart"
+              className="w-[20px] h-[20px] object-contain"
+            />
+            <span>Shop Online</span>
+          </a>
         </div>
       </div>
 

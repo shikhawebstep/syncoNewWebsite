@@ -144,12 +144,16 @@ const ApplicationForm = () => {
     getVenues();
   }, []);
 
+  const userOutward = useMemo(
+    () => getOutwardCode(formData.postcode),
+    [formData.postcode]
+  );
+
   const filteredVenueOptions = useMemo(() => {
     if (!formData.postcode || !formData.postcode.trim()) return venueOptions;
 
     const userRaw = formData.postcode.trim().toUpperCase();
     const userClean = userRaw.replace(/\s+/g, "");
-    const userOutward = getOutwardCode(userRaw);
 
     const matchingCreatedBys = new Set();
 
@@ -183,9 +187,29 @@ const ApplicationForm = () => {
     }
 
     return venueOptions;
-  }, [venueOptions, formData.postcode]);
+  }, [venueOptions, formData.postcode, userOutward]);
 
-  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+  };
+
+  const handleRadioChange = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+  };
+
+  const toggleArrayValue = (field, value) => {
+    if (!value) return;
+    setFormData((prev) => ({
+      ...prev,
+      [field]: prev[field].includes(value)
+        ? prev[field].filter((v) => v !== value)
+        : [...prev[field], value],
+    }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
 
   const goToStep = (targetStep) => {
     if (targetStep > step) {

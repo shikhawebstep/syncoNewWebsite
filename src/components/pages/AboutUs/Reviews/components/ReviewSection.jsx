@@ -345,7 +345,7 @@ const ReviewSection = () => {
                                                     </p>
 
                                                     {/* STARS */}
-                                                    <div className="flex justify-center mt-3">
+                                                    <div className="flex justify-center items-center gap-1.5 mt-3">
                                                         {Array.from({ length: item.rating }).map((_, j) => (
                                                             <FaStar
                                                                 key={j}
@@ -355,16 +355,17 @@ const ReviewSection = () => {
                                                     </div>
 
                                                     {/* SPEECH ARROW */}
-                                                    <div
-                                                        className="absolute bottom-[-14px] left-1/2 -translate-x-1/2 w-0 h-0
-                    border-l-[15px] border-r-[15px] border-t-[15px]
-                    border-l-transparent border-r-transparent"
-                                                        style={{
-                                                            borderTopColor: item.color
-                                                                .replace("bg-[", "")
-                                                                .replace("]", ""),
-                                                        }}
-                                                    />
+                                                    <div className="absolute top-[99%] left-1/2 -translate-x-1/2 leading-none z-10">
+                                                        <svg
+                                                            width="44"
+                                                            height="16"
+                                                            viewBox="0 0 44 16"
+                                                            fill="currentColor"
+                                                            className={`block ${item.arrowColor}`}
+                                                        >
+                                                            <path d="M0,0 C3,0 6,1 8.5,3.5 L19,13.5 C20.5,15 23.5,15 25,13.5 L35.5,3.5 C38,1 41,0 44,0 Z" />
+                                                        </svg>
+                                                    </div>
                                                 </div>
 
                                                 {/* USER IMAGE */}
